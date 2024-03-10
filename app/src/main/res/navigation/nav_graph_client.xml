@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_client"
+    app:startDestination="@id/clientDeckFragment">
+
+    <fragment
+        android:id="@+id/clientChatFragment"
+        android:name="com.jose.magiccraftapp.client.ClientChatFragment"
+        android:label="fragment_client_chat"
+        tools:layout="@layout/fragment_client_chat" />
+    <fragment
+        android:id="@+id/clientDeckFragment"
+        android:name="com.jose.magiccraftapp.client.ClientDeckFragment"
+        android:label="fragment_client_deck"
+        tools:layout="@layout/fragment_client_deck" />
+    <fragment
+        android:id="@+id/clientEventFragment"
+        android:name="com.jose.magiccraftapp.client.ClientEventFragment"
+        android:label="fragment_client_event"
+        tools:layout="@layout/fragment_client_event" />
+    <fragment
+        android:id="@+id/clientSettingFragment"
+        android:name="com.jose.magiccraftapp.client.ClientSettingFragment"
+        android:label="fragment_client_setting"
+        tools:layout="@layout/fragment_client_setting" />
+    <fragment
+        android:id="@+id/clientToolsFragment"
+        android:name="com.jose.magiccraftapp.client.ClientToolsFragment"
+        android:label="fragment_client_tools"
+        tools:layout="@layout/fragment_client_tools" />
+</navigation>

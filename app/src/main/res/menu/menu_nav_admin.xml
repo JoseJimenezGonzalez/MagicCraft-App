@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/adminHomeFragment"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/adminDeckFragment"
+        android:icon="@drawable/ic_cards"
+        android:title="Mazos" />
+
+    <item
+        android:id="@+id/adminChatFragment"
+        android:icon="@drawable/ic_chat"
+        android:title="Chat" />
+
+    <item
+        android:id="@+id/adminEventFragment"
+        android:icon="@drawable/ic_events"
+        android:title="Eventos" />
+
+    <item
+        android:id="@+id/adminSettingFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="Ajustes" />
+</menu>

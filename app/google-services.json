@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "679345489749",
+    "firebase_url": "https://magiccraftapp-default-rtdb.firebaseio.com",
+    "project_id": "magiccraftapp",
+    "storage_bucket": "magiccraftapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679345489749:android:beffded2af0d046b6d11dc",
+        "android_client_info": {
+          "package_name": "com.jose.magiccraftapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDviERHlv7KftR_U7pFbYTaxrutgj7cf6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

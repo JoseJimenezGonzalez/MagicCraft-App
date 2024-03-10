@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/clientDeckFragment"
+        android:icon="@drawable/ic_cards"
+        android:title="Mazos" />
+
+    <item
+        android:id="@+id/clientChatFragment"
+        android:icon="@drawable/ic_chat"
+        android:title="Chat" />
+
+    <item
+        android:id="@+id/clientEventFragment"
+        android:icon="@drawable/ic_events"
+        android:title="Eventos" />
+
+    <item
+        android:id="@+id/clientToolsFragment"
+        android:icon="@drawable/ic_tools"
+        android:title="Herramientas" />
+
+    <item
+        android:id="@+id/clientSettingFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="Ajustes" />
+</menu>
