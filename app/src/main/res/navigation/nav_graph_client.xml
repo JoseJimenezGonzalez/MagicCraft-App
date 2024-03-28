@@ -14,7 +14,11 @@
         android:id="@+id/clientDeckFragment"
         android:name="com.jose.magiccraftapp.client.ClientDeckFragment"
         android:label="fragment_client_deck"
-        tools:layout="@layout/fragment_client_deck" />
+        tools:layout="@layout/fragment_client_deck" >
+        <action
+            android:id="@+id/action_clientDeckFragment_to_clientDeckManageFragment"
+            app:destination="@id/clientDeckManageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/clientEventFragment"
         android:name="com.jose.magiccraftapp.client.ClientEventFragment"
@@ -30,4 +34,9 @@
         android:name="com.jose.magiccraftapp.client.ClientToolsFragment"
         android:label="fragment_client_tools"
         tools:layout="@layout/fragment_client_tools" />
+    <fragment
+        android:id="@+id/clientDeckManageFragment"
+        android:name="com.jose.magiccraftapp.client.ClientDeckManageFragment"
+        android:label="fragment_client_deck_manage"
+        tools:layout="@layout/fragment_client_deck_manage" />
 </navigation>

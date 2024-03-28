@@ -7,14 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.databinding.FragmentAdminDeckBinding
 import com.jose.magiccraftapp.databinding.FragmentClientDeckBinding
 import com.jose.magiccraftapp.model.CurrentUser
 import com.jose.magiccraftapp.model.Deck
@@ -31,7 +30,7 @@ class ClientDeckFragment : Fragment() {
 
     private lateinit var deckList: MutableList<Deck>
 
-    private lateinit var adapter: AdapterRecyclerViewDeck
+    private lateinit var adapter: ClientAdapterRecyclerViewDeck
 
     private lateinit var idUser: String
 
@@ -79,7 +78,7 @@ class ClientDeckFragment : Fragment() {
             }
 
         })
-        adapter = AdapterRecyclerViewDeck(deckList)
+        adapter = ClientAdapterRecyclerViewDeck(deckList, findNavController())
         apply {
             recycler = binding.rvDecks
             recycler.adapter = adapter

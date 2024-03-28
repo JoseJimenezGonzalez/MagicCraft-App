@@ -6,28 +6,30 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.jose.magiccraftapp.R
+import com.jose.magiccraftapp.model.CurrentUser
 import com.jose.magiccraftapp.model.Deck
 
-class AdapterRecyclerViewDeck(private var deckList: MutableList<Deck>): RecyclerView.Adapter<AdapterRecyclerViewDeck.ViewHolder>() {
+class ClientAdapterRecyclerViewDeck(private var deckList: MutableList<Deck>, private val navController: NavController): RecyclerView.Adapter<ClientAdapterRecyclerViewDeck.ViewHolder>() {
 
     private lateinit var context: Context
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): AdapterRecyclerViewDeck.ViewHolder {
+    ): ClientAdapterRecyclerViewDeck.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_deck, parent, false)
         context = parent.context
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: AdapterRecyclerViewDeck.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ClientAdapterRecyclerViewDeck.ViewHolder, position: Int) {
         val currentItem = deckList[position]
 
         holder.textViewNameDeck.text = currentItem.nameDeck
@@ -43,6 +45,14 @@ class AdapterRecyclerViewDeck(private var deckList: MutableList<Deck>): Recycler
             .apply(opcionesGlide(context))
             .transition(transicion)
             .into(holder.imageDeck)
+
+        //Tratar el click sobre un elemento del recycler view
+        holder.itemView.setOnClickListener {
+            //Modificamos el mazo actual
+            CurrentUser.currentDeck = currentItem
+            //Nos vamos a otro fragment
+            navController.navigate(R.id.action_clientDeckFragment_to_clientDeckManageFragment)
+        }
     }
 
     override fun getItemCount(): Int = deckList.size
