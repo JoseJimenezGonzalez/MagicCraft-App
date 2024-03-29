@@ -6,5 +6,5 @@ data class Deck(
     val nameDeck: String = "",
     val formatDeck: String = "",
     val urlImageFirebase: String = "",
-    val cards: MutableList<CardDeck> = mutableListOf()
+    val cards: MutableList<CardScryfall> = mutableListOf()
 )
