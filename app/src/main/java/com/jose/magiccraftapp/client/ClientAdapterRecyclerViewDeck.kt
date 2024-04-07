@@ -1,6 +1,7 @@
 package com.jose.magiccraftapp.client
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +51,7 @@ class ClientAdapterRecyclerViewDeck(private var deckList: MutableList<Deck>, pri
         holder.itemView.setOnClickListener {
             //Modificamos el mazo actual
             CurrentUser.currentDeck = currentItem
+            Log.e("Hemos pulsado sobre el mazo", "${currentItem.cards.size}")
             //Nos vamos a otro fragment
             navController.navigate(R.id.action_clientDeckFragment_to_clientDeckManageFragment)
         }

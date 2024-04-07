@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.jose.magiccraftapp.databinding.FragmentClientDeckBinding
+import com.jose.magiccraftapp.model.Card
 import com.jose.magiccraftapp.model.CurrentUser
 import com.jose.magiccraftapp.model.Deck
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,12 +42,15 @@ class ClientDeckFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.e("OnCreateView", "1")
         _binding = FragmentClientDeckBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Log.e("OnViewCreated", "2")
 
         idUser = CurrentUser.currentUser!!.id
 
@@ -64,11 +68,14 @@ class ClientDeckFragment : Fragment() {
         dbRef.child("MagicCraft").child("Decks").child(idUser).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 deckList.clear()
-                snapshot.children.forEach { deck ->
-                    val pojoDeck = deck.getValue(Deck::class.java)!!
-                    Log.e("Mazo", pojoDeck.nameDeck)
+                snapshot.children.forEach { deckSnapshot ->
+                    val pojoDeck = deckSnapshot.getValue(Deck::class.java)!!
+                    // Recuperar las cartas de cada mazo
+                    deckSnapshot.child("Cards").children.forEach { cardSnapshot ->
+                        val pojoCard = cardSnapshot.getValue(Card::class.java)!!
+                        pojoDeck.cards.add(pojoCard)
+                    }
                     deckList.add(pojoDeck)
-                    Log.e("Despues de añadir", deckList.size.toString())
                 }
                 recycler.adapter?.notifyDataSetChanged()
             }

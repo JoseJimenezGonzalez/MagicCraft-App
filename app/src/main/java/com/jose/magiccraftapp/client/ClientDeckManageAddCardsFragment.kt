@@ -1,6 +1,7 @@
 package com.jose.magiccraftapp.client
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.jose.magiccraftapp.data.CardApiService
 import com.jose.magiccraftapp.databinding.FragmentClientDeckManageAddCardsBinding
+import com.jose.magiccraftapp.model.Card
 import com.jose.magiccraftapp.model.CardScryfall
+import com.jose.magiccraftapp.model.CurrentUser
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import retrofit2.Retrofit
@@ -38,6 +41,28 @@ class ClientDeckManageAddCardsFragment : Fragment() {
 
         //Codigo
         setUpSearchBar()
+        setUpButtonAddCard()
+    }
+
+    private fun setUpButtonAddCard() {
+        binding.btnAddCard.setOnClickListener {
+            val id = currentCard.id
+            val name = currentCard.name
+            val type = currentCard.type_line
+            val text = currentCard.oracle_text
+            val urlArtCrop = currentCard.image_uris.art_crop
+            val urlArtNormal = currentCard.image_uris.normal
+
+            //Metemos la carta en current card
+            CurrentUser.currentCard = Card(
+                id, name, type, text, urlArtCrop, urlArtNormal
+            )
+            //Ahora añadimos la carta al mazo actual
+            CurrentUser.currentDeck!!.cards.add(CurrentUser.currentCard!!)
+            Log.e("Carta introducida", "${CurrentUser.currentCard!!.name}")
+            Log.e("Tamaño del mazo", "${CurrentUser.currentDeck!!.nameDeck} y tiene ${CurrentUser.currentDeck!!.cards.size} cartas")
+            Log.e("Nombre de la carta del mazo", "${CurrentUser.currentDeck!!.cards.toString()}")
+        }
     }
 
     private fun setUpSearchBar() {
