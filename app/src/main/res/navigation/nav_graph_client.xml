@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/clientChatFragment"
-        android:name="com.jose.magiccraftapp.client.ClientChatFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientChatFragment"
         android:label="fragment_client_chat"
         tools:layout="@layout/fragment_client_chat" />
     <fragment
         android:id="@+id/clientDeckFragment"
-        android:name="com.jose.magiccraftapp.client.ClientDeckFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientDeckFragment"
         android:label="fragment_client_deck"
         tools:layout="@layout/fragment_client_deck" >
         <action
@@ -21,22 +21,22 @@
     </fragment>
     <fragment
         android:id="@+id/clientEventFragment"
-        android:name="com.jose.magiccraftapp.client.ClientEventFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientEventFragment"
         android:label="fragment_client_event"
         tools:layout="@layout/fragment_client_event" />
     <fragment
         android:id="@+id/clientSettingFragment"
-        android:name="com.jose.magiccraftapp.client.ClientSettingFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientSettingFragment"
         android:label="fragment_client_setting"
         tools:layout="@layout/fragment_client_setting" />
     <fragment
         android:id="@+id/clientToolsFragment"
-        android:name="com.jose.magiccraftapp.client.ClientToolsFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientToolsFragment"
         android:label="fragment_client_tools"
         tools:layout="@layout/fragment_client_tools" />
     <fragment
         android:id="@+id/clientDeckManageFragment"
-        android:name="com.jose.magiccraftapp.client.ClientDeckManageFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientDeckManageFragment"
         android:label="fragment_client_deck_manage"
         tools:layout="@layout/fragment_client_deck_manage" />
 </navigation>
