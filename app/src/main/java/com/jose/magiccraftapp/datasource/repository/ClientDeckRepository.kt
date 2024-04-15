@@ -29,7 +29,6 @@ class ClientDeckRepository @Inject constructor(private val dbRef: DatabaseRefere
                     deckList.add(pojoDeck)
                 }
                 mutableData.value = deckList
-                Log.e("mutamierda tiene elementos?????", "${mutableData.value!!.size} elementos")
             }
 
             override fun onCancelled(error: DatabaseError) {
