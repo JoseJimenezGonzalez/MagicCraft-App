@@ -5,16 +5,16 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.datasource.model.UserForm
 import com.jose.magiccraftapp.databinding.ActivityRegisterBinding
-import com.jose.magiccraftapp.datasource.model.User
+import com.jose.magiccraftapp.datasource.model.UserForm
+import com.jose.magiccraftapp.datasource.viewmodel.RegisterActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -28,6 +28,8 @@ class RegisterActivity : AppCompatActivity() {
 
     @Inject
     lateinit var auth: FirebaseAuth
+
+    private val viewModel: RegisterActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +51,11 @@ class RegisterActivity : AppCompatActivity() {
         actionButtonRegister()
 
         actionButtonGoToLogin()
+
+        //Observo variable toast del view model
+        viewModel.messageToast.observe(this) { message ->
+            generateToast(message)
+        }
     }
 
     private fun actionButtonGoToLogin() {
@@ -94,42 +101,13 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun validateAll(isNameValid: Boolean, isSurnameValid: Boolean, isMailValid: Boolean, isPasswordValid: Boolean, isRepeatPasswordValid: Boolean, arePasswordEquals: Boolean, userForm: UserForm) {
         if(isNameValid && isSurnameValid && isMailValid && isPasswordValid && isRepeatPasswordValid && arePasswordEquals){
-            registerUserAuth(userForm)
+            viewModel.registerUserAuth(userForm)
         }else{
             Toast.makeText(this, "Hay campos erróneos", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun registerUserAuth(userForm: UserForm) {
-        val mail = userForm.mail
-        val password = userForm.password
-        auth.createUserWithEmailAndPassword(mail, password).addOnCompleteListener { task ->
-            if(task.isSuccessful){
-                val userAuth = auth.currentUser
-                //Lamada a funcion para meter los datos en la RealTimeDatabase
-                registerUserRealTimeDatabase(userForm, userAuth!!)
-            }else{
-                generateToast("Ya existe una cuenta con ese correo en nuestra base de datos")
-            }
-        }
-    }
 
-    private fun registerUserRealTimeDatabase(userForm: UserForm, userAuth: FirebaseUser) {
-        val id = userAuth.uid
-        val isUserAdmin = isAdministratorUser(userForm.mail)
-        val typeUser = typeOfUser(isUserAdmin)
-        dbRef.child("MagicCraft").child("Users").child(id).setValue(
-            User(
-                id,
-                userForm.name,
-                userForm.surname,
-                userForm.mail,
-                userForm.password,
-                typeUser
-            )
-        )
-        generateToast("Se ha registrado correctamente")
-    }
 
     //Validar los datos
     private fun isValidName(name: String): Boolean = name.isNotBlank()
@@ -193,8 +171,4 @@ class RegisterActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    //Poner el mail que se desee, en este caso se pone este
-    private fun isAdministratorUser(email: String): Boolean = email=="administrador@gmail.com"
-
-    private fun typeOfUser(bol: Boolean): String = if (bol) "administrador" else "cliente"
 }

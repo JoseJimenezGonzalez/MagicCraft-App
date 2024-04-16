@@ -4,18 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.ActivityLoginBinding
-import com.jose.magiccraftapp.datasource.model.CurrentUser
-import com.jose.magiccraftapp.datasource.model.User
+import com.jose.magiccraftapp.datasource.viewmodel.LoginActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,6 +26,8 @@ class LoginActivity : AppCompatActivity() {
 
     @Inject
     lateinit var auth: FirebaseAuth
+
+    private val viewModel: LoginActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,61 +47,29 @@ class LoginActivity : AppCompatActivity() {
         actionButtonGoToRegister()
 
         actionButtonLogin()
+
+        //Observadores
+        viewModel.toastMessage.observe(this){ message ->
+            generateToast(message)
+        }
+        viewModel.routeToNavigate.observe(this) { activityClass ->
+            if (activityClass != null) {
+                goToMainActivity(activityClass)
+            }
+        }
+    }
+
+    private fun goToMainActivity(activityClass: Class<*>) {
+        val intent = Intent(this, activityClass)
+        startActivity(intent)
     }
 
     private fun actionButtonLogin() {
         binding.btnIniciarSesion.setOnClickListener {
             val mail = binding.tietCorreo.text.toString().trim()
             val password = binding.tietPassword.text.toString().trim()
-            loginAuth(mail, password)
+            viewModel.loginAuth(mail, password)
         }
-    }
-
-    private fun loginAuth(mail: String, password: String) {
-        auth.signInWithEmailAndPassword(mail, password).addOnCompleteListener { task ->
-            if(task.isSuccessful){
-                val userAuth = auth.currentUser
-                val id = userAuth!!.uid
-                obtainDataUserFromRealTimeDatabase(id)
-            }else{
-                generateToast("No existe ese usuario en la base de datos")
-            }
-        }
-    }
-
-    private fun obtainDataUserFromRealTimeDatabase(id: String) {
-        dbRef.child("MagicCraft").child("Users").child(id).addListenerForSingleValueEvent(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                    //Recojo toda la informacion del usuario
-                    val user = snapshot.getValue(User::class.java)
-                    val typeUser = user!!.typeUser
-                    addCurrentUserToCompanionObject(user)
-                    goToMainUserActivity(typeUser)
-                }else{
-                    println("El usuario con ID $id no existe")
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                println("Error al obtener datos del usuario: $error")
-            }
-
-        })
-    }
-
-    private fun goToMainUserActivity(typeUser: String) {
-        if (typeUser == "administrador"){
-            val intent = Intent(this, MainAdminActivity::class.java)
-            startActivity(intent)
-        }else{
-            val intent = Intent(this, MainClientActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
-    private fun addCurrentUserToCompanionObject(user: User) {
-        CurrentUser.currentUser = user
     }
 
     private fun actionButtonGoToRegister() {

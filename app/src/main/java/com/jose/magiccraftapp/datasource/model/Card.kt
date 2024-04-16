@@ -10,5 +10,6 @@ data class Card(
     var text: String = "",
     var urlArtCrop: String = "",
     var urlArtNormal: String = "",
-    var numberCard: Int = 4
+    var numberCard: Int = 4,
+    var cmc: Int = 0
 ): Parcelable

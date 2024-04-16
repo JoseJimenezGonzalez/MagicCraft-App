@@ -2,4 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <!-- Colores material design grafico android -->
+    <color name="m200_rosa">#EF9A9A</color>
+    <color name="m200_rosa_oscuro">#F48FB1</color>
+    <color name="m200_purpura">#CE93D8</color>
+    <color name="m200_lila">#B39DDB</color>
+    <color name="m200_verde">#A5D6A7</color>
+    <color name="m200_amarillo">#FFF59D</color>
+    <color name="m200_naranja">#FFCC80</color>
+    <color name="m200_azul">#81D4FA</color>
 </resources>

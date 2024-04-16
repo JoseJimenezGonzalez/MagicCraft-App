@@ -1,21 +1,24 @@
 package com.jose.magiccraftapp.ui.fragment
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.jose.magiccraftapp.datasource.retrofit.RetrofitService
 import com.jose.magiccraftapp.databinding.FragmentClientDeckManageAddCardsBinding
-import com.jose.magiccraftapp.datasource.model.Card
 import com.jose.magiccraftapp.datasource.dataclass.CardScryfall
+import com.jose.magiccraftapp.datasource.model.Card
 import com.jose.magiccraftapp.datasource.model.CurrentUser
 import com.jose.magiccraftapp.datasource.retrofit.ApiRequest
+import com.jose.magiccraftapp.datasource.retrofit.RetrofitService
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
@@ -55,10 +58,12 @@ class ClientDeckManageAddCardsFragment : Fragment() {
             val text = currentCard.oracle_text
             val urlArtCrop = currentCard.image_uris.art_crop
             val urlArtNormal = currentCard.image_uris.normal
+            val numberOfCard = 4
+            val cmc = currentCard.cmc
 
             //Metemos la carta en current card
             CurrentUser.currentCard = Card(
-                id, name, type, text, urlArtCrop, urlArtNormal
+                id, name, type, text, urlArtCrop, urlArtNormal, 4, cmc
             )
             //Ahora añadimos la carta al mazo actual
             CurrentUser.currentDeck!!.cards.add(CurrentUser.currentCard!!)
@@ -76,6 +81,7 @@ class ClientDeckManageAddCardsFragment : Fragment() {
                 // Por ejemplo, puedes buscar la consulta en tu base de datos.
                 binding.ly.visibility = View.INVISIBLE
                 searchCardApi(query!!)
+                hideKeyboard()
                 return true
             }
 
@@ -109,6 +115,16 @@ class ClientDeckManageAddCardsFragment : Fragment() {
                 Toast.makeText(context, "Error inesperado", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+
+    fun Fragment.hideKeyboard() {
+        view?.let { activity?.hideKeyboard(it) }
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 }
