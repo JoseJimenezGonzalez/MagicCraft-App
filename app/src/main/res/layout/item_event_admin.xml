@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="14dp"
+    android:backgroundTint="#D0DFEC">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:layout_marginTop="16dp">
+            <ImageView
+                android:id="@+id/ivFotoEvento"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ImageView>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tvNombreEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nombre del evento"
+            android:textColor="@color/black">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvFormatoEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Formato del evento"
+            android:textColor="@color/black">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvFechaEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Fecha del evento"
+            android:textColor="@color/black">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvPrecioEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Precio"
+            android:textColor="@color/black">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvAforoMaximo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Aforo maximo"
+            android:textColor="@color/black">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvAforoOcupado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="Aforo ocupado"
+            android:textColor="@color/black">
+        </TextView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnApuntarseEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="Apuntarse a evento"
+            android:background="#4452A1"
+            android:textColor="@color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+        </androidx.appcompat.widget.AppCompatButton>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</com.google.android.material.card.MaterialCardView>
