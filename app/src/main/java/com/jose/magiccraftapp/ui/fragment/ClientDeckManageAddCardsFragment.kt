@@ -14,9 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.jose.magiccraftapp.databinding.FragmentClientDeckManageAddCardsBinding
-import com.jose.magiccraftapp.datasource.dataclass.CardScryfall
-import com.jose.magiccraftapp.datasource.model.Card
-import com.jose.magiccraftapp.datasource.model.CurrentUser
+import com.jose.magiccraftapp.datasource.dataclass.CardDataclass
+import com.jose.magiccraftapp.data.model.Card
+import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.datasource.retrofit.ApiRequest
 import com.jose.magiccraftapp.datasource.retrofit.RetrofitService
 import kotlinx.coroutines.launch
@@ -28,7 +28,7 @@ class ClientDeckManageAddCardsFragment : Fragment() {
     private var _binding: FragmentClientDeckManageAddCardsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var currentCard: CardScryfall
+    private lateinit var currentCard: CardDataclass
 
     val apiRequest = object: ApiRequest{}
 

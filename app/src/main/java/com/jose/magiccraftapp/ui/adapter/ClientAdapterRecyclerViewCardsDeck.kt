@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.datasource.model.Card
+import com.jose.magiccraftapp.data.model.Card
 
 class ClientAdapterRecyclerViewCardsDeck (private var cardList: MutableList<Card>): RecyclerView.Adapter<ClientAdapterRecyclerViewCardsDeck.ViewHolder>() {
 

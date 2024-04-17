@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.ActivityLoginBinding
-import com.jose.magiccraftapp.datasource.viewmodel.LoginActivityViewModel
+import com.jose.magiccraftapp.data.viewmodel.LoginActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

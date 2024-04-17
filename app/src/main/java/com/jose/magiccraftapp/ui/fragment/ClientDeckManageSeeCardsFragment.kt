@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
 import com.jose.magiccraftapp.databinding.FragmentClientDeckManageSeeCardsBinding
-import com.jose.magiccraftapp.datasource.model.Card
-import com.jose.magiccraftapp.datasource.model.CurrentUser
+import com.jose.magiccraftapp.data.model.Card
+import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.ui.adapter.ClientAdapterRecyclerViewCardsDeck
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

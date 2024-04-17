@@ -14,8 +14,8 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.FragmentClientDeckManageStatisticsBinding
-import com.jose.magiccraftapp.datasource.model.CurrentUser
-import com.jose.magiccraftapp.datasource.model.MyValueFormatter
+import com.jose.magiccraftapp.data.model.CurrentUser
+import com.jose.magiccraftapp.data.model.MyValueFormatter
 import kotlin.math.max
 
 

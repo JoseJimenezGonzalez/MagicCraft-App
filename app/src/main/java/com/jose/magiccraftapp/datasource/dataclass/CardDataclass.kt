@@ -2,7 +2,7 @@ package com.jose.magiccraftapp.datasource.dataclass
 
 import com.google.gson.annotations.SerializedName
 
-data class CardScryfall(
+data class CardDataclass(
     @SerializedName("id")
     val id: String,
     @SerializedName("name")
@@ -16,9 +16,9 @@ data class CardScryfall(
     @SerializedName("cmc")
     val cmc: Int,
     @SerializedName("prices")
-    val prices: PricesScryfall,
+    val prices: PricesDataclass,
     @SerializedName("image_uris")
-    val image_uris: ImageUrisScryfall,
+    val image_uris: ImageDataclass,
     @SerializedName("set_name")
     val set_name: String
 )

@@ -1,4 +1,4 @@
-package com.jose.magiccraftapp.datasource.repository
+package com.jose.magiccraftapp.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,8 +6,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import com.jose.magiccraftapp.datasource.model.Card
-import com.jose.magiccraftapp.datasource.model.Deck
+import com.jose.magiccraftapp.data.model.Card
+import com.jose.magiccraftapp.data.model.Deck
 import javax.inject.Inject
 
 class ClientDeckRepository @Inject constructor(private val dbRef: DatabaseReference) {

@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.StorageReference
 import com.jose.magiccraftapp.databinding.FragmentAdminEventManageAddBinding
-import com.jose.magiccraftapp.datasource.model.Event
+import com.jose.magiccraftapp.data.model.Event
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

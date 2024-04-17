@@ -14,8 +14,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.datasource.model.CurrentUser
-import com.jose.magiccraftapp.datasource.model.Deck
+import com.jose.magiccraftapp.data.model.CurrentUser
+import com.jose.magiccraftapp.data.model.Deck
 
 class ClientAdapterRecyclerViewDeck(private var deckList: MutableList<Deck>): RecyclerView.Adapter<ClientAdapterRecyclerViewDeck.ViewHolder>() {
 

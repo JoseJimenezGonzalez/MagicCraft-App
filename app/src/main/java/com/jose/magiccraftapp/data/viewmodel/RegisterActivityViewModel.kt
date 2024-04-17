@@ -1,9 +1,9 @@
-package com.jose.magiccraftapp.datasource.viewmodel
+package com.jose.magiccraftapp.data.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.jose.magiccraftapp.datasource.model.UserForm
-import com.jose.magiccraftapp.datasource.repository.RegisterActivityRepository
+import com.jose.magiccraftapp.data.model.UserForm
+import com.jose.magiccraftapp.data.repository.RegisterActivityRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

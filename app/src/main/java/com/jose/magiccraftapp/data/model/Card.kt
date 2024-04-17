@@ -1,4 +1,4 @@
-package com.jose.magiccraftapp.datasource.model
+package com.jose.magiccraftapp.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

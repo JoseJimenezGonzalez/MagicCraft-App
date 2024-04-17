@@ -14,8 +14,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.ActivityClientCreateDeckBinding
-import com.jose.magiccraftapp.datasource.model.CurrentUser
-import com.jose.magiccraftapp.datasource.model.Deck
+import com.jose.magiccraftapp.data.model.CurrentUser
+import com.jose.magiccraftapp.data.model.Deck
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

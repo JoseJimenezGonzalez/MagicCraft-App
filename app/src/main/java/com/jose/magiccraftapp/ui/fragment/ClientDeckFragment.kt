@@ -18,10 +18,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.FragmentClientDeckBinding
-import com.jose.magiccraftapp.datasource.model.Card
-import com.jose.magiccraftapp.datasource.model.CurrentUser
-import com.jose.magiccraftapp.datasource.model.Deck
-import com.jose.magiccraftapp.datasource.viewmodel.ClientDeckViewModel
+import com.jose.magiccraftapp.data.model.Card
+import com.jose.magiccraftapp.data.model.CurrentUser
+import com.jose.magiccraftapp.data.model.Deck
+import com.jose.magiccraftapp.data.viewmodel.ClientDeckViewModel
 import com.jose.magiccraftapp.ui.activity.ClientCreateDeckActivity
 import com.jose.magiccraftapp.ui.adapter.ClientAdapterRecyclerViewDeck
 import dagger.hilt.android.AndroidEntryPoint

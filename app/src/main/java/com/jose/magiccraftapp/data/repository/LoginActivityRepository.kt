@@ -1,4 +1,4 @@
-package com.jose.magiccraftapp.datasource.repository
+package com.jose.magiccraftapp.data.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
@@ -6,8 +6,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import com.jose.magiccraftapp.datasource.model.CurrentUser
-import com.jose.magiccraftapp.datasource.model.User
+import com.jose.magiccraftapp.data.model.CurrentUser
+import com.jose.magiccraftapp.data.model.User
 import com.jose.magiccraftapp.ui.activity.MainAdminActivity
 import com.jose.magiccraftapp.ui.activity.MainClientActivity
 import javax.inject.Inject

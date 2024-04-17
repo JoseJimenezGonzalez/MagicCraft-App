@@ -1,4 +1,4 @@
-package com.jose.magiccraftapp.datasource.model
+package com.jose.magiccraftapp.data.model
 
 data class UserForm(
     val name: String,

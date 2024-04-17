@@ -1,9 +1,9 @@
-package com.jose.magiccraftapp.datasource.viewmodel
+package com.jose.magiccraftapp.data.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.jose.magiccraftapp.datasource.model.Deck
-import com.jose.magiccraftapp.datasource.repository.ClientDeckRepository
+import com.jose.magiccraftapp.data.model.Deck
+import com.jose.magiccraftapp.data.repository.ClientDeckRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

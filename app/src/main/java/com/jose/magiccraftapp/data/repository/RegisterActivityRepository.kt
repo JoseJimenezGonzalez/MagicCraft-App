@@ -1,11 +1,11 @@
-package com.jose.magiccraftapp.datasource.repository
+package com.jose.magiccraftapp.data.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
-import com.jose.magiccraftapp.datasource.model.User
-import com.jose.magiccraftapp.datasource.model.UserForm
+import com.jose.magiccraftapp.data.model.User
+import com.jose.magiccraftapp.data.model.UserForm
 import javax.inject.Inject
 
 class RegisterActivityRepository @Inject constructor(private val dbRef: DatabaseReference, var auth: FirebaseAuth) {

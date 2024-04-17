@@ -13,8 +13,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.ActivityRegisterBinding
-import com.jose.magiccraftapp.datasource.model.UserForm
-import com.jose.magiccraftapp.datasource.viewmodel.RegisterActivityViewModel
+import com.jose.magiccraftapp.data.model.UserForm
+import com.jose.magiccraftapp.data.viewmodel.RegisterActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

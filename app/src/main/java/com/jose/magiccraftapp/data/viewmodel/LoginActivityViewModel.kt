@@ -1,8 +1,8 @@
-package com.jose.magiccraftapp.datasource.viewmodel
+package com.jose.magiccraftapp.data.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.jose.magiccraftapp.datasource.repository.LoginActivityRepository
+import com.jose.magiccraftapp.data.repository.LoginActivityRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
