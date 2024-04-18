@@ -1,13 +1,14 @@
 package com.jose.magiccraftapp.data.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.jose.magiccraftapp.data.repository.LoginActivityRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginActivityViewModel @Inject constructor(private val repository: LoginActivityRepository): ViewModel() {
+class LoginActivityViewModel @Inject constructor(private val repository: LoginActivityRepository, application: Application): AndroidViewModel(application) {
 
     val routeToNavigate = MutableLiveData<Class<*>>()
     val toastMessage = MutableLiveData("")
