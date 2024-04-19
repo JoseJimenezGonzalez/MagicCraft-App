@@ -13,6 +13,9 @@ interface MazoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(mazo: Mazo)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(mazos: MutableList<Mazo>)
+
     @Update
     fun update(vararg mazo: Mazo)
 

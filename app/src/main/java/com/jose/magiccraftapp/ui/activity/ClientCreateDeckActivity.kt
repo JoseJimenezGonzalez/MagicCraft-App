@@ -13,9 +13,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
 import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.databinding.ActivityClientCreateDeckBinding
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.Deck
+import com.jose.magiccraftapp.databinding.ActivityClientCreateDeckBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -93,7 +93,7 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
 
     private fun validateAll(nameValid: Boolean, formatValid: Boolean, imageValid: Boolean) {
         if(nameValid && formatValid && imageValid){
-            val idUser = CurrentUser.currentUser!!.id
+            val idUser = CurrentUser.currentUser!!.idUsuario
             val idDeck = dbRef.child("MagicCraft").child("Decks").child(idUser).push().key
             registerDeck(idUser, idDeck)
         }

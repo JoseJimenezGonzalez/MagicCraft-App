@@ -13,6 +13,9 @@ interface CartaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(carta: Carta)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(cartas: MutableList<Carta>)
+
     @Update
     fun update(vararg carta: Carta)
 

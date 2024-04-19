@@ -1,8 +1,10 @@
 package com.jose.magiccraftapp.data.model
 
+import com.jose.magiccraftapp.data.entity.Usuario
+
 class CurrentUser {
     companion object{
-        var currentUser: User? = null
+        var currentUser: Usuario? = null
         var currentDeck: Deck? = null
         var currentCard: Card? = null
     }
