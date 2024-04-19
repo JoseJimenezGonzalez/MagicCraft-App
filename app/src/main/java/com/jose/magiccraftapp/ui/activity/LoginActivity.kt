@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseReference
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.ActivityLoginBinding
 import com.jose.magiccraftapp.data.viewmodel.LoginActivityViewModel
+import com.jose.magiccraftapp.data.viewmodel.UsuarioViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
     @Inject
     lateinit var auth: FirebaseAuth
 
-    private val viewModel: LoginActivityViewModel by viewModels()
+    private val userViewModel: UsuarioViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,10 +50,10 @@ class LoginActivity : AppCompatActivity() {
         actionButtonLogin()
 
         //Observadores
-        viewModel.toastMessage.observe(this){ message ->
+        userViewModel.toastMessage.observe(this){ message ->
             generateToast(message)
         }
-        viewModel.routeToNavigate.observe(this) { activityClass ->
+        userViewModel.routeToNavigate.observe(this) { activityClass ->
             if (activityClass != null) {
                 goToMainActivity(activityClass)
             }
@@ -68,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnIniciarSesion.setOnClickListener {
             val mail = binding.tietCorreo.text.toString().trim()
             val password = binding.tietPassword.text.toString().trim()
-            viewModel.loginAuth(mail, password)
+            userViewModel.loginAuth(mail, password)
         }
     }
 
