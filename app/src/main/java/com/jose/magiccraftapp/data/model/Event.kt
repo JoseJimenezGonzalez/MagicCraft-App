@@ -13,5 +13,6 @@ data class Event(
     val aforo: Int = 0,
     var aforoOcupado: Int = 0,
     val urlImagenEvento: String = "",
-    var idUsers: MutableList<String> = mutableListOf()
+    var idUsers: MutableList<String> = mutableListOf(),
+    var messageList: MutableList<MessageEvent> = mutableListOf()
 ): Parcelable

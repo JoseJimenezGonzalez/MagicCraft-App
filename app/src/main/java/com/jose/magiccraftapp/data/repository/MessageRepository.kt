@@ -9,7 +9,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.Message
+import com.jose.magiccraftapp.data.model.MessageEvent
 
 class MessageRepository(application: Application) {
     // Inicialización de DatabaseReference
@@ -31,6 +33,31 @@ class MessageRepository(application: Application) {
                     //Recorrer todos los menajes e ir añadiendolos a la lista
                     snapshot.children.forEach { snapshotBucle ->
                         val message = snapshotBucle.getValue(Message::class.java)
+                        if (message != null) {
+                            messagesList.add(message)
+                        }
+                    }
+                    messageLive.value = messagesList
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                println("Error al obtener los mensajes: $error")
+            }
+        })
+        return messageLive
+    }
+
+    fun getMessagesOfEvent(idEvent: String) : LiveData<MutableList<MessageEvent>> {
+        val messageLive = MutableLiveData<MutableList<MessageEvent>>()
+        dbRef.child("MagicCraft").child("Events").child(CurrentUser.currentEventChat!!.id).child("Chat").addValueEventListener(object :
+            ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    val messagesList = mutableListOf<MessageEvent>()
+                    //Recorrer todos los menajes e ir añadiendolos a la lista
+                    snapshot.children.forEach { snapshotBucle ->
+                        val message = snapshotBucle.getValue(MessageEvent::class.java)
                         if (message != null) {
                             messagesList.add(message)
                         }

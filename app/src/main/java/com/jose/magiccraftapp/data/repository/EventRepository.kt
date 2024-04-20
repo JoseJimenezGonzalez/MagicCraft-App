@@ -10,7 +10,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.jose.magiccraftapp.data.model.Event
-import com.jose.magiccraftapp.data.model.ReservarEvento
 
 class EventRepository(application: Application) {
     // Inicialización de DatabaseReference
@@ -33,30 +32,6 @@ class EventRepository(application: Application) {
                     listEvents.add(pojoEvent)
                 }
                 mutableData.value = listEvents
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-        return mutableData
-    }
-
-    fun getIdEventReservedByUser(idUsuario: String): LiveData<MutableList<String>>{
-        val mutableData = MutableLiveData<MutableList<String>>()
-        dbRef.child("MagicCraft").child("Reservas_Eventos").addValueEventListener(object :
-            ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val listId = mutableListOf<String>()
-                snapshot.children.forEach { reservedEventSnapshot ->
-                    val pojoReservaEvento = reservedEventSnapshot.getValue(ReservarEvento::class.java)
-                    val idUsuarioReserva = pojoReservaEvento!!.idUsuario
-                    if(idUsuarioReserva == idUsuario){
-                        listId.add(pojoReservaEvento.idEvento)
-                    }
-                }
-                mutableData.value = listId
             }
 
             override fun onCancelled(error: DatabaseError) {

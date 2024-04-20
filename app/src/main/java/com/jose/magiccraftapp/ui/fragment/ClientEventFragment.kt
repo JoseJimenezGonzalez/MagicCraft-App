@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.Event
 import com.jose.magiccraftapp.data.viewmodel.EventViewModel
@@ -99,7 +101,9 @@ class ClientEventFragment : Fragment() {
     }
 
     private fun handleItemClick(event: Event) {
-
+        CurrentUser.currentEventChat = event
+        //Navegar a chatting event
+        findNavController().navigate(R.id.action_clientEventFragment_to_clientEventChattingFragment)
     }
 
 }

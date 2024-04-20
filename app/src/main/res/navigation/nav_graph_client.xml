@@ -27,7 +27,11 @@
         android:id="@+id/clientEventFragment"
         android:name="com.jose.magiccraftapp.ui.fragment.ClientEventFragment"
         android:label="fragment_client_event"
-        tools:layout="@layout/fragment_client_event" />
+        tools:layout="@layout/fragment_client_event" >
+        <action
+            android:id="@+id/action_clientEventFragment_to_clientEventChattingFragment"
+            app:destination="@id/clientEventChattingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/clientSettingFragment"
         android:name="com.jose.magiccraftapp.ui.fragment.ClientSettingFragment"
@@ -48,4 +52,9 @@
         android:name="com.jose.magiccraftapp.ui.fragment.ClientChattingFragment"
         android:label="fragment_client_chatting"
         tools:layout="@layout/fragment_client_chatting" />
+    <fragment
+        android:id="@+id/clientEventChattingFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientEventChattingFragment"
+        android:label="fragment_client_event_chatting"
+        tools:layout="@layout/fragment_client_event_chatting" />
 </navigation>

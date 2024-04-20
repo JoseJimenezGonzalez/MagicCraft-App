@@ -12,8 +12,4 @@ class EventViewModel (application: Application): AndroidViewModel(application) {
     fun getAllEvents(): LiveData<MutableList<Event>>{
         return repository.getAllEvents()
     }
-
-    fun getIdEventReservedByUser(idUsuario: String): LiveData<MutableList<String>>{
-        return repository.getIdEventReservedByUser(idUsuario)
-    }
 }
