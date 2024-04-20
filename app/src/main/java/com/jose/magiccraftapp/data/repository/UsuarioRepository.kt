@@ -59,11 +59,9 @@ class UsuarioRepository (application: Application) {
                                 userLive.value = null
                             }
                         }
-
                         override fun onCancelled(error: DatabaseError) {
                             println("Error al obtener datos del usuario: $error")
                         }
-
                     })
                 } else {
                     // La autenticación fue exitosa, pero userAuth es null
@@ -75,6 +73,33 @@ class UsuarioRepository (application: Application) {
             }
         }
         return userLive
+    }
+
+    fun obtainUsersChat(id: String): LiveData<MutableList<User>>{
+        val usersLive = MutableLiveData<MutableList<User>>()
+        dbRef.child("MagicCraft").child("Users").addValueEventListener(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    val usersList = mutableListOf<User>()
+                    //Recorrer todos los usuarios e ir añadiendolos menos el actual
+                    snapshot.children.forEach { snapshotBucle ->
+                        val user = snapshotBucle.getValue(User::class.java)
+                        if(user != null && user.id != id){
+                            usersList.add(user)
+                        }
+                    }
+                    usersLive.value = usersList
+                } else {
+                    // El usuario con ID $id no existe
+                    usersLive.value = mutableListOf()
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                println("Error al obtener datos del usuario: $error")
+            }
+        })
+        return usersLive
     }
 
 

@@ -7,5 +7,6 @@ class CurrentUser {
         var currentUser: Usuario? = null
         var currentDeck: Deck? = null
         var currentCard: Card? = null
+        var currentUserChat: User? = null
     }
 }

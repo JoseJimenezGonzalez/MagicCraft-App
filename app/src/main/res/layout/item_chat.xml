@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvImagenOtro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp">
+        <ImageView
+            android:id="@+id/ivOtro"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_androide">
+        </ImageView>
+    </com.google.android.material.card.MaterialCardView>
+    <TextView
+        android:id="@+id/tvNombreOtro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cvImagenOtro"
+        android:text="Nombre otro"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp">
+    </TextView>
+    <TextView
+        android:id="@+id/tvContenidoOtro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvNombreOtro"
+        app:layout_constraintStart_toEndOf="@id/cvImagenOtro"
+        android:text="Contenido otro"
+        android:layout_marginStart="20dp">
+    </TextView>
+    <TextView
+        android:id="@+id/tvFechaOtro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvContenidoOtro"
+        app:layout_constraintStart_toEndOf="@id/cvImagenOtro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Fecha de otro"
+        android:layout_marginStart="20dp">
+    </TextView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvImagenMia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp">
+        <ImageView
+            android:id="@+id/ivMia"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_androide">
+        </ImageView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvNombreMio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/cvImagenMia"
+        android:text="Nombre mio"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp">
+    </TextView>
+    <TextView
+        android:id="@+id/tvContenidoMio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvNombreMio"
+        app:layout_constraintEnd_toStartOf="@id/cvImagenMia"
+        android:text="Contenido mio"
+        android:layout_marginEnd="20dp">
+    </TextView>
+    <TextView
+        android:id="@+id/tvFechaMia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvContenidoMio"
+        app:layout_constraintEnd_toStartOf="@id/cvImagenMia"
+        android:text="Fecha mia"
+        android:layout_marginEnd="20dp">
+    </TextView>
+</androidx.constraintlayout.widget.ConstraintLayout>

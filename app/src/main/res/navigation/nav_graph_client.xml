@@ -9,7 +9,11 @@
         android:id="@+id/clientChatFragment"
         android:name="com.jose.magiccraftapp.ui.fragment.ClientChatFragment"
         android:label="fragment_client_chat"
-        tools:layout="@layout/fragment_client_chat" />
+        tools:layout="@layout/fragment_client_chat" >
+        <action
+            android:id="@+id/action_clientChatFragment_to_clientChattingFragment"
+            app:destination="@id/clientChattingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/clientDeckFragment"
         android:name="com.jose.magiccraftapp.ui.fragment.ClientDeckFragment"
@@ -39,4 +43,9 @@
         android:name="com.jose.magiccraftapp.ui.fragment.ClientDeckManageFragment"
         android:label="fragment_client_deck_manage"
         tools:layout="@layout/fragment_client_deck_manage" />
+    <fragment
+        android:id="@+id/clientChattingFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientChattingFragment"
+        android:label="fragment_client_chatting"
+        tools:layout="@layout/fragment_client_chatting" />
 </navigation>

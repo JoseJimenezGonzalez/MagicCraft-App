@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.jose.magiccraftapp.data.entity.Usuario
+import com.jose.magiccraftapp.data.model.User
 import com.jose.magiccraftapp.data.repository.UsuarioRepository
 
 
@@ -14,6 +15,10 @@ class UsuarioViewModel(application: Application): AndroidViewModel(application) 
 
     fun obtainUser(mail: String, password: String): LiveData<Usuario?>{
         return repository.obtainUser(mail, password)
+    }
+
+    fun obtainUsersChat(id: String): LiveData<MutableList<User>>{
+        return repository.obtainUsersChat(id)
     }
 
 

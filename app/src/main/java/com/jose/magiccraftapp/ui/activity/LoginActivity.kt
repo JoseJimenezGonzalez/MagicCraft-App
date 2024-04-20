@@ -65,12 +65,6 @@ class LoginActivity : AppCompatActivity() {
         actionButtonLogin()
     }
 
-    private fun goToMainActivity(activityClass: Class<*>) {
-        binding.progressBar.visibility = View.GONE
-        val intent = Intent(this, activityClass)
-        startActivity(intent)
-    }
-
     private fun actionButtonLogin() {
         binding.btnIniciarSesion.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
