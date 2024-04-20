@@ -10,8 +10,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.ActivityMainAdminBinding
-import com.jose.magiccraftapp.databinding.ActivityMainClientBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainAdminActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainAdminBinding

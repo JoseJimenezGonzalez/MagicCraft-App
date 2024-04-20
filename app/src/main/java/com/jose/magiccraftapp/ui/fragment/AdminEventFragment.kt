@@ -11,7 +11,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.FragmentAdminEventBinding
 import com.jose.magiccraftapp.ui.adapter.AdminAdapterViewPagerEvent
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AdminEventFragment : Fragment() {
 
     private var _binding: FragmentAdminEventBinding? = null

@@ -15,8 +15,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.StorageReference
-import com.jose.magiccraftapp.databinding.FragmentAdminEventManageAddBinding
 import com.jose.magiccraftapp.data.model.Event
+import com.jose.magiccraftapp.databinding.FragmentAdminEventManageAddBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -132,12 +132,12 @@ class AdminEventManageAddFragment : Fragment() , CoroutineScope {
             }
             //No puede haber dos eventos con el mismo nombre y misma fecha
             if(existeEvento(listaEventos, nombre, fechaTorneo)){
-                Toast.makeText(context, "Ya existe esa evento", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Ya existe ese evento", Toast.LENGTH_SHORT).show()
                 existeEvento = true
             }
             //Si todas las condiciones estan bien
             if(esAforoCorrecto && esFechaCorrecto && esFormatoCorrecto && esPrecioCorrecto && esNombreCorrecto && esFotoCorrecta && !existeEvento){
-                val idEvento = dbRef.child("tienda").child("eventos").push().key
+                val idEvento = dbRef.child("MagicCraft").child("Events").push().key
                 registrarEventoEnBaseDatos(idEvento, nombre, formato, fechaTorneo, precioEvento, aforoEvento)
                 Toast.makeText(context, "Se ha introducido el evento en la base de datos", Toast.LENGTH_SHORT).show()
             }
@@ -155,7 +155,7 @@ class AdminEventManageAddFragment : Fragment() , CoroutineScope {
     ) {
         launch {
             val urlImageFirebase = guardarImagenCover(stoRef, idEvento!!, urlImagen!!)
-            dbRef.child("tienda").child("eventos").child(idEvento).setValue(
+            dbRef.child("MagicCraft").child("Events").child(idEvento).setValue(
                 Event(
                     idEvento, nombre, formato, fechaTorneo, precioEvento.toDouble(), aforoEvento.toInt(), 0, urlImageFirebase
                 )
@@ -186,8 +186,8 @@ class AdminEventManageAddFragment : Fragment() , CoroutineScope {
 
         val lista = mutableListOf<Event>()
 
-        dbRef.child("tienda")
-            .child("eventos")
+        dbRef.child("MagicCraft")
+            .child("Events")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     snapshot.children.forEach{hijo : DataSnapshot ->
@@ -209,7 +209,7 @@ class AdminEventManageAddFragment : Fragment() , CoroutineScope {
 
     suspend fun guardarImagenCover(stoRef: StorageReference, id:String, imagen: Uri):String{
 
-        val urlCoverFirebase: Uri = stoRef.child("eventos").child("mtg").child("imagenes").child(id)
+        val urlCoverFirebase: Uri = stoRef.child("MagicCraft").child("Image_Cover_Event").child(id)
             .putFile(imagen).await().storage.downloadUrl.await()
 
         return urlCoverFirebase.toString()
