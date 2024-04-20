@@ -157,7 +157,7 @@ class AdminEventManageAddFragment : Fragment() , CoroutineScope {
             val urlImageFirebase = guardarImagenCover(stoRef, idEvento!!, urlImagen!!)
             dbRef.child("MagicCraft").child("Events").child(idEvento).setValue(
                 Event(
-                    idEvento, nombre, formato, fechaTorneo, precioEvento.toDouble(), aforoEvento.toInt(), 0, urlImageFirebase
+                    idEvento, nombre, formato, fechaTorneo, precioEvento.toDouble(), aforoEvento.toInt(), 0, urlImageFirebase, mutableListOf()
                 )
             )
         }

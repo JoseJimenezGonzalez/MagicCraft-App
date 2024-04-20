@@ -13,7 +13,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.Event
-import com.jose.magiccraftapp.data.model.ReservarEvento
 import com.jose.magiccraftapp.data.viewmodel.EventViewModel
 import com.jose.magiccraftapp.databinding.FragmentClientEventBinding
 import com.jose.magiccraftapp.ui.adapter.AdapterRecyclerViewEvent
@@ -80,23 +79,10 @@ class ClientEventFragment : Fragment() {
     }
 
     private fun handleBtnClick(event: Event) {
+        //Obtener la lista de los usuarios apuntados al evento
+        val idUsers = event.idUsers
+        idUsers.add(CurrentUser.currentUser!!.idUsuario)
         //Se apunta al evento
-        val idReservaEvento = dbRef.child("MagicCraft").child("Reservas_Eventos").push().key!!
-        dbRef.child("MagicCraft").child("Reservas_Eventos").child(idReservaEvento).setValue(
-            ReservarEvento(
-                idReservaEvento,
-                event.id,
-                CurrentUser.currentUser!!.idUsuario,
-                event.nombre,
-                event.formato,
-                event.fecha,
-                event.precio,
-                event.aforo,
-                event.aforoOcupado++,
-                event.urlImagenEvento
-            )
-        )
-
         dbRef.child("MagicCraft").child("Events").child(event.id).setValue(
             Event(
                 event.id,
@@ -105,11 +91,11 @@ class ClientEventFragment : Fragment() {
                 event.fecha,
                 event.precio,
                 event.aforo,
-                event.aforoOcupado++,
-                event.urlImagenEvento
+                idUsers.size,
+                event.urlImagenEvento,
+                idUsers
             )
         )
-
     }
 
     private fun handleItemClick(event: Event) {
