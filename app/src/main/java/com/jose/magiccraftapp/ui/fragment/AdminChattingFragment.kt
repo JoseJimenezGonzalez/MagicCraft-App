@@ -1,27 +1,29 @@
 package com.jose.magiccraftapp.ui.fragment
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.Message
 import com.jose.magiccraftapp.data.viewmodel.MessageViewModel
-import com.jose.magiccraftapp.databinding.FragmentClientChattingBinding
+import com.jose.magiccraftapp.databinding.FragmentAdminChatBinding
+import com.jose.magiccraftapp.databinding.FragmentAdminChattingBinding
 import com.jose.magiccraftapp.ui.adapter.AdapterRecyclerViewChatting
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
-class ClientChattingFragment : Fragment() {
+class AdminChattingFragment : Fragment() {
 
-    private var _binding: FragmentClientChattingBinding? = null
+    private var _binding: FragmentAdminChattingBinding? = null
     private val binding get() = _binding!!
 
     private var idChat = ""
@@ -47,7 +49,7 @@ class ClientChattingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentClientChattingBinding.inflate(inflater, container, false)
+        _binding = FragmentAdminChattingBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -61,6 +63,7 @@ class ClientChattingFragment : Fragment() {
         getChatId(idCurrentUser, idUserChat)
         setUpButtonSendChat()
         setUpRecyclerView()
+
     }
 
     private fun setUpButtonSendChat() {
