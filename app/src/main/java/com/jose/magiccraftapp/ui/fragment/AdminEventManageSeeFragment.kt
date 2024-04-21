@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jose.magiccraftapp.R
+import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.Event
 import com.jose.magiccraftapp.data.viewmodel.EventViewModel
 import com.jose.magiccraftapp.databinding.FragmentAdminEventManageSeeBinding
@@ -62,17 +65,13 @@ class AdminEventManageSeeFragment : Fragment() {
         adapter.onItemClick = { event ->
             handleItemClick(event)
         }
-        adapter.onBtnClick = { event ->
-            handleBtnClick(event)
-        }
-    }
-
-    private fun handleBtnClick(event: Event) {
-
     }
 
     private fun handleItemClick(event: Event) {
-
+        //Nos lleva al chat
+        CurrentUser.currentEventChat = event
+        //Navegar a chatting event
+        findNavController().navigate(R.id.action_adminEventFragment_to_adminEventChattingFragment)
     }
 
 }
