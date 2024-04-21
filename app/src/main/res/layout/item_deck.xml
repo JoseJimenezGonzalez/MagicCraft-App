@@ -4,24 +4,24 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="10dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp">
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_height="130dp">
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cvImageDeck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
+
             <ImageView
                 android:id="@+id/ivDeck"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop">
             </ImageView>
         </com.google.android.material.card.MaterialCardView>
@@ -31,10 +31,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/cvImageDeck"
-            app:layout_constraintBottom_toTopOf="@id/tvDeckFormat"
-            android:layout_marginStart="20dp"
-            android:text="Nombre del mazo">
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Nombre del mazo"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/white">
         </TextView>
 
         <TextView
@@ -42,10 +45,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tvDeckName"
-            app:layout_constraintStart_toEndOf="@id/cvImageDeck"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="20dp"
-            android:text="Formato del mazo">
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:text="Formato del mazo"
+            android:textColor="@color/white">
         </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

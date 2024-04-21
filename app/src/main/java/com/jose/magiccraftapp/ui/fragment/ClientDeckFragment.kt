@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
@@ -69,6 +70,15 @@ class ClientDeckFragment : Fragment() {
             recycler = binding.rvDecks
             recycler.adapter = adapter
             recycler.layoutManager = LinearLayoutManager(context)
+
+            // Define el número de columnas que quieres en tu cuadrícula
+            val numberOfColumns = 2
+
+            // Crea una instancia de GridLayoutManager
+            val gridLayoutManager = GridLayoutManager(context, numberOfColumns)
+
+            // Establece el GridLayoutManager en tu RecyclerView
+            recycler.layoutManager = gridLayoutManager
         }
         // Observar los cambios en los mazos
         mazoViewModel.getDecks(idUser).observe(viewLifecycleOwner) { decks ->

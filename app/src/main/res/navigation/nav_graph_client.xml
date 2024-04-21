@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_client"
-    app:startDestination="@id/clientDeckFragment">
+    app:startDestination="@id/clientHomeFragment">
 
     <fragment
         android:id="@+id/clientChatFragment"
@@ -33,11 +33,6 @@
             app:destination="@id/clientEventChattingFragment" />
     </fragment>
     <fragment
-        android:id="@+id/clientSettingFragment"
-        android:name="com.jose.magiccraftapp.ui.fragment.ClientSettingFragment"
-        android:label="fragment_client_setting"
-        tools:layout="@layout/fragment_client_setting" />
-    <fragment
         android:id="@+id/clientToolsFragment"
         android:name="com.jose.magiccraftapp.ui.fragment.ClientToolsFragment"
         android:label="fragment_client_tools"
@@ -57,4 +52,18 @@
         android:name="com.jose.magiccraftapp.ui.fragment.ClientEventChattingFragment"
         android:label="fragment_client_event_chatting"
         tools:layout="@layout/fragment_client_event_chatting" />
+    <fragment
+        android:id="@+id/clientHomeFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientHomeFragment"
+        android:label="fragment_client_home"
+        tools:layout="@layout/fragment_client_home" >
+        <action
+            android:id="@+id/action_clientHomeFragment_to_clientSettingFragment"
+            app:destination="@id/clientSettingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clientSettingFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientSettingFragment"
+        android:label="fragment_client_setting"
+        tools:layout="@layout/fragment_client_setting" />
 </navigation>

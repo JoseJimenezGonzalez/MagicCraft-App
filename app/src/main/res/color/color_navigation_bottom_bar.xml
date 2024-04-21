@@ -7,7 +7,7 @@
         android:state_focused="true" android:state_checked="true"/>
     <item android:color="@color/white"
         android:state_hovered="true" android:state_checked="true"/>
-    <item android:color="#ECD396"
+    <item android:color="#FFA000"
         android:state_checked="true"/>
 
     <!-- Inactive item -->
