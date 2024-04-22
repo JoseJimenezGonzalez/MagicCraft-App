@@ -60,10 +60,26 @@
         <action
             android:id="@+id/action_clientHomeFragment_to_clientSettingFragment"
             app:destination="@id/clientSettingFragment" />
+        <action
+            android:id="@+id/action_clientHomeFragment_to_clientViewRulesPdfFragment"
+            app:destination="@id/clientViewRulesPdfFragment" />
+        <action
+            android:id="@+id/action_clientHomeFragment_to_clientNewViewFragment"
+            app:destination="@id/clientNewViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/clientSettingFragment"
         android:name="com.jose.magiccraftapp.ui.fragment.ClientSettingFragment"
         android:label="fragment_client_setting"
         tools:layout="@layout/fragment_client_setting" />
+    <fragment
+        android:id="@+id/clientViewRulesPdfFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientViewRulesPdfFragment"
+        android:label="fragment_client_view_rules_pdf"
+        tools:layout="@layout/fragment_client_view_rules_pdf" />
+    <fragment
+        android:id="@+id/clientNewViewFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientNewViewFragment"
+        android:label="fragment_client_new_view"
+        tools:layout="@layout/fragment_client_new_view" />
 </navigation>

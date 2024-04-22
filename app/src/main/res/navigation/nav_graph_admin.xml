@@ -59,4 +59,14 @@
         android:name="com.jose.magiccraftapp.ui.fragment.AdminNewsFragment"
         android:label="fragment_admin_news"
         tools:layout="@layout/fragment_admin_news" />
+    <fragment
+        android:id="@+id/adminNewsManageAddFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.AdminNewsManageAddFragment"
+        android:label="fragment_admin_news_manage_add"
+        tools:layout="@layout/fragment_admin_news_manage_add" />
+    <fragment
+        android:id="@+id/adminNewsManageListFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.AdminNewsManageListFragment"
+        android:label="fragment_admin_news_manage_list"
+        tools:layout="@layout/fragment_admin_news_manage_list" />
 </navigation>
