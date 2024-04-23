@@ -19,6 +19,7 @@ class AdapterRecyclerViewNews (private var newsList: MutableList<News>): Recycle
     private lateinit var context: Context
 
     var onItemClick: ((News) -> Unit)? = null
+    var onItemLongClick: ((News) -> Unit)? = null
 
 
     override fun onCreateViewHolder(
@@ -49,6 +50,10 @@ class AdapterRecyclerViewNews (private var newsList: MutableList<News>): Recycle
 
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(currentItem)
+        }
+        holder.itemView.setOnLongClickListener {
+            onItemLongClick?.invoke(currentItem)
+            true
         }
 
 

@@ -1,5 +1,6 @@
 package com.jose.magiccraftapp.ui.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import com.jose.magiccraftapp.data.model.News
 import com.jose.magiccraftapp.data.viewmodel.NewsViewModel
 import com.jose.magiccraftapp.databinding.FragmentAdminNewsManageListBinding
@@ -28,6 +31,12 @@ class AdminNewsManageListFragment : Fragment() {
 
     private lateinit var adapter: AdapterRecyclerViewNews
 
+    // Inicialización de DatabaseReference
+    var dbRef = FirebaseDatabase.getInstance().reference
+
+    // Inicialización de StorageReference
+    var stRef = FirebaseStorage.getInstance().reference
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +54,7 @@ class AdminNewsManageListFragment : Fragment() {
 
     }
 
+
     private fun setUpRecyclerView() {
         newsList = mutableListOf()
         adapter = AdapterRecyclerViewNews(newsList)
@@ -60,6 +70,29 @@ class AdminNewsManageListFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
+        adapter.onItemLongClick = { new ->
+            showConfirmationDialog("¿Estás seguro de que quieres eliminar esta noticia?") {
+                //Eliminar la noticia
+                dbRef.child("MagicCraft").child("News").child(new.idNew).removeValue()
+                stRef.child("MagicCraft").child("Image_Cover_News").child(new.idNew).delete()
+            }
+        }
+
+    }
+
+    fun showConfirmationDialog(message: String, confirmAction: () -> Unit) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Confirmación")
+            .setMessage(message)
+            .setPositiveButton("Sí") { dialog, _ ->
+                confirmAction()
+                dialog.dismiss()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 
 }
