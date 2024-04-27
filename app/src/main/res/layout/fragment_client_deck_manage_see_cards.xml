@@ -16,7 +16,8 @@
         android:layout_marginStart="10dp"
         android:text="Nombre del mazo"
         android:textSize="18sp"
-        android:textStyle="bold">
+        android:textStyle="bold"
+        android:textColor="@color/black">
     </TextView>
 
     <ImageView

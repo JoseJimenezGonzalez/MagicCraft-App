@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#3F51B5"
     tools:context=".ui.activity.MainClientActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -12,25 +13,25 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationViewClient"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationViewClient"
-        app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph_client" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationViewClient"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:backgroundTint="#2A2A2C"
+        app:itemBackground="@null"
+        app:itemIconTint="@color/color_navigation_bottom_bar"
+        app:itemTextColor="@color/color_navigation_bottom_bar"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/menu_nav_client"
-        app:backgroundTint = "#080F33"
-        app:itemBackground="@null"
-        app:labelVisibilityMode="labeled"
-        app:itemTextColor="@color/color_navigation_bottom_bar"
-        app:itemIconTint="@color/color_navigation_bottom_bar"/>
+        app:menu="@menu/menu_nav_client" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

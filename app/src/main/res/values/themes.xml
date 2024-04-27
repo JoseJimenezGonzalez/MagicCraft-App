@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MagicCraftApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">#080F33</item>
+        <item name="colorPrimary">#F57C00</item>
         <item name="colorSecondary">#FFFFFF</item>
 
         <!-- Agregar el estilo personalizado para el BottomNavigationView -->

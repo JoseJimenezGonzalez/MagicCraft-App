@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.LoginActivity"
-    android:background="#080F33">
+    android:background="#3F51B5">
 
     <ImageView
         android:id="@+id/ivLogoMagic"
@@ -29,7 +29,8 @@
         app:layout_constraintBottom_toTopOf="@id/tilCorreo"
         android:text="MagicCraft"
         android:textColor="@color/white"
-        android:textSize="20sp">
+        android:textSize="50sp"
+        android:textStyle="bold">
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -40,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tilPassword"
-        app:boxStrokeColor="#4452A1"
+        app:boxStrokeColor="@color/black"
         android:textColorHint="@color/white"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
@@ -64,7 +65,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btnIniciarSesion"
-        app:boxStrokeColor="#4452A1"
+        app:boxStrokeColor="@color/black"
         app:endIconMode="password_toggle"
         app:boxStrokeWidth="2dp"
         android:hint="Contraseña"
@@ -91,7 +92,7 @@
         app:layout_constraintBottom_toTopOf="@id/tvTienesCuenta"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
-        android:background="#4452A1"
+        android:background="#F57C00"
         android:textColor="@color/white"
         android:text="Iniciar sesion">
     </androidx.appcompat.widget.AppCompatButton>

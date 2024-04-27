@@ -26,6 +26,7 @@ import com.jose.magiccraftapp.data.repository.MazoRepository
 import com.jose.magiccraftapp.data.repository.UsuarioRepository
 import com.jose.magiccraftapp.data.viewmodel.UsuarioViewModel
 import com.jose.magiccraftapp.databinding.ActivityLoginBinding
+import com.jose.magiccraftapp.util.putPreference
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -77,6 +78,15 @@ class LoginActivity : AppCompatActivity() {
                     generateToast("Usuario correcto")
                     //Guardar usuario en componion
                     CurrentUser.currentUser = usuario
+                    //Guardar datos de usuario en la shared
+                    val name = usuario.name
+                    val surname = usuario.surname
+                    val idUsuaio = usuario.idUsuario
+                    val mail = usuario.email
+                    val typeUser = usuario.typeUser
+                    val password = usuario.password
+                    val login = "login"
+                    saveSharedPreferences(name, surname, idUsuaio, mail, typeUser, password, login)
                     //Guardar usuario en la base de datos
                     val usuarioRepository = UsuarioRepository(application)
                     CoroutineScope(Dispatchers.IO).launch {
@@ -141,12 +151,31 @@ class LoginActivity : AppCompatActivity() {
                                 // Handle error
                             }
                         })
+
                         val intent = Intent(this, MainClientActivity::class.java)
                         startActivity(intent)
                     }
                 }
             })
         }
+    }
+
+    private fun saveSharedPreferences(
+        name: String,
+        surname: String,
+        idUsuaio: String,
+        mail: String,
+        typeUser: String,
+        password: String,
+        login: String
+    ) {
+        this.putPreference("name", name)
+        this.putPreference("surname", surname)
+        this.putPreference("idUsuario", idUsuaio)
+        this.putPreference("mail", mail)
+        this.putPreference("typeUser", typeUser)
+        this.putPreference("password", password)
+        this.putPreference("login", login)
     }
 
     private fun actionButtonGoToRegister() {
@@ -159,4 +188,6 @@ class LoginActivity : AppCompatActivity() {
     private fun generateToast(message: String){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
+
 }

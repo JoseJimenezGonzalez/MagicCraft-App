@@ -13,9 +13,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Mis mazos"
-        android:paddingStart="10dp"
-        android:textSize="24sp">
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:text="Mis mazos">
     </TextView>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -36,7 +37,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="20dp"
-        android:src="@drawable/ic_add">
+        android:src="@drawable/ic_add"
+        android:backgroundTint="#F57C00">
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

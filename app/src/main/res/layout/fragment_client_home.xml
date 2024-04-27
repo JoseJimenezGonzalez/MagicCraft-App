@@ -21,7 +21,8 @@
             android:layout_weight="1"
             android:text="Home"
             android:textSize="30sp"
-            android:textAlignment="center">
+            android:textAlignment="center"
+            android:textColor="@color/black">
         </TextView>
         <ImageView
             android:id="@+id/ivSettings"
@@ -58,7 +59,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp">
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#C6CBE1">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,30 +70,11 @@
         </TextView>
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cvLegacyArticlesPdf"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/cvRules"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="PDF Guide Deck"
-            android:textAlignment="center"
-            android:textSize="24sp">
-        </TextView>
-    </com.google.android.material.card.MaterialCardView>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNews"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/cvLegacyArticlesPdf"
+        app:layout_constraintTop_toBottomOf="@id/cvRules"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
