@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.AdminEventManageAddFragment">
+    tools:context=".ui.fragment.AdminEventManageAddFragment"
+    android:background="#3F51B5">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvImagen"
@@ -156,7 +157,7 @@
         app:layout_constraintTop_toBottomOf="@id/tilAforoEvento"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
-        android:background="#4452A1"
+        android:background="#F57C00"
         android:textColor="@color/white">
     </androidx.appcompat.widget.AppCompatButton>
 

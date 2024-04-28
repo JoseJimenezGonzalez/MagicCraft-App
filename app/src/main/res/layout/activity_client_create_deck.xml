@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.ClientCreateDeckActivity">
+    tools:context=".ui.activity.ClientCreateDeckActivity"
+    android:background="#3F51B5">
 
     <ImageView
         android:id="@+id/ivBack"
@@ -24,27 +25,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tvImageDeck"
-        android:text="Crear mazo"
-        android:textSize="26sp">
+        app:layout_constraintBottom_toTopOf="@id/cvImageDeck"
+        android:text="Create Deck"
+        android:textSize="26sp"
+        android:textColor="@color/black">
     </TextView>
 
-    <TextView
-        android:id="@+id/tvImageDeck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/cvImageDeck"
-        android:text="Introduce foto para el mazo">
-    </TextView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvImageDeck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvImageDeck"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tilNameDeck">
@@ -52,7 +44,8 @@
             android:id="@+id/ivImageDeck"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:scaleType="centerCrop">
+            android:scaleType="centerCrop"
+            android:src="@drawable/lotus_art">
         </ImageView>
     </com.google.android.material.card.MaterialCardView>
 
@@ -64,7 +57,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tilFormatDeck"
-        app:boxStrokeColor="#4452A1"
+        app:boxStrokeColor="@color/black"
         android:textColorHint="@color/black"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
@@ -88,7 +81,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btnSubmitDeck"
-        app:boxStrokeColor="#4452A1"
+        app:boxStrokeColor="@color/black"
         android:textColorHint="@color/black"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
@@ -114,7 +107,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="Crear mazo"
         android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp">
+        android:layout_marginEnd="14dp"
+        android:background="#F57C00"
+        android:textColor="@color/white">
     </androidx.appcompat.widget.AppCompatButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
