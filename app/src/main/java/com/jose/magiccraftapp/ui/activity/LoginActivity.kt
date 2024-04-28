@@ -75,8 +75,13 @@ class LoginActivity : AppCompatActivity() {
                     val urlImageFirebase = usuario.urlImageFirebase
                     val login = "login"
                     saveSharedPreferences(name, surname, idUsuaio, mail, typeUser, password, urlImageFirebase, login)
-                    val intent = Intent(this, MainClientActivity::class.java)
-                    startActivity(intent)
+                    if(mail == "administrador@gmail.com"){
+                        val intent = Intent(this, MainAdminActivity::class.java)
+                        startActivity(intent)
+                    }else{
+                        val intent = Intent(this, MainClientActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
             })
         }

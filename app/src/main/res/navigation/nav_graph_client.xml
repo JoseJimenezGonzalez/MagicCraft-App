@@ -66,6 +66,9 @@
         <action
             android:id="@+id/action_clientHomeFragment_to_clientNewViewFragment"
             app:destination="@id/clientNewViewFragment" />
+        <action
+            android:id="@+id/action_clientHomeFragment_to_clientCalendarFragment"
+            app:destination="@id/clientCalendarFragment" />
     </fragment>
     <fragment
         android:id="@+id/clientSettingFragment"
@@ -82,4 +85,9 @@
         android:name="com.jose.magiccraftapp.ui.fragment.ClientNewViewFragment"
         android:label="fragment_client_new_view"
         tools:layout="@layout/fragment_client_new_view" />
+    <fragment
+        android:id="@+id/clientCalendarFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientCalendarFragment"
+        android:label="fragment_client_calendar"
+        tools:layout="@layout/fragment_client_calendar" />
 </navigation>

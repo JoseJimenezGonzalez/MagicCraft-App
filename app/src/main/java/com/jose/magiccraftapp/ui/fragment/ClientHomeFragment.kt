@@ -44,6 +44,7 @@ class ClientHomeFragment : Fragment() {
         setUpButtonOpenUrlRules()
         setUpButtonOpenSetting()
         setUpRecyclerView()
+        setUpButtonOpenCalendar()
     }
 
     private fun handleItem(new: News) {
@@ -75,6 +76,12 @@ class ClientHomeFragment : Fragment() {
     private fun setUpButtonOpenSetting() {
         binding.ivSettings.setOnClickListener {
             findNavController().navigate(R.id.action_clientHomeFragment_to_clientSettingFragment)
+        }
+    }
+
+    private fun setUpButtonOpenCalendar(){
+        binding.cvCalendar.setOnClickListener {
+            findNavController().navigate(R.id.action_clientHomeFragment_to_clientCalendarFragment)
         }
     }
 

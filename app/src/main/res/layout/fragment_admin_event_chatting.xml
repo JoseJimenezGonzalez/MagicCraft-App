@@ -33,8 +33,9 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
             android:text="Nombre del torneo"
-            android:textColor="@color/black"
-            android:textSize="18sp">
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold">
         </TextView>
     </LinearLayout>
 

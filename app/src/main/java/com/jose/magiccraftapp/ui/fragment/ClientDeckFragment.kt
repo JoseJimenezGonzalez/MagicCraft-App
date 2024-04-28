@@ -1,5 +1,6 @@
 package com.jose.magiccraftapp.ui.fragment
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.storage.FirebaseStorage
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.Deck
@@ -40,6 +42,9 @@ class ClientDeckFragment : Fragment() {
 
     @Inject
     lateinit var dbRef: DatabaseReference
+
+    // Inicialización de StorageReference
+    var stRef = FirebaseStorage.getInstance().reference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,12 +95,35 @@ class ClientDeckFragment : Fragment() {
         adapter.onItemClick = { deck ->
             handleItemClick(deck)
         }
+        adapter.onItemLongClick = { deck ->
+            showConfirmationDialog("¿Estás seguro de que quieres eliminar este mazo?") {
+                //Eliminar la noticia
+                dbRef.child("MagicCraft").child("Decks").child(deck.idUserDeck).child(deck.idDeck).removeValue()
+                stRef.child("MagicCraft").child("Image_Cover_Deck").child(deck.idUserDeck).child(deck.idDeck).delete()
+                deckList.remove(deck)
+                adapter.notifyDataSetChanged()
+            }
+        }
     }
 
     private fun handleItemClick(deck: Deck) {
         //Modificamos el mazo actual
         CurrentUser.currentDeck = deck
         findNavController().navigate(R.id.action_clientDeckFragment_to_clientDeckManageFragment)
+    }
+    fun showConfirmationDialog(message: String, confirmAction: () -> Unit) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Confirmación")
+            .setMessage(message)
+            .setPositiveButton("Sí") { dialog, _ ->
+                confirmAction()
+                dialog.dismiss()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 
 }

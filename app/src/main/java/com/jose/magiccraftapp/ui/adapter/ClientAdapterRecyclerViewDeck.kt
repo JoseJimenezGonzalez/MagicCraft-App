@@ -1,20 +1,17 @@
 package com.jose.magiccraftapp.ui.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.Deck
 
 class ClientAdapterRecyclerViewDeck(private var deckList: MutableList<Deck>): RecyclerView.Adapter<ClientAdapterRecyclerViewDeck.ViewHolder>() {
@@ -22,6 +19,7 @@ class ClientAdapterRecyclerViewDeck(private var deckList: MutableList<Deck>): Re
     private lateinit var context: Context
 
     var onItemClick: ((Deck) -> Unit)? = null
+    var onItemLongClick: ((Deck) -> Unit)? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -52,6 +50,11 @@ class ClientAdapterRecyclerViewDeck(private var deckList: MutableList<Deck>): Re
         //Tratar el click sobre un elemento del recycler view
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(currentItem)
+        }
+
+        holder.itemView.setOnLongClickListener {
+            onItemLongClick?.invoke(currentItem)
+            true
         }
     }
 

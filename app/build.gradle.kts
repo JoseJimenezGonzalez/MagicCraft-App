@@ -101,6 +101,8 @@ dependencies {
     //Lottie
     implementation("com.airbnb.android:lottie:3.7.0")
 
+    implementation("com.kizitonwose.calendar:view:2.5.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
