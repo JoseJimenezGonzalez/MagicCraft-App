@@ -29,7 +29,7 @@
         android:text="Nombre otro"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:textColor="@color/black">
+        android:textColor="@color/white">
     </TextView>
     <TextView
         android:id="@+id/tvContenidoOtro"
@@ -39,7 +39,7 @@
         app:layout_constraintStart_toEndOf="@id/cvImagenOtro"
         android:text="Contenido otro"
         android:layout_marginStart="20dp"
-        android:textColor="@color/black">
+        android:textColor="@color/white">
     </TextView>
     <TextView
         android:id="@+id/tvFechaOtro"
@@ -50,7 +50,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="Fecha de otro"
         android:layout_marginStart="20dp"
-        android:textColor="@color/black">
+        android:textColor="@color/white">
     </TextView>
 
     <com.google.android.material.card.MaterialCardView
@@ -78,7 +78,7 @@
         android:text="Nombre mio"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:textColor="@color/black">
+        android:textColor="@color/white">
     </TextView>
     <TextView
         android:id="@+id/tvContenidoMio"
@@ -88,7 +88,7 @@
         app:layout_constraintEnd_toStartOf="@id/cvImagenMia"
         android:text="Contenido mio"
         android:layout_marginEnd="20dp"
-        android:textColor="@color/black">
+        android:textColor="@color/white">
     </TextView>
     <TextView
         android:id="@+id/tvFechaMia"
@@ -98,6 +98,6 @@
         app:layout_constraintEnd_toStartOf="@id/cvImagenMia"
         android:text="Fecha mia"
         android:layout_marginEnd="20dp"
-        android:textColor="@color/black">
+        android:textColor="@color/white">
     </TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,9 +26,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/cvImageDeck"
-        android:text="Create Deck"
+        android:text="Crear mazo"
         android:textSize="26sp"
-        android:textColor="@color/black">
+        android:textColor="@color/white">
     </TextView>
 
 
@@ -57,19 +57,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tilFormatDeck"
-        app:boxStrokeColor="@color/black"
-        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/white"
+        android:textColorHint="@color/white"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
         app:boxStrokeWidth="2dp"
         android:hint="Nombre del mazo"
-        app:hintTextColor="@color/black">
+        app:hintTextColor="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietNameDeck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,19 +81,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btnSubmitDeck"
-        app:boxStrokeColor="@color/black"
-        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/white"
+        android:textColorHint="@color/white"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
         app:boxStrokeWidth="2dp"
         android:hint="Formato del mazo"
-        app:hintTextColor="@color/black">
+        app:hintTextColor="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietFormatDeck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 

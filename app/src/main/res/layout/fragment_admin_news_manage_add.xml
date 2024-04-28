@@ -13,35 +13,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tvImageDeck"
-        android:text="Crear noticia"
-        android:textSize="26sp">
-    </TextView>
-
-    <TextView
-        android:id="@+id/tvImageDeck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/cvImageNews"
-        android:text="Introduce foto para la noticia">
+        android:text="Crear noticia"
+        android:textSize="26sp"
+        android:textColor="@color/white">
     </TextView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvImageNews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvImageDeck"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tilTitle">
         <ImageView
             android:id="@+id/ivImageNews"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop">
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_newss">
         </ImageView>
     </com.google.android.material.card.MaterialCardView>
 
@@ -53,19 +44,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tilSubTittle"
-        app:boxStrokeColor="#4452A1"
-        android:textColorHint="@color/black"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
         app:boxStrokeWidth="2dp"
         android:hint="Titulo de la noticia"
-        app:hintTextColor="@color/black">
+        app:boxStrokeColor="@color/black"
+        android:textColorHint="@color/white"
+        app:hintTextColor="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,19 +68,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tilUrl"
-        app:boxStrokeColor="#4452A1"
-        android:textColorHint="@color/black"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
         app:boxStrokeWidth="2dp"
         android:hint="Subtitulo de la noticia"
-        app:hintTextColor="@color/black">
+        app:boxStrokeColor="@color/black"
+        android:textColorHint="@color/white"
+        app:hintTextColor="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietSubTittle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,19 +92,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btnSubmitNews"
-        app:boxStrokeColor="#4452A1"
-        android:textColorHint="@color/black"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
         app:boxStrokeWidth="2dp"
         android:hint="Url de la noticia"
-        app:hintTextColor="@color/black">
+        app:boxStrokeColor="@color/black"
+        android:textColorHint="@color/white"
+        app:hintTextColor="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietUrl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,7 +118,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="Crear noticia"
         android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp">
+        android:layout_marginEnd="14dp"
+        android:background="@color/naranja"
+        android:textColor="@color/white">
     </androidx.appcompat.widget.AppCompatButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

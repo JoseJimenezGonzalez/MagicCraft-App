@@ -13,4 +13,9 @@
     <color name="m200_amarillo">#FFF59D</color>
     <color name="m200_naranja">#FFCC80</color>
     <color name="m200_azul">#81D4FA</color>
+
+    <!-- Colores principales -->
+    <color name="naranja">#F57C00</color>
+    <color name="gris">#2A2A2C</color>
+    <color name="azul">#3F51B5</color>
 </resources>

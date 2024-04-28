@@ -6,7 +6,7 @@
     android:layout_marginTop="10dp"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
-    android:backgroundTint="#C6CBE1">
+    android:backgroundTint="#2A2A2C">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,7 +35,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/cvImageUser"
             android:layout_marginStart="20dp"
-            android:text="Nombre del usuario">
+            android:text="Nombre del usuario"
+            android:textColor="@color/white"
+            android:textStyle="bold">
         </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

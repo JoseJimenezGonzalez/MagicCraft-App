@@ -52,7 +52,9 @@
             android:layout_height="wrap_content"
             android:text="Añadir al mazo"
             android:layout_marginStart="14dp"
-            android:layout_marginEnd="14dp">
+            android:layout_marginEnd="14dp"
+            android:background="@color/naranja"
+            android:textColor="@color/white">
         </androidx.appcompat.widget.AppCompatButton>
 
 

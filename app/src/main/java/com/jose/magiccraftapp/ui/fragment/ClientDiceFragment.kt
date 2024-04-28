@@ -17,7 +17,7 @@ class ClientDiceFragment: Fragment() {
     private val binding get() = _binding!!
 
     val listPlayer = listOf(
-        "Player 1 start", "Player 2 start"
+        "Jugador 1 empieza", "Jugador 2 empieza"
     )
 
     override fun onCreateView(

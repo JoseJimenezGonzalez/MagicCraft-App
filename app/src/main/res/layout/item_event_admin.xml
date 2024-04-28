@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="14dp"
-    android:backgroundTint="#C6CBE1">
+    android:backgroundTint="@color/gris">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Nombre del evento"
-            android:textColor="@color/black">
+            android:textColor="@color/white">
         </TextView>
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Formato del evento"
-            android:textColor="@color/black">
+            android:textColor="@color/white">
         </TextView>
 
         <TextView
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Fecha del evento"
-            android:textColor="@color/black">
+            android:textColor="@color/white">
         </TextView>
 
         <TextView
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Precio"
-            android:textColor="@color/black">
+            android:textColor="@color/white">
         </TextView>
 
         <TextView
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Aforo maximo"
-            android:textColor="@color/black">
+            android:textColor="@color/white">
         </TextView>
 
         <TextView
@@ -75,7 +75,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:text="Aforo ocupado"
-            android:textColor="@color/black">
+            android:textColor="@color/white">
         </TextView>
 
         <androidx.appcompat.widget.AppCompatButton

@@ -2,18 +2,19 @@ package com.jose.magiccraftapp.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
-import com.jose.magiccraftapp.databinding.FragmentClientDeckManageSeeCardsBinding
 import com.jose.magiccraftapp.data.model.Card
 import com.jose.magiccraftapp.data.model.CurrentUser
+import com.jose.magiccraftapp.data.model.ModalBottomSheetDialog
+import com.jose.magiccraftapp.databinding.FragmentClientDeckManageSeeCardsBinding
 import com.jose.magiccraftapp.ui.adapter.ClientAdapterRecyclerViewCardsDeck
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -111,6 +112,20 @@ class ClientDeckManageSeeCardsFragment : Fragment() {
             recycler.adapter = adapter
             recycler.layoutManager = LinearLayoutManager(context)
         }
+        adapter.onItemClick = { card ->
+            handleItemClick(card)
+        }
+    }
+
+    private fun handleItemClick(card: Card) {
+        CurrentUser.currentCardBottomSheet = card
+        setUpModalButton(card.urlArtNormal)
+    }
+
+    private fun setUpModalButton(urlImagen: String) {
+        val modal = ModalBottomSheetDialog()
+        modal.setImageUrl(urlImagen) // Establecer la URL de la imagen en el modal
+        modal.show(parentFragmentManager, ModalBottomSheetDialog.TAG)
     }
 
 }

@@ -9,8 +9,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvImagen"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,9 +18,10 @@
         app:cardCornerRadius="16dp">
         <ImageView
             android:id="@+id/ivImagen"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/image_search">
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_eventt">
         </ImageView>
     </androidx.cardview.widget.CardView>
 
@@ -36,16 +37,16 @@
         app:boxStrokeWidth="2dp"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:boxStrokeColor="#4452A1"
-        android:textColorHint="@color/black"
-        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/black"
+        android:textColorHint="@color/white"
+        app:hintTextColor="@color/white"
         android:hint="Nombre">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietNombreEvento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -60,16 +61,16 @@
         app:boxStrokeWidth="2dp"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:boxStrokeColor="#4452A1"
-        android:textColorHint="@color/black"
-        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/black"
+        android:textColorHint="@color/white"
+        app:hintTextColor="@color/white"
         android:hint="Formato del torneo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietFormatoTorneo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -84,9 +85,9 @@
         app:boxStrokeWidth="2dp"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:boxStrokeColor="#4452A1"
-        android:textColorHint="@color/black"
-        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/black"
+        android:textColorHint="@color/white"
+        app:hintTextColor="@color/white"
         android:hint="Fecha del evento">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -95,7 +96,7 @@
             android:layout_height="wrap_content"
             android:inputType="date"
             android:focusable="false"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -110,16 +111,16 @@
         app:boxStrokeWidth="2dp"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:boxStrokeColor="#4452A1"
-        android:textColorHint="@color/black"
-        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/black"
+        android:textColorHint="@color/white"
+        app:hintTextColor="@color/white"
         android:hint="Precio del evento">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietPrecioEvento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -134,16 +135,16 @@
         app:boxStrokeWidth="2dp"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:boxStrokeColor="#4452A1"
-        android:textColorHint="@color/black"
-        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/black"
+        android:textColorHint="@color/white"
+        app:hintTextColor="@color/white"
         android:hint="Aforo del evento">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietAforoEvento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton

@@ -15,9 +15,9 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="10dp"
         android:text="Nombre del mazo"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/black">
+        android:textColor="@color/white">
     </TextView>
 
     <ImageView
@@ -26,7 +26,8 @@
         android:layout_height="50dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/baseline_menu_24">
+        android:src="@drawable/baseline_menu_24"
+        android:layout_marginEnd="6dp">
     </ImageView>
 
     <androidx.recyclerview.widget.RecyclerView

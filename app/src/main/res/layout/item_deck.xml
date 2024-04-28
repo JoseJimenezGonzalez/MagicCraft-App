@@ -25,32 +25,38 @@
                 android:scaleType="centerCrop">
             </ImageView>
         </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:id="@+id/tvDeckName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Nombre del mazo"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/white">
-        </TextView>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:alpha="0.7"
+            android:background="@color/black">
+            <TextView
+                android:id="@+id/tvDeckName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Nombre del mazo"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/white">
+            </TextView>
 
-        <TextView
-            android:id="@+id/tvDeckFormat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tvDeckName"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="2dp"
-            android:text="Formato del mazo"
-            android:textColor="@color/white">
-        </TextView>
+            <TextView
+                android:id="@+id/tvDeckFormat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="2dp"
+                android:text="Formato del mazo"
+                android:textColor="@color/white"
+                android:layout_marginBottom="6dp">
+            </TextView>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -6,7 +6,7 @@
     android:layout_marginBottom="6dp"
     android:layout_marginStart="6dp"
     android:layout_marginEnd="6dp"
-    android:backgroundTint="#C6CBE1">
+    android:backgroundTint="#2A2A2C">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,6 +35,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="Diamante ojo de leon"
             android:textSize="14sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:layout_marginStart="20dp">
         </TextView>
 
@@ -63,7 +65,8 @@
                 android:textAlignment="center"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:text="4">
+                android:text="4"
+                android:textColor="@color/white">
             </TextView>
             <ImageView
                 android:id="@+id/ivPlus"

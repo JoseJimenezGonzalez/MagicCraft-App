@@ -22,7 +22,7 @@
             android:text="Home"
             android:textSize="30sp"
             android:textAlignment="center"
-            android:textColor="@color/black">
+            android:textColor="@color/white">
         </TextView>
         <ImageView
             android:id="@+id/ivSettings"
@@ -60,13 +60,15 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:backgroundTint="#C6CBE1">
+        android:backgroundTint="@color/gris">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="PDF Rules"
             android:textAlignment="center"
-            android:textSize="24sp">
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/white">
         </TextView>
     </com.google.android.material.card.MaterialCardView>
 

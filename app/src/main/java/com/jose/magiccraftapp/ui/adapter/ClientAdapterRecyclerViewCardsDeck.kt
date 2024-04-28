@@ -1,7 +1,6 @@
 package com.jose.magiccraftapp.ui.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +17,8 @@ import com.jose.magiccraftapp.data.model.Card
 class ClientAdapterRecyclerViewCardsDeck (private var cardList: MutableList<Card>): RecyclerView.Adapter<ClientAdapterRecyclerViewCardsDeck.ViewHolder>() {
 
     private lateinit var context: Context
+
+    var onItemClick: ((Card) -> Unit)? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -47,8 +48,7 @@ class ClientAdapterRecyclerViewCardsDeck (private var cardList: MutableList<Card
 
         //Tratar el click sobre un elemento del recycler view
         holder.itemView.setOnClickListener {
-            Log.e("cmc", "${currentItem.cmc}")
-            Log.e("type", "${currentItem.type}")
+            onItemClick?.invoke(currentItem)
         }
         holder.imageViewMinus.setOnClickListener {
             currentItem.numberCard--

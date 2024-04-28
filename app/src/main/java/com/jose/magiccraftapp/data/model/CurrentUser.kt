@@ -8,5 +8,6 @@ class CurrentUser {
         var currentUserChat: User? = null
         var currentEventChat: Event? = null
         var currentNew: News? = null
+        var currentCardBottomSheet: Card? = null
     }
 }

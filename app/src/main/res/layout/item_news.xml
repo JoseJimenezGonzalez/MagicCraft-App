@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="#C6CBE1"
+    android:backgroundTint="@color/gris"
     android:layout_marginBottom="8dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -37,7 +37,8 @@
             android:layout_marginTop="6dp"
             android:textStyle="bold"
             android:text="Este es el título"
-            android:textSize="16sp">
+            android:textSize="16sp"
+            android:textColor="@color/white">
         </TextView>
 
         <TextView
@@ -50,7 +51,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="6dp"
             android:textStyle="italic"
-            android:text="Este es el subtítulo">
+            android:text="Este es el subtítulo"
+            android:textColor="@color/white">
         </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
