@@ -2,10 +2,10 @@ package com.jose.magiccraftapp.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,11 +16,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.MessageEvent
 import com.jose.magiccraftapp.data.viewmodel.MessageViewModel
-import com.jose.magiccraftapp.databinding.FragmentAdminChattingBinding
 import com.jose.magiccraftapp.databinding.FragmentAdminEventChattingBinding
 import com.jose.magiccraftapp.ui.adapter.AdapterRecyclerViewEventChatting
 import java.text.SimpleDateFormat
@@ -92,7 +90,7 @@ class AdminEventChattingFragment : Fragment() {
                 val idMensaje = dbRef.child("MagicCraft").child("Events").child(CurrentUser.currentEventChat!!.id).child("Chat").push().key!!
                 val mensajeEvento = MessageEvent(
                     idMensaje,
-                    CurrentUser.currentUser!!.idUsuario,
+                    CurrentUser.currentUser!!.id,
                     CurrentUser.currentUser!!.name,
                     "",
                     mensajeEnviado,

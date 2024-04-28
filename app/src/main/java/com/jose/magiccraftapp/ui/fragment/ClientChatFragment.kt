@@ -1,6 +1,7 @@
 package com.jose.magiccraftapp.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,7 +43,7 @@ class ClientChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        idUser = CurrentUser.currentUser!!.idUsuario
+        idUser = CurrentUser.currentUser!!.id
 
         setUpRecyclerView()
     }
@@ -70,6 +71,7 @@ class ClientChatFragment : Fragment() {
 
     private fun handleItemClick(usuario: User) {
         CurrentUser.currentUserChat = usuario
+        Log.e("ClientChatFragment", usuario.toString())
         findNavController().navigate(R.id.action_clientChatFragment_to_clientChattingFragment)
     }
 

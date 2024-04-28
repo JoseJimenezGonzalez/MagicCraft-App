@@ -11,26 +11,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.data.entity.Carta
-import com.jose.magiccraftapp.data.entity.Mazo
-import com.jose.magiccraftapp.data.model.Card
 import com.jose.magiccraftapp.data.model.CurrentUser
-import com.jose.magiccraftapp.data.model.Deck
-import com.jose.magiccraftapp.data.repository.CartaRepository
-import com.jose.magiccraftapp.data.repository.MazoRepository
-import com.jose.magiccraftapp.data.repository.UsuarioRepository
 import com.jose.magiccraftapp.data.viewmodel.UsuarioViewModel
 import com.jose.magiccraftapp.databinding.ActivityLoginBinding
 import com.jose.magiccraftapp.util.putPreference
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -81,80 +68,15 @@ class LoginActivity : AppCompatActivity() {
                     //Guardar datos de usuario en la shared
                     val name = usuario.name
                     val surname = usuario.surname
-                    val idUsuaio = usuario.idUsuario
-                    val mail = usuario.email
+                    val idUsuaio = usuario.id
+                    val mail = usuario.mail
                     val typeUser = usuario.typeUser
                     val password = usuario.password
+                    val urlImageFirebase = usuario.urlImageFirebase
                     val login = "login"
-                    saveSharedPreferences(name, surname, idUsuaio, mail, typeUser, password, login)
-                    //Guardar usuario en la base de datos
-                    val usuarioRepository = UsuarioRepository(application)
-                    CoroutineScope(Dispatchers.IO).launch {
-                        usuarioRepository.insert(usuario)
-                    }
-                    //Guardar usuario en shared
-                    //Navegar
-                    if(usuario.typeUser == "administrador"){
-                        val intent = Intent(this, MainAdminActivity::class.java)
-                        startActivity(intent)
-                    }else{
-                        //Inserto mazos y cartas
-                        dbRef.child("MagicCraft").child("Decks").child(usuario.idUsuario).addValueEventListener(object :
-                            ValueEventListener {
-                            override fun onDataChange(snapshot: DataSnapshot) {
-                                val deckList = mutableListOf<Deck>()
-                                snapshot.children.forEach { deckSnapshot ->
-                                    val pojoDeck = deckSnapshot.getValue(Deck::class.java)!!
-                                    // Recuperar las cartas de cada mazo
-                                    deckSnapshot.child("Cards").children.forEach { cardSnapshot ->
-                                        val pojoCard = cardSnapshot.getValue(Card::class.java)!!
-                                        pojoDeck.cards.add(pojoCard)
-                                    }
-                                    deckList.add(pojoDeck)
-                                }
-                                //Transformo la lista
-                                val listaMazo = deckList.map { deck ->
-                                    Mazo(
-                                        deck.idDeck,
-                                        deck.idUserDeck,
-                                        deck.nameDeck,
-                                        deck.formatDeck,
-                                        "combo",
-                                        deck.urlImageFirebase
-                                    )
-                                }.toMutableList()
-                                val listaCartas = deckList.flatMap { deck ->
-                                    deck.cards.map { card ->
-                                        Carta(
-                                            card.id,
-                                            deck.idDeck,
-                                            card.cmc,
-                                            card.numberCard,
-                                            card.text,
-                                            card.type,
-                                            "blanco",
-                                            card.urlArtCrop,
-                                            card.urlArtNormal
-                                        )
-                                    }
-                                }.toMutableList()
-                                CoroutineScope(Dispatchers.IO).launch {
-                                    val mazoRepository = MazoRepository(application)
-                                    val cartaRepository = CartaRepository(application)
-                                    mazoRepository.insertAll(listaMazo)
-                                    cartaRepository.insertAll(listaCartas)
-                                }
-
-                            }
-
-                            override fun onCancelled(error: DatabaseError) {
-                                // Handle error
-                            }
-                        })
-
-                        val intent = Intent(this, MainClientActivity::class.java)
-                        startActivity(intent)
-                    }
+                    saveSharedPreferences(name, surname, idUsuaio, mail, typeUser, password, urlImageFirebase, login)
+                    val intent = Intent(this, MainClientActivity::class.java)
+                    startActivity(intent)
                 }
             })
         }
@@ -167,6 +89,7 @@ class LoginActivity : AppCompatActivity() {
         mail: String,
         typeUser: String,
         password: String,
+        urlImageFirebase: String,
         login: String
     ) {
         this.putPreference("name", name)
@@ -175,6 +98,7 @@ class LoginActivity : AppCompatActivity() {
         this.putPreference("mail", mail)
         this.putPreference("typeUser", typeUser)
         this.putPreference("password", password)
+        this.putPreference("urlImageFirebase", urlImageFirebase)
         this.putPreference("login", login)
     }
 

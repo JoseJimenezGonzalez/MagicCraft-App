@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.data.entity.Usuario
 import com.jose.magiccraftapp.data.model.CurrentUser
+import com.jose.magiccraftapp.data.model.User
 import com.jose.magiccraftapp.databinding.ActivitySplashBinding
 import com.jose.magiccraftapp.util.getStringPreference
 
@@ -51,18 +51,20 @@ class SplashActivity : AppCompatActivity() {
                 val mail = getStringPreference("mail")
                 val typeUser = getStringPreference("typeUser")
                 val password = getStringPreference("password")
+                val urlImageFirebase = getStringPreference("urlImageFirebase")
                 val login = getStringPreference("login")
-                if (name.isNotBlank() && surname.isNotBlank() && idUsuario.isNotBlank() && mail.isNotBlank() && typeUser.isNotBlank() && password.isNotBlank() && login.isNotBlank()) {
+                if (name.isNotBlank() && surname.isNotBlank() && idUsuario.isNotBlank() && mail.isNotBlank() && typeUser.isNotBlank() && password.isNotBlank() && login.isNotBlank() && urlImageFirebase.isNotBlank()) {
                     if(login == "login"){
                         //Está guardado el usuario, nos saltamos el login
                         //Iniciamos el companion del usuario
-                        CurrentUser.currentUser = Usuario(
+                        CurrentUser.currentUser = User(
                             idUsuario,
-                            mail,
                             name,
                             surname,
+                            mail,
                             password,
-                            typeUser)
+                            typeUser,
+                            urlImageFirebase)
                         if(typeUser == "administrador"){
                             val intent = Intent(this@SplashActivity, MainAdminActivity::class.java)
                             startActivity(intent)

@@ -54,7 +54,7 @@ class AdapterRecyclerViewEvent (private var eventList: MutableList<Event>): Recy
             .transition(transicion)
             .into(holder.ivFoto)
 
-        if(CurrentUser.currentUser!!.typeUser == "administrador" || currentItem.aforoOcupado == currentItem.aforo || currentItem.idUsers.contains(CurrentUser.currentUser!!.idUsuario)){
+        if(CurrentUser.currentUser!!.typeUser == "administrador" || currentItem.aforoOcupado == currentItem.aforo || currentItem.idUsers.contains(CurrentUser.currentUser!!.id)){
             holder.boton.visibility = View.GONE
         }
 

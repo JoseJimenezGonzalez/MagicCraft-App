@@ -89,7 +89,7 @@ class ClientEventChattingFragment : Fragment() {
                 val idMensaje = dbRef.child("MagicCraft").child("Events").child(CurrentUser.currentEventChat!!.id).child("Chat").push().key!!
                 val mensajeEvento = MessageEvent(
                     idMensaje,
-                    CurrentUser.currentUser!!.idUsuario,
+                    CurrentUser.currentUser!!.id,
                     CurrentUser.currentUser!!.name,
                     "",
                     mensajeEnviado,

@@ -93,7 +93,7 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
 
     private fun validateAll(nameValid: Boolean, formatValid: Boolean, imageValid: Boolean) {
         if(nameValid && formatValid && imageValid){
-            val idUser = CurrentUser.currentUser!!.idUsuario
+            val idUser = CurrentUser.currentUser!!.id
             val idDeck = dbRef.child("MagicCraft").child("Decks").child(idUser).push().key
             registerDeck(idUser, idDeck)
         }

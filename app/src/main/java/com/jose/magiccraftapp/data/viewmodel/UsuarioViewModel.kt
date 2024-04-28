@@ -13,7 +13,7 @@ class UsuarioViewModel(application: Application): AndroidViewModel(application) 
 
     private val repository = UsuarioRepository(application)
 
-    fun obtainUser(mail: String, password: String): LiveData<Usuario?>{
+    fun obtainUser(mail: String, password: String): LiveData<User?>{
         return repository.obtainUser(mail, password)
     }
 

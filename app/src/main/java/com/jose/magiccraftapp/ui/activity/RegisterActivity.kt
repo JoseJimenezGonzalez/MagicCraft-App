@@ -1,35 +1,52 @@
 package com.jose.magiccraftapp.ui.activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Patterns
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.storage.StorageReference
 import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.databinding.ActivityRegisterBinding
+import com.jose.magiccraftapp.data.model.User
 import com.jose.magiccraftapp.data.model.UserForm
-import com.jose.magiccraftapp.data.viewmodel.RegisterActivityViewModel
+import com.jose.magiccraftapp.databinding.ActivityRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @AndroidEntryPoint
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(), CoroutineScope {
 
     private lateinit var binding: ActivityRegisterBinding
+
+    private var urlImagen: Uri? = null
+
+    private lateinit var cover: ImageView
 
     @Inject
     lateinit var dbRef: DatabaseReference
 
     @Inject
-    lateinit var auth: FirebaseAuth
+    lateinit var stoRef: StorageReference
 
-    private val viewModel: RegisterActivityViewModel by viewModels()
+    lateinit var job: Job
+
+    @Inject
+    lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,16 +63,18 @@ class RegisterActivity : AppCompatActivity() {
 
         //Codigo
 
+        cover = binding.ivAccount
+
+        job = Job()
+
         //Usuario acciona el boton de registrarse
 
         actionButtonRegister()
 
         actionButtonGoToLogin()
 
-        //Observo variable toast del view model
-        viewModel.messageToast.observe(this) { message ->
-            generateToast(message)
-        }
+        setUpButtonImageViewGalery()
+
     }
 
     private fun actionButtonGoToLogin() {
@@ -82,6 +101,7 @@ class RegisterActivity : AppCompatActivity() {
             val isPasswordValid = isValidPassword(password)
             val isRepeatPasswordValid = isValidPassword(repeatPassword)
             val arePasswordEquals = areValidPasswordsEquals(password, repeatPassword)
+            val isImageValid = isValidImage()
 
             //Creo un objeto UserForm (persona fromulario que recoge los datos anteriores)
             val userForm = UserForm(name, surname, mail, password)
@@ -94,14 +114,15 @@ class RegisterActivity : AppCompatActivity() {
             paintErrorEqualsPasswords(isPasswordValid, isRepeatPasswordValid, arePasswordEquals)
 
             //Valida si esta ok para llamar a otras funciones
-            validateAll(isNameValid, isSurnameValid, isMailValid, isPasswordValid, isRepeatPasswordValid, arePasswordEquals, userForm)
+            validateAll(isNameValid, isSurnameValid, isMailValid, isPasswordValid, isRepeatPasswordValid, arePasswordEquals, userForm, isImageValid)
         }
 
     }
 
-    private fun validateAll(isNameValid: Boolean, isSurnameValid: Boolean, isMailValid: Boolean, isPasswordValid: Boolean, isRepeatPasswordValid: Boolean, arePasswordEquals: Boolean, userForm: UserForm) {
-        if(isNameValid && isSurnameValid && isMailValid && isPasswordValid && isRepeatPasswordValid && arePasswordEquals){
-            viewModel.registerUserAuth(userForm)
+    private fun validateAll(isNameValid: Boolean, isSurnameValid: Boolean, isMailValid: Boolean, isPasswordValid: Boolean, isRepeatPasswordValid: Boolean, arePasswordEquals: Boolean, userForm: UserForm, isImageValid: Boolean) {
+        if(isNameValid && isSurnameValid && isMailValid && isPasswordValid && isRepeatPasswordValid && arePasswordEquals && isImageValid){
+            //Hacerlo en view model
+            registerUserAuth(userForm)
         }else{
             Toast.makeText(this, "Hay campos erróneos", Toast.LENGTH_SHORT).show()
         }
@@ -157,6 +178,15 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun isValidImage(): Boolean{
+        if(urlImagen == null){
+            generateToast("Tienes que seleccionar una imagen")
+            return false
+        }else{
+            return true
+        }
+    }
+
     private fun paintErrorEqualsPasswords(isPasswordValid: Boolean, isRepeatPasswordValid: Boolean, arePasswordsEquals: Boolean){
         if(isPasswordValid && isRepeatPasswordValid && arePasswordsEquals){
             binding.tietPassword.error = null
@@ -167,8 +197,75 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    suspend fun saveImageCover(stoRef: StorageReference, idUser: String, imagen: Uri):String{
+
+        val urlCoverFirebase: Uri = stoRef.child("MagicCraft").child("Image_Cover_User").child(idUser)
+            .putFile(imagen).await().storage.downloadUrl.await()
+
+        return urlCoverFirebase.toString()
+    }
+
     private fun generateToast(message: String){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
+    private fun setUpButtonImageViewGalery() {
+        //Cuando le da click en la imagen para guardar imagen del juego
+        binding.ivAccount.setOnClickListener {
+            galeryAccess.launch("image/*")
+        }
+    }
+
+    fun registerUserAuth(userForm: UserForm) {
+        val mail = userForm.mail
+        val password = userForm.password
+        auth.createUserWithEmailAndPassword(mail, password).addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                val userAuth = auth.currentUser
+                //Lamada a funcion para meter los datos en la RealTimeDatabase
+                registerUserRealTimeDatabase(userForm, userAuth!!)
+            }else{
+                generateToast("Ya existe una cuenta con ese correo en nuestra base de datos")
+            }
+        }
+    }
+
+    private fun registerUserRealTimeDatabase(userForm: UserForm, userAuth: FirebaseUser) {
+        launch {
+            val id = userAuth.uid
+            val isUserAdmin = isAdministratorUser(userForm.mail)
+            val typeUser = typeOfUser(isUserAdmin)
+            val urlImageFirebase = saveImageCover(stoRef, id, urlImagen!!)
+            dbRef.child("MagicCraft").child("Users").child(id).setValue(
+                User(
+                    id,
+                    userForm.name,
+                    userForm.surname,
+                    userForm.mail,
+                    userForm.password,
+                    typeUser,
+                    urlImageFirebase
+                )
+            )
+        }
+        generateToast("Se ha registrado correctamente")
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun isAdministratorUser(email: String): Boolean = email=="administrador@gmail.com"
+
+    private fun typeOfUser(bol: Boolean): String = if (bol) "administrador" else "cliente"
+
+    private val galeryAccess =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            if (uri != null) {
+                urlImagen = uri
+                cover.setImageURI(uri)
+            }
+        }
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.IO + job
 
 }

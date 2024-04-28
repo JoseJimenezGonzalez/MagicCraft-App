@@ -30,6 +30,7 @@ class RegisterActivityRepository @Inject constructor(private val dbRef: Database
         val id = userAuth.uid
         val isUserAdmin = isAdministratorUser(userForm.mail)
         val typeUser = typeOfUser(isUserAdmin)
+
         dbRef.child("MagicCraft").child("Users").child(id).setValue(
             User(
                 id,

@@ -1,6 +1,7 @@
 package com.jose.magiccraftapp.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,7 @@ class ClientChattingFragment : Fragment() {
 
     private lateinit var adapter: AdapterRecyclerViewChatting
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,9 +57,14 @@ class ClientChattingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Codigo
-        val idCurrentUser = CurrentUser.currentUser!!.idUsuario
+
+        val idCurrentUser = CurrentUser.currentUser!!.id
+
         val idUserChat = CurrentUser.currentUserChat!!.id
-        val nameCurrentUser = CurrentUser.currentUser!!.name
+
+        Log.e("ClientChattingFragmentU", CurrentUser.currentUser.toString())
+        Log.e("ClientChattingFragmentC", CurrentUser.currentUserChat.toString())
+
         getChatId(idCurrentUser, idUserChat)
         setUpButtonSendChat()
         setUpRecyclerView()
@@ -74,13 +81,16 @@ class ClientChattingFragment : Fragment() {
                 val mensaje = Message(
                     idMensaje,
                     idChat,
-                    CurrentUser.currentUser!!.idUsuario,
+                    CurrentUser.currentUser!!.id,
                     CurrentUser.currentUserChat!!.id,
                     CurrentUser.currentUser!!.name,
-                    "",
+                    CurrentUser.currentUserChat!!.name,
+                    CurrentUser.currentUser!!.urlImageFirebase,
+                    CurrentUser.currentUserChat!!.urlImageFirebase,
                     mensajeEnviado,
                     fechaHora
                 )
+                Log.e("ClientChattingFragment", mensaje.toString())
                 dbRef.child("MagicCraft").child("Chat").child(idChat).child(idMensaje).setValue(mensaje)
                 binding.etChat.text.clear()
             }

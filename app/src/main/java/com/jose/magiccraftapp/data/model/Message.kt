@@ -10,7 +10,9 @@ data class Message(
     var idEmisor: String = "",
     var idReceptor: String = "",
     var nombreEmisor: String = "",
+    var nombreReceptor: String = "",
     var imagenEmisor: String = "",
+    var imagenReceptor: String = "",
     var contenido: String = "",
     var fechaHora: String = ""
 ): Parcelable

@@ -27,8 +27,8 @@ class UsuarioRepository (application: Application) {
     // Inicialización de FirebaseAuth
     var auth = FirebaseAuth.getInstance()
 
-    fun obtainUser(mail: String, password: String): LiveData<Usuario?> {
-        val userLive = MutableLiveData<Usuario?>()
+    fun obtainUser(mail: String, password: String): LiveData<User?> {
+        val userLive = MutableLiveData<User?>()
         auth.signInWithEmailAndPassword(mail, password).addOnCompleteListener { task ->
             if(task.isSuccessful){
                 val userAuth = auth.currentUser
@@ -41,13 +41,14 @@ class UsuarioRepository (application: Application) {
                                 // Recojo toda la informacion del usuario
                                 val user = snapshot.getValue(User::class.java)
                                 if (user != null) {
-                                    val usuario = Usuario(
+                                    val usuario = User(
                                         user.id,
-                                        user.mail,
                                         user.name,
                                         user.surname,
+                                        user.mail,
                                         user.password,
-                                        user.typeUser
+                                        user.typeUser,
+                                        user.urlImageFirebase
                                     )
                                     userLive.value = usuario
                                 } else {

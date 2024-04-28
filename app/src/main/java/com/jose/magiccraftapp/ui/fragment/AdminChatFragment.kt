@@ -1,10 +1,11 @@
 package com.jose.magiccraftapp.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,7 +43,7 @@ class AdminChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        idUser = CurrentUser.currentUser!!.idUsuario
+        idUser = CurrentUser.currentUser!!.id
 
         setUpRecyclerView()
     }
@@ -70,6 +71,7 @@ class AdminChatFragment : Fragment() {
 
     private fun handleItemClick(usuario: User) {
         CurrentUser.currentUserChat = usuario
+        Log.e("AdminChatFragment", usuario.toString())
         findNavController().navigate(R.id.action_adminChatFragment_to_adminChattingFragment)
     }
 }

@@ -1,21 +1,20 @@
 package com.jose.magiccraftapp.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.Message
 import com.jose.magiccraftapp.data.viewmodel.MessageViewModel
-import com.jose.magiccraftapp.databinding.FragmentAdminChatBinding
 import com.jose.magiccraftapp.databinding.FragmentAdminChattingBinding
 import com.jose.magiccraftapp.ui.adapter.AdapterRecyclerViewChatting
 import java.text.SimpleDateFormat
@@ -57,9 +56,8 @@ class AdminChattingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Codigo
-        val idCurrentUser = CurrentUser.currentUser!!.idUsuario
+        val idCurrentUser = CurrentUser.currentUser!!.id
         val idUserChat = CurrentUser.currentUserChat!!.id
-        val nameCurrentUser = CurrentUser.currentUser!!.name
         getChatId(idCurrentUser, idUserChat)
         setUpButtonSendChat()
         setUpRecyclerView()
@@ -77,13 +75,16 @@ class AdminChattingFragment : Fragment() {
                 val mensaje = Message(
                     idMensaje,
                     idChat,
-                    CurrentUser.currentUser!!.idUsuario,
+                    CurrentUser.currentUser!!.id,
                     CurrentUser.currentUserChat!!.id,
                     CurrentUser.currentUser!!.name,
-                    "",
+                    CurrentUser.currentUserChat!!.name,
+                    CurrentUser.currentUser!!.urlImageFirebase,
+                    CurrentUser.currentUserChat!!.urlImageFirebase,
                     mensajeEnviado,
                     fechaHora
                 )
+                Log.e("AdminChattingFragment", mensaje.toString())
                 dbRef.child("MagicCraft").child("Chat").child(idChat).child(idMensaje).setValue(mensaje)
                 binding.etChat.text.clear()
             }

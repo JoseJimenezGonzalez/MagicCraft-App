@@ -83,7 +83,7 @@ class ClientEventFragment : Fragment() {
     private fun handleBtnClick(event: Event) {
         //Obtener la lista de los usuarios apuntados al evento
         val idUsers = event.idUsers
-        idUsers.add(CurrentUser.currentUser!!.idUsuario)
+        idUsers.add(CurrentUser.currentUser!!.id)
         //Se apunta al evento
         dbRef.child("MagicCraft").child("Events").child(event.id).setValue(
             Event(

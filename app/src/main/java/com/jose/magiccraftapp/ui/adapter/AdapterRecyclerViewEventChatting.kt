@@ -32,7 +32,7 @@ class AdapterRecyclerViewEventChatting (private var usersList: MutableList<Messa
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = usersList[position]
 
-        if(currentItem.idEmisor == CurrentUser.currentUser!!.idUsuario){
+        if(currentItem.idEmisor == CurrentUser.currentUser!!.id){
             //Estoy comentando yo, lo que sea del otro lo oculto
             //Yo
             holder.tvNombreMio.text = "Yo"

@@ -52,7 +52,7 @@ class ClientDeckFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        idUser = CurrentUser.currentUser!!.idUsuario
+        idUser = CurrentUser.currentUser!!.id
 
         binding.fabCreateDeck.setOnClickListener {
             val intent = Intent(context, ClientCreateDeckActivity::class.java)

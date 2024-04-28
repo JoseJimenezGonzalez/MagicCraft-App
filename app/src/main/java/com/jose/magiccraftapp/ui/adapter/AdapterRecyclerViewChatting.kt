@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.card.MaterialCardView
@@ -32,7 +33,7 @@ class AdapterRecyclerViewChatting (private var usersList: MutableList<Message>):
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = usersList[position]
 
-        if(currentItem.idEmisor == CurrentUser.currentUser!!.idUsuario){
+        if(currentItem.idEmisor == CurrentUser.currentUser!!.id){
             //Estoy comentando yo, lo que sea del otro lo oculto
             //Yo
             holder.tvNombreMio.text = "Yo"
@@ -51,24 +52,35 @@ class AdapterRecyclerViewChatting (private var usersList: MutableList<Message>):
             holder.tvContenidoMio.text = ""
             holder.tvFechaMio.text = ""
             //Otro
+            //Problemmmmm
+            holder.tvNombreOtro.text = currentItem.nombreEmisor
             holder.tvContenidoOtro.text = currentItem.contenido
             holder.tvFechaOtro.text = currentItem.fechaHora
         }
 
+        //MIO
+        val urlMio: String? = when(CurrentUser.currentUser!!.urlImageFirebase){
+            "" -> null
+            else -> CurrentUser.currentUser!!.urlImageFirebase
+        }
 
-        //val URL: String? = when(currentItem.urlImageFirebase){
-        //    "" -> null
-        //    else -> currentItem.urlImageFirebase
-        //}
+        Glide.with(context)
+            .load(urlMio)
+            .apply(opcionesGlide(context))
+            .transition(transicion)
+            .into(holder.ivImagenMia)
 
-        //Glide.with(context)
-        //    .load(URL)
-        //    .apply(opcionesGlide(context))
-        //    .transition(transicion)
-        //    .into(holder.imageUser)
+        //Otro
+        val urlOtro: String? = when(CurrentUser.currentUserChat!!.urlImageFirebase){
+            "" -> null
+            else -> CurrentUser.currentUserChat!!.urlImageFirebase
+        }
 
-        //Tratar el click sobre un elemento del recycler view
-
+        Glide.with(context)
+            .load(urlOtro)
+            .apply(opcionesGlide(context))
+            .transition(transicion)
+            .into(holder.ivImagenOtro)
     }
 
     override fun getItemCount(): Int = usersList.size

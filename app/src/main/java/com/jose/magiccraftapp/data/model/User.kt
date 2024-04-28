@@ -6,5 +6,6 @@ data class User(
     val surname: String = "",
     val mail: String = "",
     val password: String = "",
-    val typeUser: String = ""
+    val typeUser: String = "",
+    val urlImageFirebase: String = ""
 )
