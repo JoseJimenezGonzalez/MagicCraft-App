@@ -1,7 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MagicCraftApp" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.MagicCraftAppNight" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#C5E1A5</item>
+        <item name="colorPrimaryVariant">#66BB6A</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#90CAF9</item>
+        <item name="colorSecondaryVariant">#03A9F4</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+
+        <!-- Agregar el estilo personalizado para el BottomNavigationView -->
+        <item name="bottomNavigationStyle">@style/AppTheme.BottomNavigationView</item>
     </style>
+    <!-- Define el estilo personalizado para el BottomNavigationView -->
+    <style name="AppTheme.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="Theme.MagicCraftApp" parent="Base.Theme.MagicCraftApp" />
 </resources>

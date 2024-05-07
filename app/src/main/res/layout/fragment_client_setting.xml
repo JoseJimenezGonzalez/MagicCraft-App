@@ -254,19 +254,23 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_margin="14dp">
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Claro"
-                    android:textColor="@color/white">
-                </com.google.android.material.checkbox.MaterialCheckBox>
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Oscuro"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="10dp">
-                </com.google.android.material.checkbox.MaterialCheckBox>
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:checkedButton="@+id/rbClaro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/rbClaro"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Tema claro"/>
+                    <RadioButton
+                        android:id="@+id/rbOscuro"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Tema oscuro"/>
+                </RadioGroup>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -89,5 +89,18 @@
         android:id="@+id/clientCalendarFragment"
         android:name="com.jose.magiccraftapp.ui.fragment.ClientCalendarFragment"
         android:label="fragment_client_calendar"
-        tools:layout="@layout/fragment_client_calendar" />
+        tools:layout="@layout/fragment_client_calendar" >
+        <action
+            android:id="@+id/action_clientCalendarFragment_to_clientCalendarEventFragment"
+            app:destination="@id/clientCalendarEventFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clientCalendarEventFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ClientCalendarEventFragment"
+        android:label="fragment_client_calendar_event"
+        tools:layout="@layout/fragment_client_calendar_event" >
+        <action
+            android:id="@+id/action_clientCalendarEventFragment_to_clientEventChattingFragment"
+            app:destination="@id/clientEventChattingFragment" />
+    </fragment>
 </navigation>

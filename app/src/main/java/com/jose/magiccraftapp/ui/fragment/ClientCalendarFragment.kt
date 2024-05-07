@@ -14,6 +14,7 @@ import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -151,6 +152,10 @@ class ClientCalendarFragment : Fragment() {
                     Log.e("AdminCalendarFragmentlista", lista.toString())
                     if(lista.isNotEmpty()){
                         //Mostramos la lista en el recycler view
+                        //Pasamos la fecha para filtrar luego los eventos
+                        val bundle = Bundle()
+                        bundle.putString("fechaString", fechaString)
+                        findNavController().navigate(R.id.action_clientCalendarFragment_to_clientCalendarEventFragment, bundle)
                     }
                 }
 
