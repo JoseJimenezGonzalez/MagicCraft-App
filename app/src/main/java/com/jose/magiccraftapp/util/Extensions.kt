@@ -123,6 +123,25 @@ fun Context.removePreference(key: String) {
     return getPreferences().edit().remove(key).apply()
 }
 
+
+
+// Guardar un ID de evento en las preferencias compartidas
+fun Context.addEventIdToSharedPreferences(eventId: String) {
+    val eventSet = getPreferences().getStringSet("event_ids", mutableSetOf())?.toMutableSet() ?: mutableSetOf()
+    if(!eventSet.contains(eventId)){
+        eventSet.add(eventId)
+        with(getPreferences().edit()) {
+            putStringSet("event_ids", eventSet)
+            apply()
+        }
+    }
+}
+
+// Obtener todos los IDs de eventos de las preferencias compartidas
+fun Context.getEventIdsFromSharedPreferences(): Set<String> {
+    return getPreferences().getStringSet("event_ids", mutableSetOf())?.toSet() ?: setOf()
+}
+
 fun <T> List<T>.chunked(size: Int): List<List<T>> {
     val chunked = mutableListOf<List<T>>()
     for (i in indices step size) {

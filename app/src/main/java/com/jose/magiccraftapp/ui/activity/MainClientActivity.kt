@@ -29,6 +29,8 @@ import com.google.firebase.storage.StorageReference
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.Event
 import com.jose.magiccraftapp.databinding.ActivityMainClientBinding
+import com.jose.magiccraftapp.util.addEventIdToSharedPreferences
+import com.jose.magiccraftapp.util.getEventIdsFromSharedPreferences
 import com.jose.magiccraftapp.util.getStringPreference
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.atomic.AtomicInteger
@@ -40,8 +42,6 @@ class MainClientActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainClientBinding
 
     private lateinit var navController: NavController
-
-    private var idUsuario = "usuario"
 
     private lateinit var androidId: String
 
@@ -77,19 +77,30 @@ class MainClientActivity : AppCompatActivity() {
         generador = AtomicInteger(0)
 
         //Controlar notificaciones
-        dbRef.child("MagicCraf").child("Events").addChildEventListener(object: ChildEventListener{
+        dbRef.child("MagicCraft").child("Events").addChildEventListener(object: ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                //Nada
+                val pojoEvento = snapshot.getValue(Event::class.java)
+                if(pojoEvento != null){
+                    // Comprobar si ya se ha generado una notificación para este evento
+                    val setId = getEventIdsFromSharedPreferences()
+                    Log.e("ListaSetId", setId.toString())
+                    if (!setId.contains(pojoEvento.id)) {
+                        // Generar la notificación
+                        generarNotificacion(
+                            generador.incrementAndGet(),
+                            pojoEvento,
+                            "Nuevo evento " + pojoEvento.nombre + " de " + pojoEvento.formato + " con fecha " + pojoEvento.fecha + ".",
+                            pojoEvento.nombre,
+                            MainClientActivity::class.java
+                        )
+                        // Añadir el ID del evento a las preferencias compartidas
+                        addEventIdToSharedPreferences(pojoEvento.id)
+                    }
+                }
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                val pojoEvento = snapshot.getValue(Event::class.java)
-                if(pojoEvento != null){
-                    generarNotificacion(generador.incrementAndGet(), pojoEvento,
-                        "Nuevo evento " + pojoEvento.nombre + " de " + pojoEvento.formato + " con fecha " + pojoEvento.fecha + ".",
-                        pojoEvento.nombre,
-                        MainClientActivity::class.java)
-                }
+                //Nada
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
@@ -127,7 +138,7 @@ class MainClientActivity : AppCompatActivity() {
         titulo: String,
         destino: Class<*>
     ) {
-        val id = "Canal de prueba"
+        val id = "canal_cliente"
         val actividad = Intent(applicationContext, destino).apply{
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK //Para evitar bugs en la aplicacion
         }
@@ -156,7 +167,7 @@ class MainClientActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun crearCanalNotificaciones() {
         val nombre = "canal_basico"
-        val id = "canal cliente"
+        val id = "canal_cliente"
         val descripcion = "Notificacion basica"
         val importancia = NotificationManager.IMPORTANCE_DEFAULT
 

@@ -1,5 +1,6 @@
 package com.jose.magiccraftapp.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +10,10 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.FragmentAdminSettingBinding
+import com.jose.magiccraftapp.ui.activity.LoginActivity
 import com.jose.magiccraftapp.ui.activity.MainAdminActivity
 import com.jose.magiccraftapp.ui.activity.MainClientActivity
+import com.jose.magiccraftapp.util.putPreference
 
 class AdminSettingFragment : Fragment() {
 
@@ -29,6 +32,15 @@ class AdminSettingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpRadioButtons()
+        setUpButtonLogOut()
+    }
+
+    private fun setUpButtonLogOut() {
+        binding.llLogOut.setOnClickListener {
+            requireContext().putPreference("login", "")
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setUpRadioButtons() {

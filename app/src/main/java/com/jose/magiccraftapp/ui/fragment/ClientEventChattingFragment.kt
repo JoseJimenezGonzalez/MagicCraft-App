@@ -91,7 +91,7 @@ class ClientEventChattingFragment : Fragment() {
                     idMensaje,
                     CurrentUser.currentUser!!.id,
                     CurrentUser.currentUser!!.name,
-                    "",
+                    CurrentUser.currentUser!!.urlImageFirebase,
                     mensajeEnviado,
                     fechaHora
                 )

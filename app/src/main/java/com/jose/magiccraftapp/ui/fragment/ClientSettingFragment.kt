@@ -1,5 +1,6 @@
 package com.jose.magiccraftapp.ui.fragment
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.core.app.ActivityCompat.recreate
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.FragmentClientHomeBinding
 import com.jose.magiccraftapp.databinding.FragmentClientSettingBinding
+import com.jose.magiccraftapp.ui.activity.LoginActivity
 import com.jose.magiccraftapp.ui.activity.MainClientActivity
 import com.jose.magiccraftapp.util.putPreference
 
@@ -31,6 +33,7 @@ class ClientSettingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpRadioButtons()
+        setUpButtonLogOut()
     }
 
     private fun setUpRadioButtons() {
@@ -45,6 +48,14 @@ class ClientSettingFragment : Fragment() {
                     requireContext().putPreference("theme", "dark")
                 }
             }
+        }
+    }
+
+    private fun setUpButtonLogOut() {
+        binding.llLogOut.setOnClickListener {
+            requireContext().putPreference("login", "")
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
         }
     }
 
