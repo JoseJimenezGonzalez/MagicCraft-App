@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
@@ -34,25 +35,28 @@ class AdapterRecyclerViewChatting (private var usersList: MutableList<Message>):
         val currentItem = usersList[position]
 
         if(currentItem.idEmisor == CurrentUser.currentUser!!.id){
+            holder.cvChat.setCardBackgroundColor(ContextCompat.getColor(context, R.color.chat_mio))
             //Estoy comentando yo, lo que sea del otro lo oculto
             //Yo
+            holder.cvImagenMia.visibility = View.VISIBLE
             holder.tvNombreMio.text = "Yo"
             holder.tvContenidoMio.text = currentItem.contenido
             holder.tvFechaMio.text = currentItem.fechaHora
             //Otro
-            holder.cvImagenOtro.visibility = View.INVISIBLE
+            holder.cvImagenOtro.visibility = View.GONE
             holder.tvNombreOtro.text = ""
             holder.tvContenidoOtro.text = ""
             holder.tvFechaOtro.text = ""
         }else{
+            holder.cvChat.setCardBackgroundColor(ContextCompat.getColor(context, R.color.chat_otro))
             //Está comentando el otro, lo que sea miio lo oculto
             //Yo
-            holder.cvImagenMia.visibility = View.INVISIBLE
+            holder.cvImagenMia.visibility = View.GONE
             holder.tvNombreMio.text = ""
             holder.tvContenidoMio.text = ""
             holder.tvFechaMio.text = ""
             //Otro
-            //Problemmmmm
+            holder.cvImagenOtro.visibility = View.VISIBLE
             holder.tvNombreOtro.text = currentItem.nombreEmisor
             holder.tvContenidoOtro.text = currentItem.contenido
             holder.tvFechaOtro.text = currentItem.fechaHora
@@ -86,6 +90,8 @@ class AdapterRecyclerViewChatting (private var usersList: MutableList<Message>):
     override fun getItemCount(): Int = usersList.size
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
+
+        val cvChat: MaterialCardView = itemView.findViewById(R.id.cvChat)
 
         //Mio
         val cvImagenMia: MaterialCardView = itemView.findViewById(R.id.cvImagenMia)

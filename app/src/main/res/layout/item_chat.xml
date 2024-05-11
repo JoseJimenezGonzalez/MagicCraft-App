@@ -20,38 +20,6 @@
             android:src="@drawable/ic_androide">
         </ImageView>
     </com.google.android.material.card.MaterialCardView>
-    <TextView
-        android:id="@+id/tvNombreOtro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/cvImagenOtro"
-        android:text="Nombre otro"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/white">
-    </TextView>
-    <TextView
-        android:id="@+id/tvContenidoOtro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvNombreOtro"
-        app:layout_constraintStart_toEndOf="@id/cvImagenOtro"
-        android:text="Contenido otro"
-        android:layout_marginStart="20dp"
-        android:textColor="@color/white">
-    </TextView>
-    <TextView
-        android:id="@+id/tvFechaOtro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvContenidoOtro"
-        app:layout_constraintStart_toEndOf="@id/cvImagenOtro"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Fecha de otro"
-        android:layout_marginStart="20dp"
-        android:textColor="@color/white">
-    </TextView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvImagenMia"
@@ -69,35 +37,88 @@
         </ImageView>
     </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/tvNombreMio"
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvChat"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cvImagenOtro"
         app:layout_constraintEnd_toStartOf="@id/cvImagenMia"
-        android:text="Nombre mio"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:textColor="@color/white">
-    </TextView>
-    <TextView
-        android:id="@+id/tvContenidoMio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvNombreMio"
-        app:layout_constraintEnd_toStartOf="@id/cvImagenMia"
-        android:text="Contenido mio"
-        android:layout_marginEnd="20dp"
-        android:textColor="@color/white">
-    </TextView>
-    <TextView
-        android:id="@+id/tvFechaMia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvContenidoMio"
-        app:layout_constraintEnd_toStartOf="@id/cvImagenMia"
-        android:text="Fecha mia"
-        android:layout_marginEnd="20dp"
-        android:textColor="@color/white">
-    </TextView>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="30dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+            <TextView
+                android:id="@+id/tvNombreOtro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Nombre otro"
+                android:textColor="@color/white">
+            </TextView>
+            <TextView
+                android:id="@+id/tvContenidoOtro"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvNombreOtro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Contenido otro"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp">
+            </TextView>
+            <TextView
+                android:id="@+id/tvFechaOtro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvContenidoOtro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="Fecha de otro"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp">
+            </TextView>
+
+
+
+
+
+            <TextView
+                android:id="@+id/tvNombreMio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Nombre mio"
+                android:textColor="@color/white">
+            </TextView>
+            <TextView
+                android:id="@+id/tvContenidoMio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvNombreMio"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Contenido mio"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp">
+            </TextView>
+            <TextView
+                android:id="@+id/tvFechaMia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvContenidoMio"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="Fecha mia"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp">
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

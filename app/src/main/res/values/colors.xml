@@ -18,4 +18,8 @@
     <color name="naranja">#F57C00</color>
     <color name="gris">#2A2A2C</color>
     <color name="azul">#3F51B5</color>
+
+    <!-- Colores chat -->
+    <color name="chat_mio">#232A55</color>
+    <color name="chat_otro">#1A1A2B</color>
 </resources>
