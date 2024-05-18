@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
+import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.Card
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.ModalBottomSheetDialog
@@ -79,6 +81,7 @@ class ClientDeckManageSeeCardsFragment : Fragment() {
                 when (menuItem.title) {
                     "Editar Mazo" -> {
                         // Manejar clic en "Opción 1"
+                        findNavController().navigate(R.id.action_clientDeckManageFragment_to_clientDeckEditFragment)
                         true
                     }
                     "Guardar Mazo" -> {

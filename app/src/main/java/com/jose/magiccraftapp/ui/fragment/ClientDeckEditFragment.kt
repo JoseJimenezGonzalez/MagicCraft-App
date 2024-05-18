@@ -1,21 +1,29 @@
-package com.jose.magiccraftapp.ui.activity
+package com.jose.magiccraftapp.ui.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.fragment.findNavController
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.Deck
-import com.jose.magiccraftapp.databinding.ActivityClientCreateDeckBinding
+import com.jose.magiccraftapp.databinding.FragmentClientDeckEditBinding
+import com.jose.magiccraftapp.databinding.FragmentClientDeckManageSeeCardsBinding
+import com.jose.magiccraftapp.ui.activity.MainClientActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,9 +34,10 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 @AndroidEntryPoint
-class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
+class ClientDeckEditFragment : Fragment(), CoroutineScope {
 
-    private lateinit var binding: ActivityClientCreateDeckBinding
+    private var _binding: FragmentClientDeckEditBinding? = null
+    private val binding get() = _binding!!
 
     private var urlImagen: Uri? = null
 
@@ -46,18 +55,20 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
 
     private var formatDeck = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+    private var urlImFirebase = ""
 
-        binding = ActivityClientCreateDeckBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    private var buttonGalery = false
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentClientDeckEditBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         //Codigo
 
@@ -65,13 +76,43 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
 
         job = Job()
 
+        setUpAncientData()
+
         setUpButtonImageViewGalery()
         setUpButtonImageViewBack()
-        setUpButtonAddDeck()
-
+        setUpButtonEditDeck()
     }
 
-    private fun setUpButtonAddDeck() {
+    private fun setUpAncientData() {
+        urlImFirebase = CurrentUser.currentDeck!!.urlImageFirebase
+        val nombreDeck = CurrentUser.currentDeck!!.nameDeck
+        val nombreFormato = CurrentUser.currentDeck!!.formatDeck
+        Glide.with(requireContext())
+            .load(CurrentUser.currentDeck!!.urlImageFirebase)
+            .apply(opcionesGlide(requireContext()))
+            .transition(transicion)
+            .into(binding.ivImageDeck)
+        binding.tietNameDeck.setText(nombreDeck)
+        binding.tietFormatDeck.setText(nombreFormato)
+    }
+
+    fun opcionesGlide(context: Context): RequestOptions {
+        return RequestOptions()
+            .placeholder(animacionCarga(context))
+    }
+
+    fun animacionCarga(contexto: Context): CircularProgressDrawable {
+        val animacion = CircularProgressDrawable(contexto)
+        animacion.strokeWidth = 5f
+        animacion.centerRadius = 30f
+        animacion.start()
+        return animacion
+    }
+
+    val transicion = DrawableTransitionOptions.withCrossFade(500)
+
+
+    private fun setUpButtonEditDeck() {
 
         binding.btnSubmitDeck.setOnClickListener {
 
@@ -81,54 +122,69 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
             //Obtenemos los chivatos
             val isNameValid = isValidName(nameDeck)
             val isFormatValid = isValidFormat(formatDeck)
-            val isImageValid = isValidImage()
+            var isImageValid = true
+            if(buttonGalery){
+                isImageValid = isValidImage()
+            }
             //Pintamos si tiene error
             paintErrorName(isNameValid)
             paintErrorFormat(isFormatValid)
             //Validar all campos
             validateAll(isNameValid, isFormatValid, isImageValid)
-            
+
         }
     }
 
     private fun validateAll(nameValid: Boolean, formatValid: Boolean, imageValid: Boolean) {
         if(nameValid && formatValid && imageValid){
-            val idUser = CurrentUser.currentUser!!.id
-            val idDeck = dbRef.child("MagicCraft").child("Decks").child(idUser).push().key
-            registerDeck(idUser, idDeck)
+            editDeck()
         }
     }
 
-    private fun registerDeck(idUser: String, idDeck: String?) {
+    private fun editDeck() {
+        val idUsuario = CurrentUser.currentDeck!!.idUserDeck
+        val idDeck = CurrentUser.currentDeck!!.idDeck
+        val cards = CurrentUser.currentDeck!!.cards
+        var urlImageFirebase = CurrentUser.currentDeck!!.urlImageFirebase
         launch {
-            val urlImageFirebase = saveImageCover(stoRef, idUser, idDeck!!, urlImagen!!)
-            dbRef.child("MagicCraft").child("Decks").child(idUser).child(idDeck).setValue(
+            if (buttonGalery){
+                urlImageFirebase = saveImageCover(stoRef, idUsuario, idDeck, urlImagen!!)
+
+            }
+            dbRef.child("MagicCraft").child("Decks").child(idUsuario).child(idDeck).setValue(
                 Deck(
-                    idUserDeck = idUser,
-                    idDeck = idDeck,
-                    nameDeck = nameDeck,
-                    formatDeck = formatDeck,
-                    urlImageFirebase = urlImageFirebase,
-                    cards = mutableListOf()
+                    idUsuario,
+                    idDeck,
+                    nameDeck,
+                    formatDeck,
+                    urlImageFirebase,
+                    cards = cards
                 )
             )
         }
-        generateToast("Mazo añadido con exito")
-        val intent = Intent(this, MainClientActivity::class.java)
-        startActivity(intent)
+        //Cambiamos la informacion en el companion object
+        CurrentUser.currentDeck = Deck(
+            idUserDeck = idUsuario,
+            idDeck = idDeck,
+            nameDeck = nameDeck,
+            formatDeck = formatDeck,
+            urlImageFirebase = urlImageFirebase,
+            cards = cards
+        )
+        generateToast("Se ha cambiado correctamente la información")
     }
 
 
     private fun setUpButtonImageViewBack() {
         binding.ivBack.setOnClickListener {
-            val intent = Intent(this, MainClientActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(R.id.action_clientDeckEditFragment_to_clientDeckManageFragment)
         }
     }
 
     private fun setUpButtonImageViewGalery() {
         //Cuando le da click en la imagen para guardar imagen del juego
         binding.ivImageDeck.setOnClickListener {
+            buttonGalery = true
             galeryAccess.launch("image/*")
         }
     }
@@ -171,7 +227,7 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
     }
 
     private fun generateToast(message: String){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private val galeryAccess =
@@ -184,4 +240,5 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO + job
+
 }
