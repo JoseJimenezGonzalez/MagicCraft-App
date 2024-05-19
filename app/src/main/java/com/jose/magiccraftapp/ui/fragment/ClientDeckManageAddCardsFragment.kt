@@ -63,13 +63,17 @@ class ClientDeckManageAddCardsFragment : Fragment() {
 
             //Metemos la carta en current card
             CurrentUser.currentCard = Card(
-                id, name, type, text, urlArtCrop, urlArtNormal, 4, cmc
+                id = id,
+                name = name,
+                type = type,
+                text = text,
+                urlArtCrop = urlArtCrop,
+                urlArtNormal = urlArtNormal,
+                numberCard = 4,
+                cmc = cmc
             )
             //Ahora añadimos la carta al mazo actual
             CurrentUser.currentDeck!!.cards.add(CurrentUser.currentCard!!)
-            Log.e("Carta introducida", "${CurrentUser.currentCard!!.name}")
-            Log.e("Tamaño del mazo", "${CurrentUser.currentDeck!!.nameDeck} y tiene ${CurrentUser.currentDeck!!.cards.size} cartas")
-            Log.e("Nombre de la carta del mazo", "${CurrentUser.currentDeck!!.cards.toString()}")
         }
     }
 

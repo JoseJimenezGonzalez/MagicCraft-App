@@ -14,6 +14,9 @@
     <color name="m200_naranja">#FFCC80</color>
     <color name="m200_azul">#81D4FA</color>
 
+    <color name="verde_background_event">#01579B</color>
+    <color name="rojo_background_event">#B71C1C</color>
+
     <!-- Colores principales -->
     <color name="naranja">#F57C00</color>
     <color name="gris">#2A2A2C</color>

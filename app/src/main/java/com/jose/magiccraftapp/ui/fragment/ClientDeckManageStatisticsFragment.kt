@@ -128,7 +128,7 @@ class ClientDeckManageStatisticsFragment : Fragment() {
 
         // Establece el valor máximo del eje Y a 100
         yAxisLeft.axisMinimum = 0f
-        yAxisLeft.axisMaximum = 15f
+        yAxisLeft.axisMaximum = 20f
 
         binding.barChart.animateY(2500, Easing.EaseOutCubic)//Animacion
 
@@ -151,6 +151,31 @@ class ClientDeckManageStatisticsFragment : Fragment() {
 
         binding.barChart.invalidate() // refresca para ver los cambios
 
+
+
+
+        //Calculo de la media
+        val listOfCost: MutableList<Int> = mutableListOf()
+        CurrentUser.currentDeck!!.cards.forEach { card ->
+            if(card.type != "Land"){
+                val numero = card.numberCard
+                for (i in 1..numero){
+                    listOfCost.add(card.cmc)
+                }
+            }
+        }
+        val media = listOfCost.average()
+        val mediaFormateada = String.format("%.2f", media)
+        binding.tvMediaCmc.text = "El coste de maná medio del mazo es de $mediaFormateada"
+
+        val mediana = median(listOfCost)
+        val modal = mode(listOfCost)
+
+        binding.tvMediana.text = "La mediana del mazo es ${mediana}"
+        binding.tvModal.text = "El modal del mazo es ${modal}"
+
+
+
     }
 
     private fun generatePositions(numberOfElements: Int): MutableList<Float>{
@@ -168,11 +193,6 @@ class ClientDeckManageStatisticsFragment : Fragment() {
         }
         return colorsResult
     }
-
-    private fun generateGrades(grades: MutableList<Double>): MutableList<Float> {
-        return grades.map { grade -> grade.toFloat() }.toMutableList()
-    }
-
     private fun calculateTextSizeOfLabels(numberOfBars: Int): Float {
         // Define un tamaño de texto base y un factor de disminución
         val baseTextSize = 12f
@@ -206,6 +226,25 @@ class ClientDeckManageStatisticsFragment : Fragment() {
             entries.add(BarEntry(position[i], grade[i]))
         }
         return entries
+    }
+
+    fun median(numbers: List<Int>): Double? {
+        return if (numbers.isNotEmpty()) {
+            val sortedNumbers = numbers.sorted()
+            val middle = numbers.size / 2
+            if (numbers.size % 2 == 0) {
+                (sortedNumbers[middle - 1] + sortedNumbers[middle]) / 2.0
+            } else {
+                sortedNumbers[middle].toDouble()
+            }
+        } else {
+            null
+        }
+    }
+
+    // Función para calcular el modal
+    fun mode(numbers: List<Int>): Int? {
+        return numbers.groupingBy { it }.eachCount().maxByOrNull { it.value }?.key
     }
 
 }

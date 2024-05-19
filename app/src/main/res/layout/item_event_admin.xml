@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="14dp"
-    android:backgroundTint="@color/gris">
+    android:backgroundTint="@color/gris"
+    android:id="@+id/cvEvent">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
