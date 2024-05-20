@@ -104,6 +104,7 @@
                 </TextView>
             </com.google.android.material.card.MaterialCardView>
             <LinearLayout
+                android:id="@+id/llAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -129,6 +130,7 @@
                 android:layout_height="wrap_content">
             </com.google.android.material.divider.MaterialDivider>
             <LinearLayout
+                android:id="@+id/llPolicy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -142,92 +144,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Aviso y política de privacidad"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="10dp">
-                </TextView>
-            </LinearLayout>
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </com.google.android.material.divider.MaterialDivider>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="14dp">
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_personsetting">
-                </ImageView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contacta con el desarrollador"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="10dp">
-                </TextView>
-            </LinearLayout>
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:backgroundTint="#F57C00">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Apoya el desarrollo"
-                    android:textSize="22sp"
-                    android:layout_margin="6dp"
-                    android:textColor="@color/white"
-                    android:drawableLeft="@drawable/ic_rocketsetting">
-                </TextView>
-            </com.google.android.material.card.MaterialCardView>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="14dp">
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_donationsetting">
-                </ImageView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hacer donación"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="10dp">
-                </TextView>
-            </LinearLayout>
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </com.google.android.material.divider.MaterialDivider>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="14dp">
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_developsetting">
-                </ImageView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Añadir funcionalidades"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="@color/white"

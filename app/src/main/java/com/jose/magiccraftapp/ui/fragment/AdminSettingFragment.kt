@@ -12,7 +12,8 @@ import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.FragmentAdminSettingBinding
 import com.jose.magiccraftapp.ui.activity.LoginActivity
 import com.jose.magiccraftapp.ui.activity.MainAdminActivity
-import com.jose.magiccraftapp.ui.activity.MainClientActivity
+import com.jose.magiccraftapp.ui.adapter.ModalBottomSheetAbout
+import com.jose.magiccraftapp.ui.adapter.ModalBottomSheetPolicy
 import com.jose.magiccraftapp.util.putPreference
 
 class AdminSettingFragment : Fragment() {
@@ -33,6 +34,7 @@ class AdminSettingFragment : Fragment() {
 
         setUpRadioButtons()
         setUpButtonLogOut()
+        setUpButtonsLinearLayout()
     }
 
     private fun setUpButtonLogOut() {
@@ -57,6 +59,17 @@ class AdminSettingFragment : Fragment() {
                     ActivityCompat.recreate(MainAdminActivity()) // Reconstruye la actividad para aplicar el nuevo tema
                 }
             }
+        }
+    }
+
+    private fun setUpButtonsLinearLayout() {
+        binding.llAbout.setOnClickListener {
+            val modal = ModalBottomSheetAbout()
+            modal.show(childFragmentManager, ModalBottomSheetAbout::class.java.simpleName)
+        }
+        binding.llPolicy.setOnClickListener {
+            val modal = ModalBottomSheetPolicy()
+            modal.show(childFragmentManager, ModalBottomSheetPolicy::class.java.simpleName)
         }
     }
 

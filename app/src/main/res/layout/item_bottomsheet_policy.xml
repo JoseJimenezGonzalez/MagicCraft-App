@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:background="@drawable/rounded_top_corners">
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp"
+        android:text="Aviso y política de privacidad"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textAlignment="center">
+    </TextView>
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp"
+        android:textColor="@color/white"
+        android:text="MagicCraft es una aplicación desarrollada por José Francisco Jiménez González como trabajo final del C.F.G.S de Desarrollo de Aplicaciones Multiplataforma en Escuela Arte Granada. Por lo que no es oficial, no es apoyada ni promocionada por Wizards Of The Coast ni por Hasbro, Inc.">
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="La información que se suministra en esta aplicación de Magic The Gathering, las imágenes de las cartas y los iconos de maná que pueden encontrarse en esta aplicacion están registrados como propiedad Intelectual de Wizards of the Coast."
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white">
+    </TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

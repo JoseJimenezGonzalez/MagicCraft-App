@@ -1,19 +1,16 @@
 package com.jose.magiccraftapp.ui.fragment
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.ActivityCompat.recreate
+import androidx.fragment.app.Fragment
 import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.databinding.FragmentClientHomeBinding
 import com.jose.magiccraftapp.databinding.FragmentClientSettingBinding
 import com.jose.magiccraftapp.ui.activity.LoginActivity
-import com.jose.magiccraftapp.ui.activity.MainClientActivity
+import com.jose.magiccraftapp.ui.adapter.ModalBottomSheetAbout
+import com.jose.magiccraftapp.ui.adapter.ModalBottomSheetPolicy
 import com.jose.magiccraftapp.util.putPreference
 
 class ClientSettingFragment : Fragment() {
@@ -34,6 +31,18 @@ class ClientSettingFragment : Fragment() {
 
         setUpRadioButtons()
         setUpButtonLogOut()
+        setUpButtonsLinearLayout()
+    }
+
+    private fun setUpButtonsLinearLayout() {
+        binding.llAbout.setOnClickListener {
+            val modal = ModalBottomSheetAbout()
+            modal.show(childFragmentManager, ModalBottomSheetAbout::class.java.simpleName)
+        }
+        binding.llPolicy.setOnClickListener {
+            val modal = ModalBottomSheetPolicy()
+            modal.show(childFragmentManager, ModalBottomSheetPolicy::class.java.simpleName)
+        }
     }
 
     private fun setUpRadioButtons() {

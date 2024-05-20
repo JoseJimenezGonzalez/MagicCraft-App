@@ -1,38 +1,23 @@
-package com.jose.magiccraftapp.data.model
+package com.jose.magiccraftapp.ui.adapter
 
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.databinding.ItemBottomsheetBinding
+import com.jose.magiccraftapp.databinding.ItemBottomsheetPolicyBinding
 
-class ModalBottomSheetDialog  : BottomSheetDialogFragment() {
+class ModalBottomSheetPolicy : BottomSheetDialogFragment() {
 
-    private var imageUrl: String? = null
+    private lateinit var binding : ItemBottomsheetPolicyBinding
 
-    fun setImageUrl(url: String) {
-        this.imageUrl = url
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = ItemBottomsheetPolicyBinding.inflate(inflater, container, false)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.item_bottomsheet, container, false)
-        val imageView: ImageView = view.findViewById(R.id.ivCardBottomSheet)
-
-        Glide.with(this)
-            .load(imageUrl)
-            .into(imageView)
-
-        return view
+        return binding.root
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
