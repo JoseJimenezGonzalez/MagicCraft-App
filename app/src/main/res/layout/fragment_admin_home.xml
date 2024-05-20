@@ -7,63 +7,85 @@
     tools:context=".ui.fragment.AdminHomeFragment"
     android:background="@color/azul">
 
-    <LinearLayout
-        android:id="@+id/llHead"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clHome"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
+        android:background="@drawable/background_home">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Home"
-            android:textSize="30sp"
-            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="15dp">
+            <ImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_personsetting">
+            </ImageView>
+        </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Bienvenid@ a MagicCraft"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="85dp">
+        </TextView>
+        <TextView
+            android:id="@+id/tvNameUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvWelcome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Nombre de usuario"
+            android:layout_marginTop="15dp"
+            android:textSize="18sp"
             android:textColor="@color/white">
         </TextView>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tvSurname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvNameUser"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Apellidos del usuario"
+            android:layout_marginTop="15dp"
+            android:textSize="18sp"
+            android:textColor="@color/white">
+        </TextView>
 
-    <TextView
-        android:id="@+id/tvGreeting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/llHead"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="Hola Jose Jimenez"
-        android:layout_margin="10dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="30sp">
-    </TextView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cvImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvGreeting"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/doomsday_art"
-            android:scaleType="centerCrop">
-        </ImageView>
-    </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvSurname"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Fecha actual"
+            android:layout_marginTop="15dp"
+            android:textSize="16sp"
+            android:textColor="@color/white">
+        </TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvCalendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/cvImage"
+        app:layout_constraintTop_toBottomOf="@id/clHome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"

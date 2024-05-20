@@ -1,20 +1,32 @@
 package com.jose.magiccraftapp.ui.fragment
 
+import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.News
 import com.jose.magiccraftapp.data.viewmodel.NewsViewModel
 import com.jose.magiccraftapp.databinding.FragmentClientHomeBinding
 import com.jose.magiccraftapp.ui.adapter.AdapterRecyclerViewNews
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class ClientHomeFragment : Fragment() {
 
@@ -40,11 +52,44 @@ class ClientHomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        changeActionBarColor()
+
         //Codigo
         setUpButtonOpenUrlRules()
         setUpButtonOpenSetting()
         setUpRecyclerView()
         setUpButtonOpenCalendar()
+        updateUI()
+    }
+
+    private fun changeActionBarColor() {
+        val color = ContextCompat.getColor(requireContext(), R.color.naranja_home)
+        Log.d("MyFragment", "Color obtenido: $color")
+        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
+        if (actionBar != null) {
+            actionBar.setBackgroundDrawable(ColorDrawable(color))
+            Log.d("MyFragment", "Color de la ActionBar cambiado correctamente.")
+        } else {
+            Log.e("MyFragment", "ActionBar es null.")
+        }
+    }
+
+
+    private fun updateUI() {
+
+        //Poner la foto
+        Glide.with(requireContext())
+            .load(CurrentUser.currentUser!!.urlImageFirebase)
+            .apply(opcionesGlide(requireContext()))
+            .transition(transicion)
+            .into(binding.ivProfile)
+        //Poner el nombre
+        binding.tvNameUser.text = CurrentUser.currentUser!!.name
+        //Poner los apellidos
+        binding.tvSurname.text = CurrentUser.currentUser!!.surname
+        //Poner la fecha
+        val fechaStringActual = obtenerFechaActual()
+        binding.tvDate.text = fechaStringActual
     }
 
     private fun handleItem(new: News) {
@@ -90,6 +135,28 @@ class ClientHomeFragment : Fragment() {
             findNavController().navigate(R.id.action_clientHomeFragment_to_clientViewRulesPdfFragment)
         }
 
+    }
+
+    private val transicion = DrawableTransitionOptions.withCrossFade(500)
+
+    private fun opcionesGlide(context: Context): RequestOptions {
+        return RequestOptions()
+            .placeholder(animationLoading(context))
+
+    }
+
+    private fun animationLoading(context: Context): CircularProgressDrawable {
+        val animation = CircularProgressDrawable(context)
+        animation.strokeWidth = 5f
+        animation.centerRadius = 30f
+        animation.start()
+        return animation
+    }
+
+    fun obtenerFechaActual(): String {
+        val fecha = Calendar.getInstance().time
+        val formato = SimpleDateFormat("EEEE d 'de' MMMM 'de' yyyy", Locale("es", "ES"))
+        return formato.format(fecha)
     }
 
 }
