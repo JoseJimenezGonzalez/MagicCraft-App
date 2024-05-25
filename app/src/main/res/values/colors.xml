@@ -27,4 +27,9 @@
     <!-- Colores chat -->
     <color name="chat_mio">#232A55</color>
     <color name="chat_otro">#1A1A2B</color>
+
+    <!-- Colores tema -->
+    <color name="fondo_app_principal">#3F51B5</color>
+    <color name="fondo_cv_img">#FFFFFF</color>
+
 </resources>

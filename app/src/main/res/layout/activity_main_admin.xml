@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainAdminActivity"
-    android:background="#3F51B5">
+    android:background="@color/fondo_app_principal">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment_admin"
