@@ -1,6 +1,7 @@
 package com.jose.magiccraftapp.ui.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.databinding.FragmentAdminHomeBinding
+import com.jose.magiccraftapp.ui.activity.SettingAdminActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -49,8 +51,8 @@ class AdminHomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpButtonCalendar()
-        setUpButtonLogOut()
         setUpButtonRules()
+        setUpButtonSetting()
 
     }
 
@@ -71,11 +73,14 @@ class AdminHomeFragment : Fragment() {
         binding.tvDate.text = fechaStringActual
     }
 
-    private fun setUpButtonRules() {
-        //Nada
+    private fun setUpButtonSetting(){
+        binding.ivSettings.setOnClickListener {
+            val intent = Intent(requireContext(), SettingAdminActivity::class.java)
+            startActivity(intent)
+        }
     }
 
-    private fun setUpButtonLogOut() {
+    private fun setUpButtonRules() {
         //Nada
     }
 

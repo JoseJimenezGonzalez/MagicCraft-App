@@ -5,13 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.ActivityCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.FragmentAdminSettingBinding
 import com.jose.magiccraftapp.ui.activity.LoginActivity
-import com.jose.magiccraftapp.ui.activity.MainAdminActivity
 import com.jose.magiccraftapp.ui.adapter.ModalBottomSheetAbout
 import com.jose.magiccraftapp.ui.adapter.ModalBottomSheetPolicy
 import com.jose.magiccraftapp.util.putPreference
@@ -47,16 +45,17 @@ class AdminSettingFragment : Fragment() {
 
     private fun setUpRadioButtons() {
         binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                R.id.rbClaro -> {
-                    // Cambiar al tema claro
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    ActivityCompat.recreate(MainAdminActivity()) // Reconstruye la actividad para aplicar el nuevo tema
-                }
-                R.id.rbOscuro -> {
-                    // Cambiar al tema oscuro
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    ActivityCompat.recreate(MainAdminActivity()) // Reconstruye la actividad para aplicar el nuevo tema
+            val activity = activity
+            if (activity is AppCompatActivity) {
+                when (checkedId) {
+                    R.id.rbClaro -> {
+                        requireContext().putPreference("modo_dia", true)
+                        requireContext().putPreference("boton_dia", true)
+                    }
+                    R.id.rbOscuro -> {
+                        requireContext().putPreference("modo_dia", false)
+                        requireContext().putPreference("boton_dia", false)
+                    }
                 }
             }
         }

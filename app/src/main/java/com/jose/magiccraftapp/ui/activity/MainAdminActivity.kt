@@ -3,6 +3,7 @@ package com.jose.magiccraftapp.ui.activity
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.ActivityMainAdminBinding
+import com.jose.magiccraftapp.util.getBooleanPreference
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +33,17 @@ class MainAdminActivity : AppCompatActivity() {
             insets
         }
 
+        comprobarTheme()
         initUI()
+    }
+
+    private fun comprobarTheme() {
+        val modoDia = this.getBooleanPreference("modo_dia")
+        if(modoDia){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 
 

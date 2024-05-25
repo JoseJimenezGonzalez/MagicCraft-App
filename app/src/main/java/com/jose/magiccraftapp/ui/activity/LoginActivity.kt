@@ -105,6 +105,7 @@ class LoginActivity : AppCompatActivity() {
         this.putPreference("password", password)
         this.putPreference("urlImageFirebase", urlImageFirebase)
         this.putPreference("login", login)
+        this.putPreference("modo_dia", true)
     }
 
     private fun actionButtonGoToRegister() {
