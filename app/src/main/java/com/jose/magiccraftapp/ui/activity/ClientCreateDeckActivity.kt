@@ -16,6 +16,7 @@ import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.Deck
 import com.jose.magiccraftapp.databinding.ActivityClientCreateDeckBinding
+import com.jose.magiccraftapp.util.getBooleanPreference
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -61,6 +62,13 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
 
         //Codigo
 
+        //Comprobamos el tema
+        val modoDia = this.getBooleanPreference("modo_dia")
+        if(modoDia){
+            binding.main.setBackgroundResource(R.color.fondo_setting_dia)
+        }else{
+            binding.main.setBackgroundResource(R.color.fondo_setting_noche)
+        }
         cover = binding.ivImageDeck
 
         job = Job()

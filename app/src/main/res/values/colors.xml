@@ -31,5 +31,8 @@
     <!-- Colores tema -->
     <color name="fondo_app_principal">#3F51B5</color>
     <color name="fondo_cv_img">#FFFFFF</color>
+    <color name="fondo_zona_usuario">#788AED</color>
 
+    <color name="fondo_setting_dia">#3F51B5</color>
+    <color name="fondo_setting_noche">#000000</color>
 </resources>

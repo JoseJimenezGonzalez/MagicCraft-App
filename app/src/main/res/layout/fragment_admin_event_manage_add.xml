@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.AdminEventManageAddFragment"
-    android:background="#3F51B5">
+    tools:context=".ui.fragment.AdminEventManageAddFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvImagen"
@@ -15,7 +14,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tilNombreEvento"
-        app:cardCornerRadius="16dp">
+        app:cardCornerRadius="16dp"
+        android:backgroundTint="@color/fondo_cv_img">
         <ImageView
             android:id="@+id/ivImagen"
             android:layout_width="120dp"
@@ -37,7 +37,7 @@
         app:boxStrokeWidth="2dp"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:boxStrokeColor="@color/black"
+        app:boxStrokeColor="@color/border_color"
         android:textColorHint="@color/white"
         app:hintTextColor="@color/white"
         android:hint="Nombre">
@@ -61,7 +61,7 @@
         app:boxStrokeWidth="2dp"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:boxStrokeColor="@color/black"
+        app:boxStrokeColor="@color/border_color"
         android:textColorHint="@color/white"
         app:hintTextColor="@color/white"
         android:hint="Formato del torneo">
@@ -85,7 +85,7 @@
         app:boxStrokeWidth="2dp"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:boxStrokeColor="@color/black"
+        app:boxStrokeColor="@color/border_color"
         android:textColorHint="@color/white"
         app:hintTextColor="@color/white"
         android:hint="Fecha del evento">
@@ -111,7 +111,7 @@
         app:boxStrokeWidth="2dp"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:boxStrokeColor="@color/black"
+        app:boxStrokeColor="@color/border_color"
         android:textColorHint="@color/white"
         app:hintTextColor="@color/white"
         android:hint="Precio del evento">
@@ -135,7 +135,7 @@
         app:boxStrokeWidth="2dp"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:boxStrokeColor="@color/black"
+        app:boxStrokeColor="@color/border_color"
         android:textColorHint="@color/white"
         app:hintTextColor="@color/white"
         android:hint="Aforo del evento">

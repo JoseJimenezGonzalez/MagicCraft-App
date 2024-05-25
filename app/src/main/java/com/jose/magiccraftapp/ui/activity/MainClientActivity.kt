@@ -6,10 +6,10 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.provider.Settings
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
+import android.provider.Settings
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
@@ -30,8 +30,8 @@ import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.Event
 import com.jose.magiccraftapp.databinding.ActivityMainClientBinding
 import com.jose.magiccraftapp.util.addEventIdToSharedPreferences
+import com.jose.magiccraftapp.util.getBooleanPreference
 import com.jose.magiccraftapp.util.getEventIdsFromSharedPreferences
-import com.jose.magiccraftapp.util.getStringPreference
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.atomic.AtomicInteger
 import javax.inject.Inject
@@ -58,9 +58,6 @@ class MainClientActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Cargar el tema guardado
-        val themePreference = getThemePreference()
-        setAppTheme(themePreference)
 
         binding = ActivityMainClientBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -71,6 +68,7 @@ class MainClientActivity : AppCompatActivity() {
             insets
         }
 
+        comprobarTheme()
         initUI()
         crearCanalNotificaciones()
         androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
@@ -180,15 +178,14 @@ class MainClientActivity : AppCompatActivity() {
         nm.createNotificationChannel(channel)
     }
 
-    private fun setAppTheme(themePreference: String) {
-        Log.e("TemaApp", "El tema de la app es $themePreference")
-        when (themePreference) {
-            "dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+    private fun comprobarTheme() {
+        val modoDia = this.getBooleanPreference("modo_dia")
+        if(modoDia){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
     }
 
-    private fun getThemePreference(): String {
-        return this.getStringPreference("theme")
-    }
+
 }

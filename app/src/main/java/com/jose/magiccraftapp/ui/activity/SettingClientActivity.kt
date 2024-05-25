@@ -7,21 +7,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.databinding.ActivitySettingAdminBinding
+import com.jose.magiccraftapp.databinding.ActivitySettingClientBinding
 import com.jose.magiccraftapp.ui.adapter.ModalBottomSheetAbout
 import com.jose.magiccraftapp.ui.adapter.ModalBottomSheetPolicy
 import com.jose.magiccraftapp.util.getBooleanPreference
 import com.jose.magiccraftapp.util.putPreference
 
-class SettingAdminActivity : AppCompatActivity() {
+class SettingClientActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySettingAdminBinding
+    private lateinit var binding: ActivitySettingClientBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivitySettingAdminBinding.inflate(layoutInflater)
+        binding = ActivitySettingClientBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -46,7 +46,7 @@ class SettingAdminActivity : AppCompatActivity() {
 
     private fun setUpButtonToMain() {
         binding.ivBack.setOnClickListener {
-            val intent = Intent(this, MainAdminActivity::class.java)
+            val intent = Intent(this, MainClientActivity::class.java)
             startActivity(intent)
         }
     }

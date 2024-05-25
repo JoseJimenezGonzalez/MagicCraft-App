@@ -6,4 +6,5 @@
 
     <color name="fondo_app_principal">#000000</color>
     <color name="fondo_cv_img">#FFFFFF</color>
+    <color name="fondo_zona_usuario">#2A2A2C</color>
 </resources>

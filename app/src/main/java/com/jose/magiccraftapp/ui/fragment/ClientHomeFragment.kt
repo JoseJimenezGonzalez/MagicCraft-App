@@ -1,6 +1,7 @@
 package com.jose.magiccraftapp.ui.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +24,7 @@ import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.News
 import com.jose.magiccraftapp.data.viewmodel.NewsViewModel
 import com.jose.magiccraftapp.databinding.FragmentClientHomeBinding
+import com.jose.magiccraftapp.ui.activity.SettingClientActivity
 import com.jose.magiccraftapp.ui.adapter.AdapterRecyclerViewNews
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -120,7 +122,8 @@ class ClientHomeFragment : Fragment() {
 
     private fun setUpButtonOpenSetting() {
         binding.ivSettings.setOnClickListener {
-            findNavController().navigate(R.id.action_clientHomeFragment_to_clientSettingFragment)
+            val intent = Intent(requireContext(), SettingClientActivity::class.java)
+            startActivity(intent)
         }
     }
 
