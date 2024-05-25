@@ -32,7 +32,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
             android:text="Nombre del torneo"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp">
         </TextView>
     </LinearLayout>
