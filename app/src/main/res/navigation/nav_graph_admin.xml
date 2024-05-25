@@ -33,11 +33,6 @@
             app:destination="@id/adminCalendarFragment" />
     </fragment>
     <fragment
-        android:id="@+id/adminSettingFragment"
-        android:name="com.jose.magiccraftapp.ui.fragment.AdminSettingFragment"
-        android:label="fragment_admin_setting"
-        tools:layout="@layout/fragment_admin_setting" />
-    <fragment
         android:id="@+id/adminChattingFragment"
         android:name="com.jose.magiccraftapp.ui.fragment.AdminChattingFragment"
         android:label="fragment_admin_chatting"
