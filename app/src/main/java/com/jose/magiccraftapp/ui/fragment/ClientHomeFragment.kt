@@ -24,6 +24,7 @@ import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.News
 import com.jose.magiccraftapp.data.viewmodel.NewsViewModel
 import com.jose.magiccraftapp.databinding.FragmentClientHomeBinding
+import com.jose.magiccraftapp.ui.activity.EditProfileActivity
 import com.jose.magiccraftapp.ui.activity.SettingClientActivity
 import com.jose.magiccraftapp.ui.adapter.AdapterRecyclerViewNews
 import java.text.SimpleDateFormat
@@ -62,6 +63,14 @@ class ClientHomeFragment : Fragment() {
         setUpRecyclerView()
         setUpButtonOpenCalendar()
         updateUI()
+        setUpButtonEditProfile()
+    }
+
+    private fun setUpButtonEditProfile() {
+        binding.ivProfile.setOnClickListener {
+            val intent = Intent(requireContext(), EditProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun changeActionBarColor() {
