@@ -20,4 +20,9 @@
         android:icon="@drawable/ic_events"
         android:title="Eventos" />
 
+    <item
+        android:id="@+id/adminBanClientFragment"
+        android:icon="@drawable/ic_person_remove"
+        android:title="Banear" />
+
 </menu>
