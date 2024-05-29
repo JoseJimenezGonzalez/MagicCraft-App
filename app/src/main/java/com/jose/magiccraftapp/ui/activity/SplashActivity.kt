@@ -45,22 +45,22 @@ class SplashActivity : AppCompatActivity() {
             override fun onAnimationEnd(animation: Animator) {
                 // Código para ejecutar cuando la animación termina
                 //Si tiene datos en la shared nos saltamos el login
-                val name = getStringPreference("name")
-                val surname = getStringPreference("surname")
+                val userName = getStringPreference("userName")
+                val realName = getStringPreference("realName")
                 val idUsuario = getStringPreference("idUsuario")
                 val mail = getStringPreference("mail")
                 val typeUser = getStringPreference("typeUser")
                 val password = getStringPreference("password")
                 val urlImageFirebase = getStringPreference("urlImageFirebase")
                 val login = getStringPreference("login")
-                if (name.isNotBlank() && surname.isNotBlank() && idUsuario.isNotBlank() && mail.isNotBlank() && typeUser.isNotBlank() && password.isNotBlank() && login.isNotBlank() && urlImageFirebase.isNotBlank()) {
+                if (userName.isNotBlank() && realName.isNotBlank() && idUsuario.isNotBlank() && mail.isNotBlank() && typeUser.isNotBlank() && password.isNotBlank() && login.isNotBlank() && urlImageFirebase.isNotBlank()) {
                     if(login == "login"){
                         //Está guardado el usuario, nos saltamos el login
                         //Iniciamos el companion del usuario
                         CurrentUser.currentUser = User(
                             idUsuario,
-                            name,
-                            surname,
+                            userName,
+                            realName,
                             mail,
                             password,
                             typeUser,

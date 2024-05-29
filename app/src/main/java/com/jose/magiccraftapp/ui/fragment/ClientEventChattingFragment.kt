@@ -90,7 +90,7 @@ class ClientEventChattingFragment : Fragment() {
                 val mensajeEvento = MessageEvent(
                     idMensaje,
                     CurrentUser.currentUser!!.id,
-                    CurrentUser.currentUser!!.name,
+                    CurrentUser.currentUser!!.userName,
                     CurrentUser.currentUser!!.urlImageFirebase,
                     mensajeEnviado,
                     fechaHora

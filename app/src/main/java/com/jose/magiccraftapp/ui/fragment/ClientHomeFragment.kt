@@ -77,7 +77,7 @@ class ClientHomeFragment : Fragment() {
             .transition(transicion)
             .into(binding.ivProfile)
         //Poner el nombre
-        binding.tvNameUser.text = CurrentUser.currentUser!!.name
+        binding.tvNameUser.text = CurrentUser.currentUser!!.userName
         //Poner la fecha
         val fechaStringActual = obtenerFechaActual()
         binding.tvDate.text = fechaStringActual

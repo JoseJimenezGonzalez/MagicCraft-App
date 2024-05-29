@@ -35,7 +35,7 @@ class AdapterRecyclerViewChat (private var usersList: MutableList<User>): Recycl
         Log.e("Lista usaurios", "lista de usuarios")
         val currentItem = usersList[position]
 
-        holder.textViewNameUser.text = currentItem.name
+        holder.textViewNameUser.text = currentItem.userName
 
 
         val URL: String? = when(currentItem.urlImageFirebase){

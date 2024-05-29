@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -26,7 +27,11 @@ class AdminChatFragment : Fragment() {
 
     private lateinit var recycler: RecyclerView
 
-    private lateinit var usersList: MutableList<User>
+    private lateinit var originalUsersList: MutableList<User>
+
+    private lateinit var filteredUsersList: MutableList<User>
+
+    private var nameSearch = ""
 
     private lateinit var adapter: AdapterRecyclerViewChat
 
@@ -46,21 +51,51 @@ class AdminChatFragment : Fragment() {
         idUser = CurrentUser.currentUser!!.id
 
         setUpRecyclerView()
+        setUpSearchBar()
+    }
+
+    private fun setUpSearchBar() {
+        binding.sb.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                nameSearch = newText.orEmpty()
+                filterList(nameSearch)
+                return true
+            }
+        })
+    }
+
+    private fun filterList(query: String) {
+        val filteredList = originalUsersList.filter { user ->
+            user.userName.contains(query, ignoreCase = true)
+        }
+        filteredUsersList.clear()
+        filteredUsersList.addAll(filteredList)
+        adapter.notifyDataSetChanged()
     }
 
     private fun setUpRecyclerView() {
-        usersList = mutableListOf()
-        adapter = AdapterRecyclerViewChat(usersList)
-        apply {
-            recycler = binding.rvUsers
-            recycler.adapter = adapter
-            recycler.layoutManager = LinearLayoutManager(context)
-        }
-        // Observar los cambios en los mazos
+        originalUsersList = mutableListOf()
+        filteredUsersList = mutableListOf()
+        adapter = AdapterRecyclerViewChat(filteredUsersList)
+        recycler = binding.rvUsers
+        recycler.adapter = adapter
+        recycler.layoutManager = LinearLayoutManager(context)
+
+        // Observar los cambios en los usuarios
         usuarioViewModel.obtainUsersChat(idUser).observe(viewLifecycleOwner) { usuarios ->
-            usersList.clear()
-            usersList.addAll(usuarios)
-            adapter.notifyDataSetChanged()
+            originalUsersList.clear()
+            originalUsersList.addAll(usuarios)
+            filterList(nameSearch)  // Filtrar la lista inicial
+        }
+        // Observar los cambios en los usuarios
+        usuarioViewModel.obtainUsersChat(idUser).observe(viewLifecycleOwner) { usuarios ->
+            originalUsersList.clear()
+            originalUsersList.addAll(usuarios)
+            filterList(nameSearch)  // Filtrar la lista inicial
         }
         //Click
         adapter.onItemClick = { usuario ->

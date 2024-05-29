@@ -12,10 +12,11 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.databinding.FragmentClientDeckManageStatisticsBinding
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.MyValueFormatter
+import com.jose.magiccraftapp.databinding.FragmentClientDeckManageStatisticsBinding
 import kotlin.math.max
 
 
@@ -27,6 +28,8 @@ class ClientDeckManageStatisticsFragment : Fragment() {
     private lateinit var mutableListCost: MutableList<Float>
 
     private lateinit var mutableListApparitionsCost: MutableList<Float>
+
+    private lateinit var mutableListNameCost: MutableList<String>
 
     //Colores
     private lateinit var colors: MutableList<Int>
@@ -60,6 +63,7 @@ class ClientDeckManageStatisticsFragment : Fragment() {
 
         //Codigo
         mutableListCost = mutableListOf()
+        mutableListNameCost = mutableListOf()
         //Recorro el mazo actual
         CurrentUser.currentDeck!!.cards.forEach { card ->
             val cmc = card.cmc.toFloat()
@@ -69,8 +73,12 @@ class ClientDeckManageStatisticsFragment : Fragment() {
             }
             mutableListCost.sort()
         }
+        mutableListCost.forEach { float ->
+            mutableListNameCost.add("Cmc ${float.toInt()}")
+        }
 
         Log.e("lista cmc", "${mutableListCost}")
+        Log.e("lista cmc string", "$mutableListNameCost")
 
         mutableListApparitionsCost = MutableList(mutableListCost.size) { 0.0f }
         //Recorro el mazo actual
@@ -88,7 +96,7 @@ class ClientDeckManageStatisticsFragment : Fragment() {
 
         binding.barChart.setTouchEnabled(false)
 
-        //Cantidad de notas que hay en el curso
+        //Cantidad de barras
         val numberOfGrades = mutableListCost.size
         //1º. Genero las posiciones
         val listOfPositions = generatePositions(numberOfGrades)
@@ -108,6 +116,9 @@ class ClientDeckManageStatisticsFragment : Fragment() {
         val barDataSet = BarDataSet(listOfEntries, "Dataset Label")
         barDataSet.valueFormatter = MyValueFormatter()
 
+        // Cambiar el color del texto de los valores en la parte superior de las barras
+        barDataSet.setValueTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+
         val data = BarData(barDataSet)
         binding.barChart.data = data
         binding.barChart.legend.isEnabled = false // Oculta la leyenda
@@ -120,8 +131,10 @@ class ClientDeckManageStatisticsFragment : Fragment() {
         xAxis.setDrawGridLines(false)
         xAxis.granularity = 1f
         xAxis.labelCount = listOfLabels.size
-        xAxis.textSize = sizeTextLabel//Tamaño de texto de los niveles(el que aparece debajo de las barras)
-        //xAxis.valueFormatter = IndexAxisValueFormatter(listOfLabels)
+        xAxis.textSize = sizeTextLabel
+        //xAxis.labelRotationAngle = -55f
+        xAxis.valueFormatter = IndexAxisValueFormatter(mutableListNameCost)
+        xAxis.textColor = ContextCompat.getColor(requireContext(), android.R.color.white)
 
         // Obtiene el eje Y izquierdo del gráfico
         val yAxisLeft = binding.barChart.axisLeft

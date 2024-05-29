@@ -80,7 +80,7 @@ class AdminBanClientFragment : Fragment() {
 
     private fun filterList(query: String) {
         val filteredList = originalUsersList.filter { user ->
-            user.name.contains(query, ignoreCase = true)
+            user.userName.contains(query, ignoreCase = true)
         }
         filteredUsersList.clear()
         filteredUsersList.addAll(filteredList)
@@ -97,7 +97,7 @@ class AdminBanClientFragment : Fragment() {
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
 
-        // Observar los cambios en los mazos
+        // Observar los cambios en los usuarios
         usuarioViewModel.obtainUsersChat(idUser).observe(viewLifecycleOwner) { usuarios ->
             originalUsersList.clear()
             originalUsersList.addAll(usuarios)
@@ -114,7 +114,7 @@ class AdminBanClientFragment : Fragment() {
     private fun handleItemClick(usuario: User) {
         AlertDialog.Builder(requireContext()).apply {
             setTitle("Eliminar usuario")
-            setMessage("¿Estás seguro de que quieres eliminar a ${usuario.name}?")
+            setMessage("¿Estás seguro de que quieres eliminar a ${usuario.userName}?")
             setPositiveButton("Sí") { _, _ ->
                 // Elimino al usuario de la base de datos
                 eliminarAuth(usuario)

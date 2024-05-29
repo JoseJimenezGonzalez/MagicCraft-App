@@ -3,7 +3,6 @@ package com.jose.magiccraftapp.ui.fragment
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +12,10 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.jose.magiccraftapp.databinding.FragmentClientDeckManageAddCardsBinding
-import com.jose.magiccraftapp.datasource.dataclass.CardDataclass
 import com.jose.magiccraftapp.data.model.Card
 import com.jose.magiccraftapp.data.model.CurrentUser
+import com.jose.magiccraftapp.databinding.FragmentClientDeckManageAddCardsBinding
+import com.jose.magiccraftapp.datasource.dataclass.CardDataclass
 import com.jose.magiccraftapp.datasource.retrofit.ApiRequest
 import com.jose.magiccraftapp.datasource.retrofit.RetrofitService
 import kotlinx.coroutines.launch
@@ -74,6 +73,7 @@ class ClientDeckManageAddCardsFragment : Fragment() {
             )
             //Ahora añadimos la carta al mazo actual
             CurrentUser.currentDeck!!.cards.add(CurrentUser.currentCard!!)
+            Toast.makeText(context, "Carta añadida", Toast.LENGTH_SHORT).show()
         }
     }
 

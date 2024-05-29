@@ -43,8 +43,8 @@ class UsuarioRepository (application: Application) {
                                 if (user != null) {
                                     val usuario = User(
                                         user.id,
-                                        user.name,
-                                        user.surname,
+                                        user.userName,
+                                        user.realName,
                                         user.mail,
                                         user.password,
                                         user.typeUser,
@@ -74,6 +74,31 @@ class UsuarioRepository (application: Application) {
             }
         }
         return userLive
+    }
+
+    fun getUsernames(): LiveData<MutableList<String>> {
+        val usernamesLive = MutableLiveData<MutableList<String>>()
+        dbRef.child("MagicCraft").child("Users").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val usernamesList = mutableListOf<String>()
+                    snapshot.children.forEach { snapshotChild ->
+                        val user = snapshotChild.getValue(User::class.java)
+                        if (user != null) {
+                            usernamesList.add(user.userName)
+                        }
+                    }
+                    usernamesLive.value = usernamesList
+                } else {
+                    usernamesLive.value = mutableListOf()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                println("Error al obtener los nombres de usuario: $error")
+            }
+        })
+        return usernamesLive
     }
 
     fun obtainUsersChat(id: String): LiveData<MutableList<User>>{

@@ -16,6 +16,9 @@ class UsuarioViewModel(application: Application): AndroidViewModel(application) 
     fun obtainUser(mail: String, password: String): LiveData<User?>{
         return repository.obtainUser(mail, password)
     }
+    fun getUsernames(): LiveData<MutableList<String>>{
+        return repository.getUsernames()
+    }
 
     fun obtainUsersChat(id: String): LiveData<MutableList<User>>{
         return repository.obtainUsersChat(id)

@@ -58,9 +58,10 @@ class EditProfileActivity : AppCompatActivity(), CoroutineScope {
 
     private lateinit var auth: FirebaseAuth
 
-
     var nombreUsuario = ""
+
     var nombreReal = ""
+
     var password = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +85,9 @@ class EditProfileActivity : AppCompatActivity(), CoroutineScope {
         setUpAncientData()
 
         setUpButtonImageViewGalery()
+
         setUpButtonImageViewBack()
+
         setUpButtonEditProfile()
 
     }
@@ -213,8 +216,8 @@ class EditProfileActivity : AppCompatActivity(), CoroutineScope {
 
     private fun setUpAncientData() {
         urlImFirebase = CurrentUser.currentUser!!.urlImageFirebase
-        val nombreUsuario = CurrentUser.currentUser!!.name
-        val nombreReal = CurrentUser.currentUser!!.surname
+        val nombreUsuario = CurrentUser.currentUser!!.userName
+        val nombreReal = CurrentUser.currentUser!!.realName
         val antiguoPassword = CurrentUser.currentUser!!.password
         Glide.with(this)
             .load(CurrentUser.currentUser!!.urlImageFirebase)

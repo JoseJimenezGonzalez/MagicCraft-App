@@ -66,15 +66,16 @@ class LoginActivity : AppCompatActivity() {
                     //Guardar usuario en componion
                     CurrentUser.currentUser = usuario
                     //Guardar datos de usuario en la shared
-                    val name = usuario.name
-                    val surname = usuario.surname
+                    val userName = usuario.userName
+                    val realName = usuario.realName
                     val idUsuaio = usuario.id
                     val mail = usuario.mail
                     val typeUser = usuario.typeUser
                     val password = usuario.password
                     val urlImageFirebase = usuario.urlImageFirebase
                     val login = "login"
-                    saveSharedPreferences(name, surname, idUsuaio, mail, typeUser, password, urlImageFirebase, login)
+                    val modoDia = true
+                    saveSharedPreferences(userName, realName, idUsuaio, mail, typeUser, password, urlImageFirebase, login, modoDia)
                     if(mail == "administrador@gmail.com"){
                         val intent = Intent(this, MainAdminActivity::class.java)
                         startActivity(intent)
@@ -88,24 +89,25 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun saveSharedPreferences(
-        name: String,
-        surname: String,
+        userName: String,
+        realName: String,
         idUsuaio: String,
         mail: String,
         typeUser: String,
         password: String,
         urlImageFirebase: String,
-        login: String
+        login: String,
+        modoDia: Boolean
     ) {
-        this.putPreference("name", name)
-        this.putPreference("surname", surname)
+        this.putPreference("userName", userName)
+        this.putPreference("realName", realName)
         this.putPreference("idUsuario", idUsuaio)
         this.putPreference("mail", mail)
         this.putPreference("typeUser", typeUser)
         this.putPreference("password", password)
         this.putPreference("urlImageFirebase", urlImageFirebase)
         this.putPreference("login", login)
-        this.putPreference("modo_dia", true)
+        this.putPreference("modo_dia", modoDia)
     }
 
     private fun actionButtonGoToRegister() {

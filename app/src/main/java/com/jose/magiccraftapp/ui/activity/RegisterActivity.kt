@@ -8,9 +8,11 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -18,6 +20,7 @@ import com.google.firebase.storage.StorageReference
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.User
 import com.jose.magiccraftapp.data.model.UserForm
+import com.jose.magiccraftapp.data.viewmodel.UsuarioViewModel
 import com.jose.magiccraftapp.databinding.ActivityRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -37,6 +40,8 @@ class RegisterActivity : AppCompatActivity(), CoroutineScope {
 
     private lateinit var cover: ImageView
 
+    private var userName = ""
+
     @Inject
     lateinit var dbRef: DatabaseReference
 
@@ -47,6 +52,10 @@ class RegisterActivity : AppCompatActivity(), CoroutineScope {
 
     @Inject
     lateinit var auth: FirebaseAuth
+
+    private val userViewModel: UsuarioViewModel by viewModels()
+
+    private var listOfUserNames: MutableList<String> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +84,14 @@ class RegisterActivity : AppCompatActivity(), CoroutineScope {
 
         setUpButtonImageViewGalery()
 
+        obtainListUsernames()
+
+    }
+
+    private fun obtainListUsernames() {
+        userViewModel.getUsernames().observe(this, Observer { listOfUsernames ->
+            listOfUserNames = listOfUsernames
+        })
     }
 
     private fun actionButtonGoToLogin() {
@@ -88,15 +105,15 @@ class RegisterActivity : AppCompatActivity(), CoroutineScope {
         binding.btnRegistrarUsuario.setOnClickListener {
 
             //Primero nos traemos todos los datos del usuario
-            val name = binding.tietNombre.text.toString().trim()
-            val surname = binding.tietApellidos.text.toString().trim()
+            userName = binding.tietNombre.text.toString().trim()
+            val realName = binding.tietNombre.text.toString().trim()
             val mail = binding.tietCorreo.text.toString().trim()
             val password = binding.tietPassword.text.toString().trim()
             val repeatPassword = binding.tietRepetirPassword.text.toString().trim()
 
             //Variables de los chivatos
-            val isNameValid = isValidName(name)
-            val isSurnameValid = isValidSurname(surname)
+            val isUserNameValid = isUserNameValid(userName)
+            val isRealnameValid = isRealNameValid(realName)
             val isMailValid = isValidMail(mail)
             val isPasswordValid = isValidPassword(password)
             val isRepeatPasswordValid = isValidPassword(repeatPassword)
@@ -104,17 +121,17 @@ class RegisterActivity : AppCompatActivity(), CoroutineScope {
             val isImageValid = isValidImage()
 
             //Creo un objeto UserForm (persona fromulario que recoge los datos anteriores)
-            val userForm = UserForm(name, surname, mail, password)
+            val userForm = UserForm(userName, realName, mail, password)
             //Llamada a los metodos de pintar errores
-            paintErrorName(isNameValid)
-            paintErrorSurname(isSurnameValid)
+            paintErrorUserName(isUserNameValid)
+            paintErrorRealName(isRealnameValid)
             paintErrorMail(isMailValid)
             paintErrorPassword(isPasswordValid)
             paintErrorRepeatPassword(isRepeatPasswordValid)
             paintErrorEqualsPasswords(isPasswordValid, isRepeatPasswordValid, arePasswordEquals)
 
             //Valida si esta ok para llamar a otras funciones
-            validateAll(isNameValid, isSurnameValid, isMailValid, isPasswordValid, isRepeatPasswordValid, arePasswordEquals, userForm, isImageValid)
+            validateAll(isUserNameValid, isRealnameValid, isMailValid, isPasswordValid, isRepeatPasswordValid, arePasswordEquals, userForm, isImageValid)
         }
 
     }
@@ -122,7 +139,12 @@ class RegisterActivity : AppCompatActivity(), CoroutineScope {
     private fun validateAll(isNameValid: Boolean, isSurnameValid: Boolean, isMailValid: Boolean, isPasswordValid: Boolean, isRepeatPasswordValid: Boolean, arePasswordEquals: Boolean, userForm: UserForm, isImageValid: Boolean) {
         if(isNameValid && isSurnameValid && isMailValid && isPasswordValid && isRepeatPasswordValid && arePasswordEquals && isImageValid){
             //Hacerlo en view model
-            registerUserAuth(userForm)
+            //Comprobamos si existe el nombre de usuario previamente
+            if(!listOfUserNames.contains(userName)){
+                registerUserAuth(userForm)
+            }else{
+                generateToast("Ya existe un usuario con ese nombre de usuario")
+            }
         }else{
             Toast.makeText(this, "Hay campos erróneos", Toast.LENGTH_SHORT).show()
         }
@@ -131,14 +153,14 @@ class RegisterActivity : AppCompatActivity(), CoroutineScope {
 
 
     //Validar los datos
-    private fun isValidName(name: String): Boolean = name.isNotBlank()
-    private fun isValidSurname(surname: String): Boolean = surname.isNotBlank()
+    private fun isUserNameValid(name: String): Boolean = name.isNotBlank()
+    private fun isRealNameValid(surname: String): Boolean = surname.isNotBlank()
     private fun isValidMail(mail: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(mail).matches()
     private fun isValidPassword(password: String): Boolean = password.isNotBlank() && password.length > 7
     private fun areValidPasswordsEquals(password: String, repeatPassword: String) = password == repeatPassword
 
     //Indicar error en los edit text
-    private fun paintErrorName(isNameValid: Boolean){
+    private fun paintErrorUserName(isNameValid: Boolean){
         if(isNameValid){
             binding.tietNombre.error = null
         }else{
@@ -146,11 +168,11 @@ class RegisterActivity : AppCompatActivity(), CoroutineScope {
         }
     }
 
-    private fun paintErrorSurname(isSurnameValid: Boolean){
+    private fun paintErrorRealName(isSurnameValid: Boolean){
         if(isSurnameValid){
-            binding.tietApellidos.error = null
+            binding.tietNombreReal.error = null
         }else{
-            binding.tietApellidos.error = "No puede estar vacío"
+            binding.tietNombreReal.error = "No puede estar vacío"
         }
     }
 
