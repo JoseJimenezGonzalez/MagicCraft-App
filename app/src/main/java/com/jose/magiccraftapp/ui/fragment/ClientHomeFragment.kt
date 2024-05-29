@@ -2,14 +2,10 @@ package com.jose.magiccraftapp.ui.fragment
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -55,8 +51,6 @@ class ClientHomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        changeActionBarColor()
-
         //Codigo
         setUpButtonOpenUrlRules()
         setUpButtonOpenSetting()
@@ -73,18 +67,6 @@ class ClientHomeFragment : Fragment() {
         }
     }
 
-    private fun changeActionBarColor() {
-        val color = ContextCompat.getColor(requireContext(), R.color.naranja_home)
-        Log.d("MyFragment", "Color obtenido: $color")
-        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
-        if (actionBar != null) {
-            actionBar.setBackgroundDrawable(ColorDrawable(color))
-            Log.d("MyFragment", "Color de la ActionBar cambiado correctamente.")
-        } else {
-            Log.e("MyFragment", "ActionBar es null.")
-        }
-    }
-
 
     private fun updateUI() {
 
@@ -96,8 +78,6 @@ class ClientHomeFragment : Fragment() {
             .into(binding.ivProfile)
         //Poner el nombre
         binding.tvNameUser.text = CurrentUser.currentUser!!.name
-        //Poner los apellidos
-        binding.tvSurname.text = CurrentUser.currentUser!!.surname
         //Poner la fecha
         val fechaStringActual = obtenerFechaActual()
         binding.tvDate.text = fechaStringActual
@@ -144,9 +124,8 @@ class ClientHomeFragment : Fragment() {
 
     private fun setUpButtonOpenUrlRules() {
         binding.cvRules.setOnClickListener {
-            findNavController().navigate(R.id.action_clientHomeFragment_to_clientViewRulesPdfFragment)
+            findNavController().navigate(R.id.action_clientHomeFragment_to_viewRulesPdfFragment)
         }
-
     }
 
     private val transicion = DrawableTransitionOptions.withCrossFade(500)

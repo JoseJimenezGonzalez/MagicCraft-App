@@ -1,23 +1,16 @@
 package com.jose.magiccraftapp.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
-import com.jose.magiccraftapp.R
-import com.jose.magiccraftapp.data.model.User
-import com.jose.magiccraftapp.data.viewmodel.UsuarioViewModel
-import com.jose.magiccraftapp.databinding.FragmentAdminChatBinding
-import com.jose.magiccraftapp.databinding.FragmentClientViewRulesPdfBinding
-import com.jose.magiccraftapp.ui.adapter.AdapterRecyclerViewChat
+import androidx.fragment.app.Fragment
+import com.jose.magiccraftapp.databinding.FragmentViewRulesPdfBinding
 
 
-class ClientViewRulesPdfFragment : Fragment() {
+class ViewRulesPdfFragment : Fragment() {
 
-    private var _binding: FragmentClientViewRulesPdfBinding? = null
+    private var _binding: FragmentViewRulesPdfBinding? = null
 
     private val binding get() = _binding!!
 
@@ -25,7 +18,7 @@ class ClientViewRulesPdfFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentClientViewRulesPdfBinding.inflate(inflater, container, false)
+        _binding = FragmentViewRulesPdfBinding.inflate(inflater, container, false)
         return binding.root
     }
 

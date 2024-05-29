@@ -51,8 +51,9 @@ class AdminHomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpButtonCalendar()
-        setUpButtonRules()
+        setUpButtonOpenUrlRules()
         setUpButtonSetting()
+        updateUI()
 
     }
 
@@ -66,8 +67,6 @@ class AdminHomeFragment : Fragment() {
             .into(binding.ivProfile)
         //Poner el nombre
         binding.tvNameUser.text = CurrentUser.currentUser!!.name
-        //Poner los apellidos
-        binding.tvSurname.text = CurrentUser.currentUser!!.surname
         //Poner la fecha
         val fechaStringActual = obtenerFechaActual()
         binding.tvDate.text = fechaStringActual
@@ -80,8 +79,10 @@ class AdminHomeFragment : Fragment() {
         }
     }
 
-    private fun setUpButtonRules() {
-        //Nada
+    private fun setUpButtonOpenUrlRules() {
+        binding.cvReglamento.setOnClickListener {
+            findNavController().navigate(R.id.action_adminHomeFragment_to_viewRulesPdfFragment2)
+        }
     }
 
     private fun setUpButtonCalendar() {

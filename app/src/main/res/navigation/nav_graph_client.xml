@@ -62,20 +62,15 @@
         android:label="fragment_client_home"
         tools:layout="@layout/fragment_client_home" >
         <action
-            android:id="@+id/action_clientHomeFragment_to_clientViewRulesPdfFragment"
-            app:destination="@id/clientViewRulesPdfFragment" />
-        <action
             android:id="@+id/action_clientHomeFragment_to_clientNewViewFragment"
             app:destination="@id/clientNewViewFragment" />
         <action
             android:id="@+id/action_clientHomeFragment_to_clientCalendarFragment"
             app:destination="@id/clientCalendarFragment" />
+        <action
+            android:id="@+id/action_clientHomeFragment_to_viewRulesPdfFragment"
+            app:destination="@id/viewRulesPdfFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/clientViewRulesPdfFragment"
-        android:name="com.jose.magiccraftapp.ui.fragment.ClientViewRulesPdfFragment"
-        android:label="fragment_client_view_rules_pdf"
-        tools:layout="@layout/fragment_client_view_rules_pdf" />
     <fragment
         android:id="@+id/clientNewViewFragment"
         android:name="com.jose.magiccraftapp.ui.fragment.ClientNewViewFragment"
@@ -108,4 +103,9 @@
             android:id="@+id/action_clientDeckEditFragment_to_clientDeckManageFragment"
             app:destination="@id/clientDeckManageFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/viewRulesPdfFragment"
+        android:name="com.jose.magiccraftapp.ui.fragment.ViewRulesPdfFragment"
+        android:label="fragment_view_rules_pdf"
+        tools:layout="@layout/fragment_view_rules_pdf" />
 </navigation>
