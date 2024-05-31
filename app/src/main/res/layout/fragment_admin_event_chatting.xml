@@ -22,7 +22,8 @@
             <ImageView
                 android:id="@+id/ivImageEvent"
                 android:layout_width="60dp"
-                android:layout_height="60dp">
+                android:layout_height="60dp"
+                android:scaleType="centerCrop">
             </ImageView>
         </com.google.android.material.card.MaterialCardView>
         <TextView

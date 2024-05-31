@@ -36,7 +36,8 @@
                 android:layout_height="60dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:src="@drawable/ic_personsetting">
+                android:src="@drawable/ic_personsetting"
+                android:scaleType="centerCrop">
             </ImageView>
         </com.google.android.material.card.MaterialCardView>
         <TextView

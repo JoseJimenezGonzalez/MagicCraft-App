@@ -13,6 +13,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/white"
         android:text="Listado de eventos para la fecha 14/05/2024">
     </TextView>
 

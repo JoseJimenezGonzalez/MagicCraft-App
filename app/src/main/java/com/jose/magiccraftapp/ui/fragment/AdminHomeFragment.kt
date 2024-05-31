@@ -18,6 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.databinding.FragmentAdminHomeBinding
+import com.jose.magiccraftapp.ui.activity.EditProfileActivity
 import com.jose.magiccraftapp.ui.activity.SettingAdminActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -54,7 +55,15 @@ class AdminHomeFragment : Fragment() {
         setUpButtonOpenUrlRules()
         setUpButtonSetting()
         updateUI()
+        setUpButtonEditProfile()
 
+    }
+
+    private fun setUpButtonEditProfile() {
+        binding.ivProfile.setOnClickListener {
+            val intent = Intent(requireContext(), EditProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun updateUI() {

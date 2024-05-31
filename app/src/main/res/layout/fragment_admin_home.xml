@@ -23,11 +23,12 @@
             android:backgroundTint="@color/fondo_cv_img">
             <ImageView
                 android:id="@+id/ivProfile"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:src="@drawable/ic_personsetting">
+                android:src="@drawable/ic_personsetting"
+                android:scaleType="centerCrop">
             </ImageView>
         </com.google.android.material.card.MaterialCardView>
         <ImageView
