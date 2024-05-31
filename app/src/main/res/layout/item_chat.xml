@@ -17,7 +17,8 @@
             android:id="@+id/ivOtro"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_androide">
+            android:src="@drawable/ic_androide"
+            android:scaleType="centerCrop">
         </ImageView>
     </com.google.android.material.card.MaterialCardView>
 
@@ -33,7 +34,8 @@
             android:id="@+id/ivMia"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_androide">
+            android:src="@drawable/ic_androide"
+            android:scaleType="centerCrop">
         </ImageView>
     </com.google.android.material.card.MaterialCardView>
 

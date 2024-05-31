@@ -17,7 +17,7 @@ class ClientToolsFragment : Fragment() {
     private var _binding: FragmentClientToolsBinding? = null
     private val binding get() = _binding!!
 
-    private val listOptions = listOf("Life", "Storm", "Dice")
+    private val listOptions = listOf("Vidas", "Tormenta", "Dados")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
