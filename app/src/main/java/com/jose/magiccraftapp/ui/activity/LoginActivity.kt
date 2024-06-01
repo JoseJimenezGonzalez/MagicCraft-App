@@ -1,8 +1,14 @@
 package com.jose.magiccraftapp.ui.activity
 
+import android.app.AlertDialog
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -51,6 +57,45 @@ class LoginActivity : AppCompatActivity() {
         actionButtonGoToRegister()
 
         actionButtonLogin()
+
+        checkNotificationPermission()
+    }
+
+    private fun checkNotificationPermission() {
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (!notificationManager.areNotificationsEnabled()) {
+            // Las notificaciones no están habilitadas. Muestra un diálogo al usuario.
+            val dialogView = layoutInflater.inflate(R.layout.dialog_custom, null)
+
+            val tvTitle = dialogView.findViewById<TextView>(R.id.tvTitle)
+            val tvMessage = dialogView.findViewById<TextView>(R.id.tvMessage)
+            val btnYes = dialogView.findViewById<Button>(R.id.btnYes)
+            val btnNo = dialogView.findViewById<Button>(R.id.btnNo)
+
+            tvTitle.text = "Permisos de notificación"
+            tvMessage.text = "Las notificaciones están deshabilitadas. ¿Deseas habilitarlas?"
+
+            val alertDialog = AlertDialog.Builder(this)
+                .setView(dialogView)
+                .create()
+
+            btnYes.setOnClickListener {
+                // El usuario ha aceptado. Abre la configuración de la aplicación para que el usuario pueda habilitar las notificaciones.
+                val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+                    putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+                }
+                startActivity(intent)
+                alertDialog.dismiss()
+            }
+
+            btnNo.setOnClickListener {
+                // El usuario ha rechazado. Cierra el diálogo.
+                alertDialog.dismiss()
+            }
+
+            alertDialog.show()
+        }
     }
 
     private fun actionButtonLogin() {

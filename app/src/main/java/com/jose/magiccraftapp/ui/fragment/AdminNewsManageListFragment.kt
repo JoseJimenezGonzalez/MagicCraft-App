@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.News
 import com.jose.magiccraftapp.data.viewmodel.NewsViewModel
 import com.jose.magiccraftapp.databinding.FragmentAdminNewsManageListBinding
@@ -49,9 +52,7 @@ class AdminNewsManageListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Codigo
-
         setUpRecyclerView()
-
     }
 
 
@@ -71,11 +72,37 @@ class AdminNewsManageListFragment : Fragment() {
         }
 
         adapter.onItemLongClick = { new ->
-            showConfirmationDialog("¿Estás seguro de que quieres eliminar esta noticia?") {
+
+            // Las notificaciones no están habilitadas. Muestra un diálogo al usuario.
+            val dialogView = layoutInflater.inflate(R.layout.dialog_custom, null)
+
+            val tvTitle = dialogView.findViewById<TextView>(R.id.tvTitle)
+            val tvMessage = dialogView.findViewById<TextView>(R.id.tvMessage)
+            val btnYes = dialogView.findViewById<Button>(R.id.btnYes)
+            val btnNo = dialogView.findViewById<Button>(R.id.btnNo)
+
+            tvTitle.text = "Eliminar noticia"
+            tvMessage.text = "¿Estás seguro de que quieres eliminar la noticia?"
+
+            val alertDialog = AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create()
+
+            btnYes.setOnClickListener {
                 //Eliminar la noticia
                 dbRef.child("MagicCraft").child("News").child(new.idNew).removeValue()
                 stRef.child("MagicCraft").child("Image_Cover_News").child(new.idNew).delete()
+                newsList.remove(new)
+                adapter.notifyDataSetChanged()
+                alertDialog.dismiss()
             }
+
+            btnNo.setOnClickListener {
+                // El usuario ha rechazado. Cierra el diálogo.
+                alertDialog.dismiss()
+            }
+
+            alertDialog.show()
         }
 
     }

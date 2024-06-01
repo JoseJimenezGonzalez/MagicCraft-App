@@ -1,6 +1,7 @@
 package com.jose.magiccraftapp.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,15 +57,17 @@ class AdapterRecyclerViewEvent (private var eventList: MutableList<Event>): Recy
             .transition(transicion)
             .into(holder.ivFoto)
 
-        if(CurrentUser.currentUser!!.typeUser == "administrador"){
+
+        if(currentItem.idUsers.contains(CurrentUser.currentUser!!.id)){
             holder.boton.visibility = View.GONE
-            holder.cvEvent.setCardBackgroundColor(ContextCompat.getColor(context, R.color.gris))
+            holder.cvEvent.setCardBackgroundColor(ContextCompat.getColor(context, R.color.verde_background_event))
+            Log.e("true", "true")
         }else if(currentItem.aforoOcupado == currentItem.aforo){
             holder.boton.visibility = View.GONE
             holder.cvEvent.setCardBackgroundColor(ContextCompat.getColor(context, R.color.rojo_background_event))
-        }else if(currentItem.idUsers.contains(CurrentUser.currentUser!!.id)){
+        }else if(CurrentUser.currentUser!!.typeUser == "administrador"){
             holder.boton.visibility = View.GONE
-            holder.cvEvent.setCardBackgroundColor(ContextCompat.getColor(context, R.color.verde_background_event))
+            holder.cvEvent.setCardBackgroundColor(ContextCompat.getColor(context, R.color.gris))
         }else{
             holder.boton.visibility = View.VISIBLE
             holder.cvEvent.setCardBackgroundColor(ContextCompat.getColor(context, R.color.gris))

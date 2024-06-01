@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -96,13 +98,35 @@ class ClientDeckFragment : Fragment() {
             handleItemClick(deck)
         }
         adapter.onItemLongClick = { deck ->
-            showConfirmationDialog("¿Estás seguro de que quieres eliminar este mazo?") {
-                //Eliminar la noticia
+            // Las notificaciones no están habilitadas. Muestra un diálogo al usuario.
+            val dialogView = layoutInflater.inflate(R.layout.dialog_custom, null)
+
+            val tvTitle = dialogView.findViewById<TextView>(R.id.tvTitle)
+            val tvMessage = dialogView.findViewById<TextView>(R.id.tvMessage)
+            val btnYes = dialogView.findViewById<Button>(R.id.btnYes)
+            val btnNo = dialogView.findViewById<Button>(R.id.btnNo)
+
+            tvTitle.text = "Eliminar mazo"
+            tvMessage.text = "¿Estás seguro de que quieres eliminar el mazo?"
+
+            val alertDialog = AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create()
+
+            btnYes.setOnClickListener {
                 dbRef.child("MagicCraft").child("Decks").child(deck.idUserDeck).child(deck.idDeck).removeValue()
                 stRef.child("MagicCraft").child("Image_Cover_Deck").child(deck.idUserDeck).child(deck.idDeck).delete()
                 deckList.remove(deck)
                 adapter.notifyDataSetChanged()
+                alertDialog.dismiss()
             }
+
+            btnNo.setOnClickListener {
+                // El usuario ha rechazado. Cierra el diálogo.
+                alertDialog.dismiss()
+            }
+
+            alertDialog.show()
         }
     }
 
