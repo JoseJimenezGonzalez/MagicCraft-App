@@ -107,19 +107,4 @@ class AdminNewsManageListFragment : Fragment() {
 
     }
 
-    fun showConfirmationDialog(message: String, confirmAction: () -> Unit) {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Confirmación")
-            .setMessage(message)
-            .setPositiveButton("Sí") { dialog, _ ->
-                confirmAction()
-                dialog.dismiss()
-            }
-            .setNegativeButton("No") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .create()
-            .show()
-    }
-
 }

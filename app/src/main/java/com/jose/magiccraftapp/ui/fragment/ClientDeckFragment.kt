@@ -135,19 +135,5 @@ class ClientDeckFragment : Fragment() {
         CurrentUser.currentDeck = deck
         findNavController().navigate(R.id.action_clientDeckFragment_to_clientDeckManageFragment)
     }
-    fun showConfirmationDialog(message: String, confirmAction: () -> Unit) {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Confirmación")
-            .setMessage(message)
-            .setPositiveButton("Sí") { dialog, _ ->
-                confirmAction()
-                dialog.dismiss()
-            }
-            .setNegativeButton("No") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .create()
-            .show()
-    }
 
 }
