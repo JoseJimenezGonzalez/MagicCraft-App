@@ -63,11 +63,12 @@ class SettingClientActivity : AppCompatActivity() {
         // Obtén el valor de la preferencia compartida
         val botonDia = this.getBooleanPreference("boton_dia")
 
-        // Establece el botón de radio seleccionado por defecto
         if (botonDia) {
             binding.rbClaro.isChecked = true
+            binding.rbOscuro.isChecked = false
         } else {
             binding.rbOscuro.isChecked = true
+            binding.rbClaro.isChecked = false
         }
 
         // Configura el comportamiento cuando se selecciona un botón de radio

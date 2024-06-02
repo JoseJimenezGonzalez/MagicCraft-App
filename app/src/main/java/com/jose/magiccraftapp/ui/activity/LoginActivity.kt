@@ -120,7 +120,8 @@ class LoginActivity : AppCompatActivity() {
                     val urlImageFirebase = usuario.urlImageFirebase
                     val login = "login"
                     val modoDia = true
-                    saveSharedPreferences(userName, realName, idUsuaio, mail, typeUser, password, urlImageFirebase, login, modoDia)
+                    val botonDia = true
+                    saveSharedPreferences(userName, realName, idUsuaio, mail, typeUser, password, urlImageFirebase, login, modoDia, botonDia)
                     if(mail == "administrador@gmail.com"){
                         val intent = Intent(this, MainAdminActivity::class.java)
                         startActivity(intent)
@@ -142,7 +143,8 @@ class LoginActivity : AppCompatActivity() {
         password: String,
         urlImageFirebase: String,
         login: String,
-        modoDia: Boolean
+        modoDia: Boolean,
+        botonDia: Boolean
     ) {
         this.putPreference("userName", userName)
         this.putPreference("realName", realName)
@@ -153,6 +155,7 @@ class LoginActivity : AppCompatActivity() {
         this.putPreference("urlImageFirebase", urlImageFirebase)
         this.putPreference("login", login)
         this.putPreference("modo_dia", modoDia)
+        this.putPreference("boton_dia", botonDia)
     }
 
     private fun actionButtonGoToRegister() {

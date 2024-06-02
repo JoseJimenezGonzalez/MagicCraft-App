@@ -66,8 +66,10 @@ class SettingAdminActivity : AppCompatActivity() {
         // Establece el botón de radio seleccionado por defecto
         if (botonDia) {
             binding.rbClaro.isChecked = true
+            binding.rbOscuro.isChecked = false
         } else {
             binding.rbOscuro.isChecked = true
+            binding.rbClaro.isChecked = false
         }
 
         // Configura el comportamiento cuando se selecciona un botón de radio
