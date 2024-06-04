@@ -56,14 +56,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cvImage"
         app:layout_constraintBottom_toTopOf="@id/tilApellidos"
-        app:errorEnabled="true"
         app:boxStrokeWidth="2dp"
         android:hint="Nombre usuario"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:boxStrokeColor="@color/black"
+        app:boxStrokeColor="@color/border_color"
         android:textColorHint="@color/white"
-        app:hintTextColor="@color/white">
+        app:hintTextColor="@color/white"
+        app:errorEnabled="true"
+        app:boxStrokeErrorColor="@color/rojo_error"
+        app:errorTextColor="@color/rojo_error"
+        app:errorIconTint="@color/rojo_error">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietNombre"
@@ -80,14 +83,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilNombre"
         app:layout_constraintBottom_toTopOf="@id/tilPassword"
-        app:errorEnabled="true"
         app:boxStrokeWidth="2dp"
         android:hint="Nombre y apellidos"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:boxStrokeColor="@color/black"
+        app:boxStrokeColor="@color/border_color"
         android:textColorHint="@color/white"
-        app:hintTextColor="@color/white">
+        app:hintTextColor="@color/white"
+        app:errorEnabled="true"
+        app:boxStrokeErrorColor="@color/rojo_error"
+        app:errorTextColor="@color/rojo_error"
+        app:errorIconTint="@color/rojo_error">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietApellidos"
@@ -106,12 +112,16 @@
         app:layout_constraintTop_toBottomOf="@id/tilApellidos"
         app:layout_constraintBottom_toTopOf="@id/btnRegistrarUsuario"
         app:errorEnabled="true"
+        app:boxStrokeErrorColor="@color/rojo_error"
+        app:errorTextColor="@color/rojo_error"
+        app:errorIconTint="@color/rojo_error"
         app:endIconMode="password_toggle"
+        app:endIconTint="@color/white"
         app:boxStrokeWidth="2dp"
         android:hint="Nueva contraseña"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        app:boxStrokeColor="@color/black"
+        app:boxStrokeColor="@color/border_color"
         android:textColorHint="@color/white"
         app:hintTextColor="@color/white">
 

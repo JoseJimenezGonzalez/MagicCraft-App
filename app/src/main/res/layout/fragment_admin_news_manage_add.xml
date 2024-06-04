@@ -51,7 +51,11 @@
         android:hint="Titulo de la noticia"
         app:boxStrokeColor="@color/border_color"
         android:textColorHint="@color/white"
-        app:hintTextColor="@color/white">
+        app:hintTextColor="@color/white"
+        app:errorEnabled="true"
+        app:boxStrokeErrorColor="@color/rojo_error"
+        app:errorTextColor="@color/rojo_error"
+        app:errorIconTint="@color/rojo_error">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietTitle"
@@ -75,7 +79,11 @@
         android:hint="Subtitulo de la noticia"
         app:boxStrokeColor="@color/border_color"
         android:textColorHint="@color/white"
-        app:hintTextColor="@color/white">
+        app:hintTextColor="@color/white"
+        app:errorEnabled="true"
+        app:boxStrokeErrorColor="@color/rojo_error"
+        app:errorTextColor="@color/rojo_error"
+        app:errorIconTint="@color/rojo_error">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietSubTittle"
@@ -99,7 +107,11 @@
         android:hint="Url de la noticia"
         app:boxStrokeColor="@color/border_color"
         android:textColorHint="@color/white"
-        app:hintTextColor="@color/white">
+        app:hintTextColor="@color/white"
+        app:errorEnabled="true"
+        app:boxStrokeErrorColor="@color/rojo_error"
+        app:errorTextColor="@color/rojo_error"
+        app:errorIconTint="@color/rojo_error">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietUrl"

@@ -91,38 +91,38 @@ class AdminEventManageAddFragment : Fragment() , CoroutineScope {
             var existeEvento = false
             //Condicionales
             if(nombre.isNotBlank()){
-                binding.tietNombreEvento.error = null
+                binding.tilNombreEvento.error = null
                 esNombreCorrecto = true
             }else{
-                binding.tietNombreEvento.error = "Insertar nombre"
+                binding.tilNombreEvento.error = "El nombre no puede estar vacío"
             }
 
             if(formato.isNotBlank()){
-                binding.tietFormatoTorneo.error = null
+                binding.tilFormatoTorneo.error = null
                 esFormatoCorrecto = true
             }else{
-                binding.tietFormatoTorneo.error = "Insertar formato"
+                binding.tilFormatoTorneo.error = "El formato no puede estar vacío"
             }
 
             if(fechaTorneo.isNotBlank()){
-                binding.tietFechaEvento.error = null
+                binding.tilFechaEvento.error = null
                 esFechaCorrecto = true
             }else{
-                binding.tietFechaEvento.error = "Insertar fecha"
+                binding.tilFechaEvento.error = "La fecha no puede estar vacía"
             }
 
             if(precioEvento.isNotBlank()){
-                binding.tietPrecioEvento.error = null
+                binding.tilPrecioEvento.error = null
                 esPrecioCorrecto = true
             }else{
-                binding.tietPrecioEvento.error = "Insertar precio"
+                binding.tilPrecioEvento.error = "El precio no puede estar vacío"
             }
 
             if(aforoEvento.isNotBlank()){
-                binding.tietAforoEvento.error = null
+                binding.tilAforoEvento.error = null
                 esAforoCorrecto = true
             }else{
-                binding.tietAforoEvento.error = "Insertar aforo"
+                binding.tilAforoEvento.error = "El aforo no puede estar vacío"
             }
 
             if(urlImagen == null){

@@ -27,13 +27,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tilPassword"
-        app:boxStrokeColor="@color/black"
-        android:textColorHint="@color/white"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
         app:boxStrokeWidth="2dp"
         android:hint="Correo"
-        app:hintTextColor="@color/white">
+        app:boxStrokeColor="@color/border_color"
+        android:textColorHint="@color/white"
+        app:hintTextColor="@color/white"
+        app:boxStrokeErrorColor="@color/rojo_error"
+        app:errorTextColor="@color/rojo_error"
+        app:errorIconTint="@color/rojo_error">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietCorreo"
@@ -51,13 +54,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btnIniciarSesion"
-        app:boxStrokeColor="@color/black"
         app:endIconMode="password_toggle"
+        app:endIconTint="@color/white"
         app:boxStrokeWidth="2dp"
         android:hint="Contraseña"
-        android:textColorHint="@color/white"
+        app:errorEnabled="true"
+        app:boxStrokeErrorColor="@color/rojo_error"
+        app:errorTextColor="@color/rojo_error"
+        app:errorIconTint="@color/rojo_error"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
+        app:boxStrokeColor="@color/border_color"
+        android:textColorHint="@color/white"
         app:hintTextColor="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText

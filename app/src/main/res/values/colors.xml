@@ -35,4 +35,6 @@
 
     <color name="fondo_setting_dia">#3F51B5</color>
     <color name="fondo_setting_noche">#000000</color>
+
+    <color name="rojo_error">#F65555</color>
 </resources>

@@ -128,7 +128,9 @@ class RegisterActivity : AppCompatActivity(), CoroutineScope {
             paintErrorMail(isMailValid)
             paintErrorPassword(isPasswordValid)
             paintErrorRepeatPassword(isRepeatPasswordValid)
-            paintErrorEqualsPasswords(isPasswordValid, isRepeatPasswordValid, arePasswordEquals)
+            if(isPasswordValid && isRepeatPasswordValid){
+                paintErrorEqualsPasswords(isPasswordValid, isRepeatPasswordValid, arePasswordEquals)
+            }
 
             //Valida si esta ok para llamar a otras funciones
             validateAll(isUserNameValid, isRealnameValid, isMailValid, isPasswordValid, isRepeatPasswordValid, arePasswordEquals, userForm, isImageValid)
@@ -162,41 +164,41 @@ class RegisterActivity : AppCompatActivity(), CoroutineScope {
     //Indicar error en los edit text
     private fun paintErrorUserName(isNameValid: Boolean){
         if(isNameValid){
-            binding.tietNombre.error = null
+            binding.tilNombre.error = null
         }else{
-            binding.tietNombre.error = "No puede estar vacío"
+            binding.tilNombre.error = "El nombre de usuario no puede estar vacío"
         }
     }
 
     private fun paintErrorRealName(isSurnameValid: Boolean){
         if(isSurnameValid){
-            binding.tietNombreReal.error = null
+            binding.tilNombreReal.error = null
         }else{
-            binding.tietNombreReal.error = "No puede estar vacío"
+            binding.tilNombreReal.error = "Nombre y apellidos no puede estar vacío"
         }
     }
 
     private fun paintErrorMail(isMailValid: Boolean){
         if(isMailValid){
-            binding.tietCorreo.error = null
+            binding.tilCorreo.error = null
         }else{
-            binding.tietCorreo.error = "Vacío o no corresponde con formato correo"
+            binding.tilCorreo.error = "Vacío o no corresponde con formato correo"
         }
     }
 
     private fun paintErrorPassword(isPasswordValid: Boolean){
         if(isPasswordValid){
-            binding.tietPassword.error = null
+            binding.tilPassword.error = null
         }else{
-            binding.tietPassword.error = "No puede estar vacío y tiene que tener más de 7 caracteres"
+            binding.tilPassword.error = "No puede estar vacío y tiene que tener más de 7 caracteres"
         }
     }
 
     private fun paintErrorRepeatPassword(isRepeatPasswordValid: Boolean){
         if(isRepeatPasswordValid){
-            binding.tietRepetirPassword.error = null
+            binding.tilRepetirPassword.error = null
         }else{
-            binding.tietRepetirPassword.error = "No puede estar vacío y tiene que tener más de 7 caracteres"
+            binding.tilRepetirPassword.error = "No puede estar vacío y tiene que tener más de 7 caracteres"
         }
     }
 
@@ -211,11 +213,11 @@ class RegisterActivity : AppCompatActivity(), CoroutineScope {
 
     private fun paintErrorEqualsPasswords(isPasswordValid: Boolean, isRepeatPasswordValid: Boolean, arePasswordsEquals: Boolean){
         if(isPasswordValid && isRepeatPasswordValid && arePasswordsEquals){
-            binding.tietPassword.error = null
-            binding.tietRepetirPassword.error = null
+            binding.tilPassword.error = null
+            binding.tilRepetirPassword.error = null
         }else{
-            binding.tietPassword.error = "No coinciden las contraseñas"
-            binding.tietRepetirPassword.error = "No coinciden las contraseñas"
+            binding.tilPassword.error = "No coinciden las contraseñas"
+            binding.tilRepetirPassword.error = "No coinciden las contraseñas"
         }
     }
 

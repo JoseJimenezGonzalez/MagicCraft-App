@@ -64,7 +64,11 @@
         android:paddingRight="14dp"
         app:boxStrokeWidth="2dp"
         android:hint="Nombre del mazo"
-        app:hintTextColor="@color/white">
+        app:hintTextColor="@color/white"
+        app:errorEnabled="true"
+        app:boxStrokeErrorColor="@color/rojo_error"
+        app:errorTextColor="@color/rojo_error"
+        app:errorIconTint="@color/rojo_error">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietNameDeck"
@@ -88,7 +92,11 @@
         android:paddingRight="14dp"
         app:boxStrokeWidth="2dp"
         android:hint="Formato del mazo"
-        app:hintTextColor="@color/white">
+        app:hintTextColor="@color/white"
+        app:errorEnabled="true"
+        app:boxStrokeErrorColor="@color/rojo_error"
+        app:errorTextColor="@color/rojo_error"
+        app:errorIconTint="@color/rojo_error">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietFormatDeck"

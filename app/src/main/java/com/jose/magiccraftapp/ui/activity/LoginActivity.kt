@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -98,39 +99,67 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun isValidPassword(password: String): Boolean = password.isNotBlank() && password.length > 7
+    private fun isValidMail(mail: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(mail).matches()
+
+    private fun paintErrorMail(isMailValid: Boolean){
+        if(isMailValid){
+            binding.tilCorreo.error = null
+        }else{
+            binding.tilCorreo.error = "Vacío o no corresponde con formato correo"
+        }
+    }
+
+    private fun paintErrorPassword(isPasswordValid: Boolean){
+        if(isPasswordValid){
+            binding.tilPassword.error = null
+        }else{
+            binding.tilPassword.error = "No puede estar vacío y tiene que tener más de 7 caracteres"
+        }
+    }
+
     private fun actionButtonLogin() {
         binding.btnIniciarSesion.setOnClickListener {
-            binding.progressBar.visibility = View.VISIBLE
+            //Comprobar que los datos que introduce son validos
             val mail = binding.tietCorreo.text.toString().trim()
             val password = binding.tietPassword.text.toString().trim()
-            userViewModel.obtainUser(mail, password).observe(this, Observer {  usuario ->
-                if(usuario == null){
-                    generateToast("Usuario incorrecto")
-                }else{
-                    generateToast("Usuario correcto")
-                    //Guardar usuario en componion
-                    CurrentUser.currentUser = usuario
-                    //Guardar datos de usuario en la shared
-                    val userName = usuario.userName
-                    val realName = usuario.realName
-                    val idUsuaio = usuario.id
-                    val mail = usuario.mail
-                    val typeUser = usuario.typeUser
-                    val password = usuario.password
-                    val urlImageFirebase = usuario.urlImageFirebase
-                    val login = "login"
-                    val modoDia = true
-                    val botonDia = true
-                    saveSharedPreferences(userName, realName, idUsuaio, mail, typeUser, password, urlImageFirebase, login, modoDia, botonDia)
-                    if(mail == "administrador@gmail.com"){
-                        val intent = Intent(this, MainAdminActivity::class.java)
-                        startActivity(intent)
+            val isMailCorrect = isValidMail(mail)
+            val isPasswordCorrect = isValidPassword(password)
+            paintErrorMail(isMailCorrect)
+            paintErrorPassword(isPasswordCorrect)
+            //Si los datos tienen forma correcta comprobamos si existe en auth
+            if(isMailCorrect && isPasswordCorrect){
+                binding.progressBar.visibility = View.VISIBLE
+
+                userViewModel.obtainUser(mail, password).observe(this, Observer {  usuario ->
+                    if(usuario == null){
+                        generateToast("Usuario incorrecto")
                     }else{
-                        val intent = Intent(this, MainClientActivity::class.java)
-                        startActivity(intent)
+                        generateToast("Usuario correcto")
+                        //Guardar usuario en componion
+                        CurrentUser.currentUser = usuario
+                        //Guardar datos de usuario en la shared
+                        val userName = usuario.userName
+                        val realName = usuario.realName
+                        val idUsuaio = usuario.id
+                        val mail = usuario.mail
+                        val typeUser = usuario.typeUser
+                        val password = usuario.password
+                        val urlImageFirebase = usuario.urlImageFirebase
+                        val login = "login"
+                        val modoDia = true
+                        val botonDia = true
+                        saveSharedPreferences(userName, realName, idUsuaio, mail, typeUser, password, urlImageFirebase, login, modoDia, botonDia)
+                        if(mail == "administrador@gmail.com"){
+                            val intent = Intent(this, MainAdminActivity::class.java)
+                            startActivity(intent)
+                        }else{
+                            val intent = Intent(this, MainClientActivity::class.java)
+                            startActivity(intent)
+                        }
                     }
-                }
-            })
+                })
+            }
         }
     }
 

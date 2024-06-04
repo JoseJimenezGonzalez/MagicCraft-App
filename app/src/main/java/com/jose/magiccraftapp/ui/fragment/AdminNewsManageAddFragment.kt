@@ -2,18 +2,16 @@ package com.jose.magiccraftapp.ui.fragment
 
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
-import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.News
-import com.jose.magiccraftapp.databinding.FragmentAdminNewsBinding
 import com.jose.magiccraftapp.databinding.FragmentAdminNewsManageAddBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -85,14 +83,15 @@ class AdminNewsManageAddFragment : Fragment(), CoroutineScope {
             //Pintamos si tiene error
             paintErrorTittle(isTitleValid)
             paintErrorSubTittle(isSubTittleValid)
+            paintErrorUrl(isUrlValid)
             //Validar all campos
-            validateAll(isTitleValid, isSubTittleValid, isImageValid)
+            validateAll(isTitleValid, isSubTittleValid, isImageValid, isUrlValid)
 
         }
     }
 
-    private fun validateAll(titleValid: Boolean, subTittleValid: Boolean, imageValid: Boolean) {
-        if(titleValid && subTittleValid && imageValid){
+    private fun validateAll(titleValid: Boolean, subTittleValid: Boolean, imageValid: Boolean,urlValid: Boolean) {
+        if(titleValid && subTittleValid && imageValid && urlValid){
             val idNew = dbRef.child("MagicCraft").child("News").push().key!!
             registerNew(idNew)
         }
@@ -123,17 +122,25 @@ class AdminNewsManageAddFragment : Fragment(), CoroutineScope {
 
     private fun paintErrorSubTittle(subTittleValid: Boolean) {
         if(subTittleValid){
-            binding.tietSubTittle.error = null
+            binding.tilSubTittle.error = null
         }else{
-            binding.tietSubTittle.error = "No puede estar vacío"
+            binding.tilSubTittle.error = "El subtitulo no puede estar vacío"
+        }
+    }
+
+    private fun paintErrorUrl(urlValid: Boolean) {
+        if(urlValid){
+            binding.tilUrl.error = null
+        }else{
+            binding.tilUrl.error = "La url no puede estar vacía"
         }
     }
 
     private fun paintErrorTittle(titleValid: Boolean) {
         if(titleValid){
-            binding.tietTitle.error = null
+            binding.tilTitle.error = null
         }else{
-            binding.tietTitle.error = "No puede estar vacío"
+            binding.tilTitle.error = "El título no puede estar vacío"
         }
     }
 

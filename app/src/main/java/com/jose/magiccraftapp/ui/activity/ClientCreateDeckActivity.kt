@@ -164,17 +164,17 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
 
     private fun paintErrorName(isNameValid: Boolean){
         if(isNameValid){
-            binding.tietNameDeck.error = null
+            binding.tilNameDeck.error = null
         }else{
-            binding.tietNameDeck.error = "No puede estar vacío"
+            binding.tilNameDeck.error = "El nombre no puede estar vacío"
         }
     }
 
     private fun paintErrorFormat(isFormatValid: Boolean){
         if(isFormatValid){
-            binding.tietFormatDeck.error = null
+            binding.tilFormatDeck.error = null
         }else{
-            binding.tietFormatDeck.error = "No puede estar vacío"
+            binding.tilFormatDeck.error = "El formato no puede estar vacío"
         }
     }
 

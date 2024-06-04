@@ -177,9 +177,9 @@ class EditProfileActivity : AppCompatActivity(), CoroutineScope {
 
     private fun paintErrorNombreUsuario(isNameValid: Boolean){
         if(isNameValid){
-            binding.tietNombre.error = null
+            binding.tilNombre.error = null
         }else{
-            binding.tietNombre.error = "No puede estar vacío"
+            binding.tilNombre.error = "El nombre de usuario no puede estar vacío"
         }
     }
 
@@ -187,17 +187,17 @@ class EditProfileActivity : AppCompatActivity(), CoroutineScope {
 
     private fun paintErrorNombreReal(isNameValid: Boolean){
         if(isNameValid){
-            binding.tietApellidos.error = null
+            binding.tilApellidos.error = null
         }else{
-            binding.tietApellidos.error = "No puede estar vacío"
+            binding.tilApellidos.error = "Nombre y apellidos no puede estar vacío"
         }
     }
 
     private fun paintErrorPassword(isPasswordValid: Boolean){
         if(isPasswordValid){
-            binding.tietPassword.error = null
+            binding.tilPassword.error = null
         }else{
-            binding.tietPassword.error = "No puede estar vacío y tiene que tener más de 7 caracteres"
+            binding.tilPassword.error = "La contraseña tiene que tener más de 7 caracteres"
         }
     }
 
