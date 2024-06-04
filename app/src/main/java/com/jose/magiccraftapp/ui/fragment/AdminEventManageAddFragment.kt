@@ -139,7 +139,7 @@ class AdminEventManageAddFragment : Fragment() , CoroutineScope {
             if(esAforoCorrecto && esFechaCorrecto && esFormatoCorrecto && esPrecioCorrecto && esNombreCorrecto && esFotoCorrecta && !existeEvento){
                 val idEvento = dbRef.child("MagicCraft").child("Events").push().key
                 registrarEventoEnBaseDatos(idEvento, nombre, formato, fechaTorneo, precioEvento, aforoEvento)
-                Toast.makeText(context, "Se ha introducido el evento en la base de datos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Se ha introducido el evento correctamente", Toast.LENGTH_SHORT).show()
             }
 
         }

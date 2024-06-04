@@ -25,6 +25,7 @@ class AdapterRecyclerViewEvent (private var eventList: MutableList<Event>): Recy
 
     var onItemClick: ((Event) -> Unit)? = null
     var onBtnClick: ((Event) -> Unit)? = null
+    var onItemLongClick: ((Event) -> Unit)? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -80,6 +81,11 @@ class AdapterRecyclerViewEvent (private var eventList: MutableList<Event>): Recy
         //Nos apuntamos al torneo
         holder.boton.setOnClickListener {
             onBtnClick?.invoke(currentItem)
+        }
+        //Longclick
+        holder.itemView.setOnLongClickListener {
+            onItemLongClick?.invoke(currentItem)
+            true
         }
     }
 

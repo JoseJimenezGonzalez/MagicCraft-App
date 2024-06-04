@@ -9,7 +9,10 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.StorageReference
 import com.jose.magiccraftapp.data.model.News
 import com.jose.magiccraftapp.databinding.FragmentAdminNewsManageAddBinding
@@ -47,6 +50,10 @@ class AdminNewsManageAddFragment : Fragment(), CoroutineScope {
 
     private var urlNew = ""
 
+    private var listNameNews: MutableList<String> = mutableListOf()
+
+    private var listUrlNews: MutableList<String> = mutableListOf()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,7 +73,27 @@ class AdminNewsManageAddFragment : Fragment(), CoroutineScope {
 
         setUpButtonImageViewGalery()
         setUpButtonAddNews()
+        obtainNameNewsAndUrl()
 
+    }
+
+    private fun obtainNameNewsAndUrl() {
+        //No puede haber otro mazo con el mismo nombre
+        dbRef.child("MagicCraft").child("News").addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (newsSnapshot in snapshot.children) {
+                        val news = newsSnapshot.getValue(News::class.java)
+                        news?.let {
+                            listNameNews.add(it.title)
+                            listUrlNews.add(it.urlWeb)
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle error
+                }
+            })
     }
 
     private fun setUpButtonAddNews() {
@@ -92,8 +119,12 @@ class AdminNewsManageAddFragment : Fragment(), CoroutineScope {
 
     private fun validateAll(titleValid: Boolean, subTittleValid: Boolean, imageValid: Boolean,urlValid: Boolean) {
         if(titleValid && subTittleValid && imageValid && urlValid){
-            val idNew = dbRef.child("MagicCraft").child("News").push().key!!
-            registerNew(idNew)
+            if(listNameNews.contains(title) || listUrlNews.contains(urlNew)){
+                generateToast("Hay una noticia con ese mismo titulo y/o con la misma url")
+            }else{
+                val idNew = dbRef.child("MagicCraft").child("News").push().key!!
+                registerNew(idNew)
+            }
         }
     }
 
@@ -111,6 +142,9 @@ class AdminNewsManageAddFragment : Fragment(), CoroutineScope {
             )
         }
         generateToast("Noticia añadida con éxito")
+        //Si añado mas sin salir de la actividad
+        listNameNews.add(title)
+        listUrlNews.add(urlNew)
     }
 
     suspend fun saveImageCover(stoRef: StorageReference, idNew: String, imagen: Uri): String {

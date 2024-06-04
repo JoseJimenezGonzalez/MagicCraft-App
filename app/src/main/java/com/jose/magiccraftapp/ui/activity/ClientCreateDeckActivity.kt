@@ -3,6 +3,7 @@ package com.jose.magiccraftapp.ui.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -10,7 +11,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.StorageReference
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.CurrentUser
@@ -47,6 +51,8 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
 
     private var formatDeck = ""
 
+    private var deckNames = mutableListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -76,7 +82,27 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
         setUpButtonImageViewGalery()
         setUpButtonImageViewBack()
         setUpButtonAddDeck()
+        obtainNameDecks()
 
+    }
+
+    private fun obtainNameDecks() {
+        //No puede haber otro mazo con el mismo nombre
+        dbRef.child("MagicCraft").child("Decks").child(CurrentUser.currentUser!!.id)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (deckSnapshot in snapshot.children) {
+                        val deck = deckSnapshot.getValue(Deck::class.java)
+                        deck?.let {
+                            deckNames.add(it.nameDeck)
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle error
+                }
+            })
     }
 
     private fun setUpButtonAddDeck() {
@@ -101,9 +127,14 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
 
     private fun validateAll(nameValid: Boolean, formatValid: Boolean, imageValid: Boolean) {
         if(nameValid && formatValid && imageValid){
-            val idUser = CurrentUser.currentUser!!.id
-            val idDeck = dbRef.child("MagicCraft").child("Decks").child(idUser).push().key
-            registerDeck(idUser, idDeck)
+            Log.e("listanombremazo", deckNames.toString())
+            if(!deckNames.contains(nameDeck)){
+                val idUser = CurrentUser.currentUser!!.id
+                val idDeck = dbRef.child("MagicCraft").child("Decks").child(idUser).push().key
+                registerDeck(idUser, idDeck)
+            }else{
+                generateToast("Ya existe un mazo con ese nombre")
+            }
         }
     }
 
