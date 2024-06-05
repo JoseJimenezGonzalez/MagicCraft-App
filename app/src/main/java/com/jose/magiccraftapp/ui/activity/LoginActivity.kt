@@ -133,7 +133,7 @@ class LoginActivity : AppCompatActivity() {
 
                 userViewModel.obtainUser(mail, password).observe(this, Observer {  usuario ->
                     if(usuario == null){
-                        generateToast("Usuario incorrecto")
+                        generateToast("El email y/o contraseña no es válido")
                         binding.progressBar.visibility = View.INVISIBLE
                     }else{
                         generateToast("Usuario correcto")
