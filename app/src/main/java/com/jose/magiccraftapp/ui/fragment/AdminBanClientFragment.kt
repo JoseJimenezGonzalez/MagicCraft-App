@@ -148,7 +148,7 @@ class AdminBanClientFragment : Fragment() {
     private fun eliminarDeBaseDatos(usuario: User) {
         dbRef = FirebaseDatabase.getInstance().getReference()
         dbRef.child("MagicCraft").child("Users").child(usuario.id).removeValue().addOnSuccessListener {
-            Toast.makeText(context, "Usuario eliminado correctamente de la base de datos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Se ha eliminado el usuario de la aplicación", Toast.LENGTH_SHORT).show()
         }.addOnFailureListener { e ->
             Toast.makeText(context, "Error al eliminar usuario", Toast.LENGTH_SHORT).show()
         }
@@ -164,7 +164,6 @@ class AdminBanClientFragment : Fragment() {
                     it!!.delete()
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                Toast.makeText(context, "Usuario eliminado correctamente", Toast.LENGTH_SHORT).show()
                                 eliminarDeBaseDatos(usuario)
                             } else {
                                 Toast.makeText(context, "No se ha podido eliminar al usuario", Toast.LENGTH_SHORT).show()
