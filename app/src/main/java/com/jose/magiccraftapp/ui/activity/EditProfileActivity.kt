@@ -9,9 +9,11 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Observer
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -24,6 +26,7 @@ import com.google.firebase.storage.StorageReference
 import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.User
+import com.jose.magiccraftapp.data.viewmodel.UsuarioViewModel
 import com.jose.magiccraftapp.databinding.ActivityEditProfileBinding
 import com.jose.magiccraftapp.util.putPreference
 import dagger.hilt.android.AndroidEntryPoint
@@ -63,6 +66,10 @@ class EditProfileActivity : AppCompatActivity(), CoroutineScope {
     var nombreReal = ""
 
     var password = ""
+
+    private val userViewModel: UsuarioViewModel by viewModels()
+
+    private var listOfUserNames: MutableList<String> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -90,6 +97,14 @@ class EditProfileActivity : AppCompatActivity(), CoroutineScope {
 
         setUpButtonEditProfile()
 
+        obtainListUsernames()
+
+    }
+
+    private fun obtainListUsernames() {
+        userViewModel.getUsernames().observe(this, Observer { listOfUsernames ->
+            listOfUserNames = listOfUsernames
+        })
     }
 
     private fun setUpButtonEditProfile() {
@@ -117,57 +132,61 @@ class EditProfileActivity : AppCompatActivity(), CoroutineScope {
 
     private fun validateAll(nombreUsuarioValid: Boolean, nombreRealValid: Boolean, passwordValid: Boolean, imageValid: Boolean) {
         if(nombreUsuarioValid && nombreRealValid && passwordValid && imageValid){
-            var urlImageFirebase = CurrentUser.currentUser!!.urlImageFirebase
-            launch {
-                if (buttonGalery){
-                    urlImageFirebase = saveImageCover(stoRef, CurrentUser.currentUser!!.id, urlImagen!!)
-
-                }
-            }
-            val usuarioActualizado = User(
-                CurrentUser.currentUser!!.id,
-                nombreUsuario,
-                nombreReal,
-                CurrentUser.currentUser!!.mail,
-                password,
-                CurrentUser.currentUser!!.typeUser,
-                urlImageFirebase
-            )
-            //Actualizamos pass en el auth
-            val ancientPass = CurrentUser.currentUser!!.password
-            if(password != ancientPass){
-                Log.e("Entra", "Entra")
-                auth = Firebase.auth
-                val user = auth.currentUser
-                user.let {
-                    // Cambiar contraseña
-                    user!!.updatePassword(password)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                Log.e("Entra", "Contraseña actualizada correctamente")
-                            } else {
-                                println("Error al actualizar la contraseña.")
-                            }
-                        }
-                }
-            }
-            //Actualizamos la info de la base de datos del usuario
-            dbRef.child("MagicCraft").child("Users").child(CurrentUser.currentUser!!.id).setValue(usuarioActualizado)
-            //Cambiamos la info en el companion object
-            CurrentUser.currentUser = usuarioActualizado
-            //Actualizamos datos en la shared
-            this.putPreference("name", nombreUsuario)
-            this.putPreference("surname", nombreReal)
-            this.putPreference("password", password)
-            this.putPreference("urlImageFirebase", urlImageFirebase)
-            //Ok
-            generateToast("Perfil actualizado correctamente")
-            if(CurrentUser.currentUser!!.typeUser == "administrador"){
-                val intent = Intent(this, MainAdminActivity::class.java)
-                startActivity(intent)
+            if(listOfUserNames.contains(nombreUsuario.lowercase())){
+                generateToast("Ya existe en la base de datos un usuario con ese nombre")
             }else{
-                val intent = Intent(this, MainClientActivity::class.java)
-                startActivity(intent)
+                var urlImageFirebase = CurrentUser.currentUser!!.urlImageFirebase
+                launch {
+                    if (buttonGalery){
+                        urlImageFirebase = saveImageCover(stoRef, CurrentUser.currentUser!!.id, urlImagen!!)
+
+                    }
+                }
+                val usuarioActualizado = User(
+                    CurrentUser.currentUser!!.id,
+                    nombreUsuario,
+                    nombreReal,
+                    CurrentUser.currentUser!!.mail,
+                    password,
+                    CurrentUser.currentUser!!.typeUser,
+                    urlImageFirebase
+                )
+                //Actualizamos pass en el auth
+                val ancientPass = CurrentUser.currentUser!!.password
+                if(password != ancientPass){
+                    Log.e("Entra", "Entra")
+                    auth = Firebase.auth
+                    val user = auth.currentUser
+                    user.let {
+                        // Cambiar contraseña
+                        user!!.updatePassword(password)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    Log.e("Entra", "Contraseña actualizada correctamente")
+                                } else {
+                                    println("Error al actualizar la contraseña.")
+                                }
+                            }
+                    }
+                }
+                //Actualizamos la info de la base de datos del usuario
+                dbRef.child("MagicCraft").child("Users").child(CurrentUser.currentUser!!.id).setValue(usuarioActualizado)
+                //Cambiamos la info en el companion object
+                CurrentUser.currentUser = usuarioActualizado
+                //Actualizamos datos en la shared
+                this.putPreference("name", nombreUsuario)
+                this.putPreference("surname", nombreReal)
+                this.putPreference("password", password)
+                this.putPreference("urlImageFirebase", urlImageFirebase)
+                //Ok
+                generateToast("Perfil actualizado correctamente")
+                if(CurrentUser.currentUser!!.typeUser == "administrador"){
+                    val intent = Intent(this, MainAdminActivity::class.java)
+                    startActivity(intent)
+                }else{
+                    val intent = Intent(this, MainClientActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }else{
             generateToast("Hay campos erróneos")

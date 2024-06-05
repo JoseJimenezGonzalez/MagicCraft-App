@@ -80,8 +80,11 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
         job = Job()
 
         setUpButtonImageViewGalery()
+
         setUpButtonImageViewBack()
+
         setUpButtonAddDeck()
+
         obtainNameDecks()
 
     }
@@ -94,7 +97,7 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
                     for (deckSnapshot in snapshot.children) {
                         val deck = deckSnapshot.getValue(Deck::class.java)
                         deck?.let {
-                            deckNames.add(it.nameDeck)
+                            deckNames.add(it.nameDeck.lowercase())
                         }
                     }
                 }
@@ -128,7 +131,7 @@ class ClientCreateDeckActivity : AppCompatActivity(), CoroutineScope {
     private fun validateAll(nameValid: Boolean, formatValid: Boolean, imageValid: Boolean) {
         if(nameValid && formatValid && imageValid){
             Log.e("listanombremazo", deckNames.toString())
-            if(!deckNames.contains(nameDeck)){
+            if(!deckNames.contains(nameDeck.lowercase())){
                 val idUser = CurrentUser.currentUser!!.id
                 val idDeck = dbRef.child("MagicCraft").child("Decks").child(idUser).push().key
                 registerDeck(idUser, idDeck)

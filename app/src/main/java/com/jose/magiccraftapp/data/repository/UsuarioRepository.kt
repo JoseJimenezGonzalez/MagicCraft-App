@@ -85,7 +85,7 @@ class UsuarioRepository (application: Application) {
                     snapshot.children.forEach { snapshotChild ->
                         val user = snapshotChild.getValue(User::class.java)
                         if (user != null) {
-                            usernamesList.add(user.userName)
+                            usernamesList.add(user.userName.lowercase())
                         }
                     }
                     usernamesLive.value = usernamesList

@@ -84,7 +84,7 @@ class AdminNewsManageAddFragment : Fragment(), CoroutineScope {
                     for (newsSnapshot in snapshot.children) {
                         val news = newsSnapshot.getValue(News::class.java)
                         news?.let {
-                            listNameNews.add(it.title)
+                            listNameNews.add(it.title.lowercase())
                             listUrlNews.add(it.urlWeb)
                         }
                     }
@@ -119,7 +119,7 @@ class AdminNewsManageAddFragment : Fragment(), CoroutineScope {
 
     private fun validateAll(titleValid: Boolean, subTittleValid: Boolean, imageValid: Boolean,urlValid: Boolean) {
         if(titleValid && subTittleValid && imageValid && urlValid){
-            if(listNameNews.contains(title) || listUrlNews.contains(urlNew)){
+            if(listNameNews.contains(title.lowercase()) || listUrlNews.contains(urlNew)){
                 generateToast("Hay una noticia con ese mismo titulo y/o con la misma url")
             }else{
                 val idNew = dbRef.child("MagicCraft").child("News").push().key!!

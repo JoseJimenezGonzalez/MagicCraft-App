@@ -142,7 +142,7 @@ class RegisterActivity : AppCompatActivity(), CoroutineScope {
         if(isNameValid && isSurnameValid && isMailValid && isPasswordValid && isRepeatPasswordValid && arePasswordEquals && isImageValid){
             //Hacerlo en view model
             //Comprobamos si existe el nombre de usuario previamente
-            if(!listOfUserNames.contains(userName)){
+            if(!listOfUserNames.contains(userName.lowercase())){
                 registerUserAuth(userForm)
             }else{
                 generateToast("Ya existe un usuario con ese nombre de usuario")
