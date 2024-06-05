@@ -106,7 +106,7 @@ class RegisterActivity : AppCompatActivity(), CoroutineScope {
 
             //Primero nos traemos todos los datos del usuario
             userName = binding.tietNombre.text.toString().trim()
-            val realName = binding.tietNombre.text.toString().trim()
+            val realName = binding.tietNombreReal.text.toString().trim()
             val mail = binding.tietCorreo.text.toString().trim()
             val password = binding.tietPassword.text.toString().trim()
             val repeatPassword = binding.tietRepetirPassword.text.toString().trim()

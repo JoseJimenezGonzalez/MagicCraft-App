@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -16,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.data.model.CurrentUser
 import com.jose.magiccraftapp.data.model.User
 import com.jose.magiccraftapp.data.viewmodel.UsuarioViewModel
@@ -112,15 +115,34 @@ class AdminBanClientFragment : Fragment() {
 
 
     private fun handleItemClick(usuario: User) {
-        AlertDialog.Builder(requireContext()).apply {
-            setTitle("Eliminar usuario")
-            setMessage("¿Estás seguro de que quieres eliminar a ${usuario.userName}?")
-            setPositiveButton("Sí") { _, _ ->
-                // Elimino al usuario de la base de datos
-                eliminarAuth(usuario)
-            }
-            setNegativeButton("No", null)
-        }.show()
+
+        // Las notificaciones no están habilitadas. Muestra un diálogo al usuario.
+        val dialogView = layoutInflater.inflate(R.layout.dialog_custom, null)
+
+        val tvTitle = dialogView.findViewById<TextView>(R.id.tvTitle)
+        val tvMessage = dialogView.findViewById<TextView>(R.id.tvMessage)
+        val btnYes = dialogView.findViewById<Button>(R.id.btnYes)
+        val btnNo = dialogView.findViewById<Button>(R.id.btnNo)
+
+        tvTitle.text = "Banear usuario"
+        tvMessage.text = "¿Estás seguro de que quieres banear a ${usuario.userName}?"
+
+        val alertDialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        btnYes.setOnClickListener {
+            eliminarAuth(usuario)
+            alertDialog.dismiss()
+        }
+
+        btnNo.setOnClickListener {
+            // El usuario ha rechazado. Cierra el diálogo.
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
+
     }
 
     private fun eliminarDeBaseDatos(usuario: User) {

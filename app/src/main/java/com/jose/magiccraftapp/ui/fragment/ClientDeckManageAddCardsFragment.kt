@@ -68,12 +68,12 @@ class ClientDeckManageAddCardsFragment : Fragment() {
                 text = text,
                 urlArtCrop = urlArtCrop,
                 urlArtNormal = urlArtNormal,
-                numberCard = 4,
+                numberCard = numberOfCard,
                 cmc = cmc
             )
             //Ahora añadimos la carta al mazo actual
             CurrentUser.currentDeck!!.cards.add(CurrentUser.currentCard!!)
-            Toast.makeText(context, "Carta añadida", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Carta añadida al mazo", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@id/tilNombre"
         app:layout_constraintBottom_toTopOf="@id/tilCorreo"
         app:boxStrokeWidth="2dp"
-        android:hint="Nombre"
+        android:hint="Nombre y apellidos"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
         app:boxStrokeColor="@color/border_color"

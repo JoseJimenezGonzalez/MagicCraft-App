@@ -31,7 +31,7 @@ class ViewRulesPdfFragment : Fragment() {
     private fun setUpWebView() {
 
         val urlGoogleDrive = "https://drive.google.com/viewerng/viewer?embedded=true&url="
-        val urlPdf = "https://media.wizards.com/2024/downloads/MagicCompRules%2004102024.pdf"
+        val urlPdf = "https://media.wizards.com/images/magic/resources/rules/SP_MTGM14_Rulebook_Web.pdf"
         val finalUrl = urlGoogleDrive + urlPdf
         binding.webView.apply {
             settings.setSupportZoom(true)
