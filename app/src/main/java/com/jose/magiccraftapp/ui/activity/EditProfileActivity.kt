@@ -83,6 +83,8 @@ class EditProfileActivity : AppCompatActivity(), CoroutineScope {
             insets
         }
 
+        //Codigo
+
         cover = binding.ivAccount
 
         job = Job()
