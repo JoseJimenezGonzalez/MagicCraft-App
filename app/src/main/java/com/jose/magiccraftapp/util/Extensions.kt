@@ -137,6 +137,14 @@ fun Context.addEventIdToSharedPreferences(eventId: String) {
     }
 }
 
+// Función para limpiar event_ids en las preferencias compartidas
+fun Context.clearEventIdsFromSharedPreferences() {
+    with(getPreferences().edit()) {
+        remove("event_ids")
+        apply()
+    }
+}
+
 // Obtener todos los IDs de eventos de las preferencias compartidas
 fun Context.getEventIdsFromSharedPreferences(): Set<String> {
     return getPreferences().getStringSet("event_ids", mutableSetOf())?.toSet() ?: setOf()

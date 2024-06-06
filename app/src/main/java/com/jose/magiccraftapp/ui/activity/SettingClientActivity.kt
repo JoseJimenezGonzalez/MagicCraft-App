@@ -10,6 +10,7 @@ import com.jose.magiccraftapp.R
 import com.jose.magiccraftapp.databinding.ActivitySettingClientBinding
 import com.jose.magiccraftapp.ui.adapter.ModalBottomSheetAbout
 import com.jose.magiccraftapp.ui.adapter.ModalBottomSheetPolicy
+import com.jose.magiccraftapp.util.clearEventIdsFromSharedPreferences
 import com.jose.magiccraftapp.util.getBooleanPreference
 import com.jose.magiccraftapp.util.putPreference
 
@@ -54,6 +55,7 @@ class SettingClientActivity : AppCompatActivity() {
     private fun setUpButtonLogOut() {
         binding.llLogOut.setOnClickListener {
             this.putPreference("login", "")
+            this.clearEventIdsFromSharedPreferences()
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
